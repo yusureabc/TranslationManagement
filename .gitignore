@@ -6,7 +6,6 @@ storage/*
 Homestead.json
 Homestead.yaml
 .env
-/bootstrap/*
 .idea
 _ide_helper.php
 _ide_helper_models.php
