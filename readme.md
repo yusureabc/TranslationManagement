@@ -10,6 +10,9 @@ chmod -R 755 bootstrap/cache
 composer install
 
 composer update
+
+php artisan key:generate 
+
 ~~~
 
 ## Database & Seeding
