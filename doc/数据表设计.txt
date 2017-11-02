@@ -1,0 +1,44 @@
+projects  项目表
+    id           项目 ID
+    name         项目名称
+    description  项目描述
+    user_id      用户ID
+    username     用户名
+    language     需翻译语言
+    create_at    添加时间
+    update_at    更新时间
+
+
+languages  所有语言
+    id            语言自增ID
+    project_id    项目 ID
+    name      语言名
+    status    状态  0 lock  1 open
+    download_at  最后下载时间
+    submit_at    translator最后提交时间
+
+
+translators    翻译员
+    id    自增ID
+    project_id     项目 ID
+    project_name   项目名称
+    language_id    语言ID
+    language_name  语言名称
+    user_id      用户ID
+    username     用户名
+
+
+keys  key
+    id  自增ID
+    project_id    项目 ID
+    key    key值
+
+
+contents
+    id  自增ID
+    project_id     项目ID
+    language_id    语言ID
+    key_id         key ID
+    content        翻译内容
+    create_at    添加时间
+    update_at    更新时间
