@@ -42,6 +42,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
     // 销售数据
     require(__DIR__ . '/admin/salesdata.php');
 
+    // 翻译项目
+    require(__DIR__ . '/admin/project.php');
 });
 
 // 后台系统日志

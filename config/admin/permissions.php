@@ -1,20 +1,20 @@
 
 <?php
 return [
-	'permission' => [
+    'permission' => [
 		'list' => 'permission.list',
 		'create' => 'permission.create',
 		'destroy' => 'permission.destroy',
 		'edit' => 'permission.edit',
 	],
-	'role' => [
+    'role' => [
 		'list' => 'role.list',
 		'create' => 'role.create',
 		'destroy' => 'role.destroy',
 		'edit' => 'role.edit',
 		'show' => 'role.show',
 	],
-	'user' => [
+    'user' => [
 		'list' => 'user.list',
 		'create' => 'user.create',
 		'edit' => 'user.edit',
@@ -22,28 +22,28 @@ return [
 		'show' => 'user.show',
 		'reset' => 'user.reset',
 	],
-	'menu' => [
+    'menu' => [
 		'list' => 'menu.list',
 		'create' => 'menu.create',
 		'destroy' => 'menu.destroy',
 		'edit' => 'menu.edit',
 		'show' => 'menu.show',
 	],
-	'log' => [
+    'log' => [
 		'list' => 'log.list',
 		'destroy' => 'log.destroy',
 		'show' => 'log.show',
 		'download' => 'log.download',
 		'filter' => 'log.filter',
 	],
-	'system' => [
+    'system' => [
 		'login' => 'system.login',
 		'list' => 'system.list',
 		'manage' => 'system.manage',
 		'sales' => 'system.sales',
 	],
 
-	'platform' => [
+    'platform' => [
 		'list' => 'platform.list',
 		'create' => 'platform.create',
 		'edit' => 'platform.edit',
@@ -51,7 +51,7 @@ return [
 		'show' => 'platform.show',
 	],
 
-	'product' => [
+    'product' => [
 		'create' => 'product.create',
 		'edit' => 'product.edit',
 		'destroy' => 'product.destroy',
@@ -59,7 +59,7 @@ return [
 		'list' => 'product.list',
 	],
 
-	'salesdata' => [
+    'salesdata' => [
 		'create' => 'salesdata.create',
 		'edit' => 'salesdata.edit',
 		'destroy' => 'salesdata.destroy',
@@ -68,9 +68,30 @@ return [
 		'charts' => 'salesdata.charts',
 	],
 
-	'transexcel' => [
+    'transexcel' => [
 		'import' => 'transexcel.import',
 		'export' => 'transexcel.export',
 	],
+
+    'translate' => [
+        'manage' => 'translate.manage',
+        'project' => [
+		'show' => 'project.show',
+		'edit' => 'project.edit',
+	],
+        'translate' => [
+		'manage' => 'translate.manage',
+		'project' => 'translate.project',
+		'translate' => 'translate.translate',
+	],
+    ],
+
+    'project' => [
+        'list'    => 'project.list',
+        'create'  => 'project.create',
+        'edit'    => 'project.edit',
+        'destroy' => 'project.destroy',
+        'show'    => 'project.show',
+    ],
 
 ];

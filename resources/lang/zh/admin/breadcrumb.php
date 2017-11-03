@@ -44,4 +44,10 @@ return [
         'info' 		=> '<i class="fa fa-pencil"></i> 销售数据详情',
         'charts' 		=> '<i class="fa fa-diamond"></i> 销售数据图表',
     ],
+    'project' => [
+        'list'      => '<i class="fa fa-diamond"></i> 项目列表',
+        'create'    => '<i class="fa fa-plus"></i> 添加项目',
+        'edit'      => '<i class="fa fa-pencil"></i> 修改项目',
+        'info'      => '<i class="fa fa-pencil"></i> 项目信息',
+    ],
 ];
