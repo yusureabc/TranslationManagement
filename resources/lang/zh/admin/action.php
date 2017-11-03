@@ -8,6 +8,7 @@ return [
 		'no' 		=> '取消',
 		'close'     => '关闭',
 		'reset'     => '重置密码',
+		'input'     => '录入',
 		'cancel' 	=> '<i class="fa fa-reply"></i> 返回',
 		'submit' 	=> '<i class="fa fa-paper-plane-o"></i> 提交',
 	]

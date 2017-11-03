@@ -73,25 +73,17 @@ return [
 		'export' => 'transexcel.export',
 	],
 
-    'translate' => [
-        'manage' => 'translate.manage',
-        'project' => [
+	'translate' => [
+		'manage' => 'translate.manage',
+		'start' => 'translate.start',
+	],
+
+	'project' => [
+		'list' => 'project.list',
 		'show' => 'project.show',
 		'edit' => 'project.edit',
+		'input' => 'project.input',
+		'destroy' => 'project.destroy',
 	],
-        'translate' => [
-		'manage' => 'translate.manage',
-		'project' => 'translate.project',
-		'translate' => 'translate.translate',
-	],
-    ],
-
-    'project' => [
-        'list'    => 'project.list',
-        'create'  => 'project.create',
-        'edit'    => 'project.edit',
-        'destroy' => 'project.destroy',
-        'show'    => 'project.show',
-    ],
 
 ];

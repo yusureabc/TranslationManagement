@@ -64,6 +64,21 @@ trait ActionButtonAttributeTrait
         }
         return '';
     }
+
+    /**
+     * 录入内容按钮
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-03
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function getInputActionButton()
+    {
+        if (auth()->user()->can(config('admin.permissions.'.$this->action.'.input'))) {
+            return '<a href="'.url('admin/'.$this->action.'/'.$this->id.'/input').'" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-info tooltips" data-container="body" data-original-title="' . trans('admin/action.actionButton.input') . '"  data-placement="top"><i class="fa fa-keyboard-o"></i></a> ';
+        }
+        return '';
+    }
     
     /**
      * 获取按钮
@@ -77,6 +92,7 @@ trait ActionButtonAttributeTrait
         return $this->getShowActionButton($showType).
                 $this->getResetActionButton().
                 $this->getEditActionButton().
+                $this->getInputActionButton().
                 $this->getDestroyActionButton();
     }
 }
