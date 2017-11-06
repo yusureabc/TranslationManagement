@@ -62,7 +62,7 @@ class ProjectController extends Controller
     public function store( ProjectCreateRequest $request )
     {
         $this->projectService->storeProject( $request->all() );
-        return redirect('admin/project');
+        return redirect( 'admin/project' );
     }
 
     /**

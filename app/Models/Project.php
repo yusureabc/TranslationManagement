@@ -16,4 +16,6 @@ class Project extends Model implements Transformable
     use ActionButtonAttributeTrait;
 
     private $action = 'project';
+
+    protected $guarded  = [];
 }

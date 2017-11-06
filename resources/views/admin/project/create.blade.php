@@ -51,7 +51,7 @@
             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
               <label class="col-sm-2 control-label">{{trans('admin/project.model.description')}}</label>
               <div class="col-sm-10">
-                <textarea type="text" class="form-control" name="description" value="{{old('description')}}" placeholder="{{trans('admin/project.model.description')}}"></textarea>
+                <textarea type="text" class="form-control" name="description" value="{{old('description')}}" placeholder="{{trans('admin/project.model.description')}}">{{old('description')}}</textarea>
                 @if ($errors->has('description'))
                 <span class="help-block m-b-none text-danger">{{ $errors->first('description') }}</span>
                 @endif

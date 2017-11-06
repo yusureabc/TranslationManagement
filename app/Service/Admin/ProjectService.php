@@ -117,21 +117,17 @@ class ProjectService extends BaseService
     }
 
     /**
-     * 添加平台
-     * @author Sheldon
-     * @date   2017-04-18T16:10:32+0800
-     * @param  [type]                   $attributes [表单数据]
-     * @return [type]                               [Boolean]
+     * 添加项目
      */
     public function storeProject($attributes)
     {
         try {
-            $attributes['logo'] = $this->uploadImage($attributes['logo']);
-            $result = $this->project->create($attributes);
-            if ($result) {
-                // 更新缓存
-                $this->getProjectSetCache();
-            }
+            /* 将 languages 转为字符串 */
+            $attributes['languages'] = implode( ',', $attributes['languages'] );
+            $attributes['user_id']   = getUser()->id;
+            $attributes['username']  = getUser()->username;
+            $result = $this->project->create( $attributes );
+
             return [
                 'status' => $result,
                 'message' => $result ? trans('admin/alert.project.create_success'):trans('admin/alert.project.create_error'),
