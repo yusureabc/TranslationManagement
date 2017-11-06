@@ -18,7 +18,7 @@ class ProjectPresenter
         $html = '';
         foreach ( (array)$languages as $key => $value )
         {
-            $html .= '<label class="checkbox-inline"><div class="i-checks"><label> <input type="checkbox" name="languages[]" '.$this->checkLanguage( $key, $projectLanguage ) . ' value="'. $key .'"> '. $value .'</label></div></label>';
+            $html .= '<label class="checkbox-inline"><div class="i-checks"><label> <input type="checkbox" name="languages[]" '.$this->checkLanguage( $key, $projectLanguage ) . ' value="'. $key .'"> '. trans( 'languages.'.$key ) .'</label></div></label>';
         }
 
         return $html;
