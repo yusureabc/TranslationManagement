@@ -84,6 +84,7 @@ return [
 		'edit' => 'project.edit',
 		'input' => 'project.input',
 		'destroy' => 'project.destroy',
+		'create' => 'project.create',
 	],
 
 ];

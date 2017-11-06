@@ -1,21 +1,21 @@
 @extends('layouts.admin')
 @section('css')
-<link href="{{asset('vendors/jasny/jasny-bootstrap.min.css')}}" rel="stylesheet">
+<link href="{{asset('vendors/iCheck/custom.css')}}" rel="stylesheet">
 @endsection
 @section('content')
-
+@inject( 'ProjectPresenter', 'App\Presenters\Admin\ProjectPresenter' )
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h2>{!!trans('admin/platform.title')!!}</h2>
+    <h2>{!!trans('admin/project.title')!!}</h2>
     <ol class="breadcrumb">
         <li>
             <a href="{{url('admin/dash')}}">{!!trans('admin/breadcrumb.home')!!}</a>
         </li>
         <li>
-            <a href="{{url('admin/platform')}}">{!!trans('admin/breadcrumb.platform.list')!!}</a>
+            <a href="{{url('admin/project')}}">{!!trans('admin/breadcrumb.project.list')!!}</a>
         </li>
         <li class="active">
-            <strong>{!!trans('admin/breadcrumb.platform.create')!!}</strong>
+            <strong>{!!trans('admin/breadcrumb.project.create')!!}</strong>
         </li>
     </ol>
   </div>
@@ -25,7 +25,7 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>{!!trans('admin/platform.create')!!}</h5>
+          <h5>{!!trans('admin/project.create')!!}</h5>
           <div class="ibox-tools">
               <a class="collapse-link">
                   <i class="fa fa-chevron-up"></i>
@@ -36,63 +36,40 @@
           </div>
         </div>
         <div class="ibox-content">
-          <form method="post" action="{{url('admin/platform')}}" class="form-horizontal" enctype="multipart/form-data">
+          <form method="post" action="{{url('admin/project')}}" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-              <label class="col-sm-2 control-label">{{trans('admin/platform.model.name')}}</label>
+              <label class="col-sm-2 control-label">{{trans('admin/project.model.name')}}</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="{{trans('admin/platform.model.name')}}">
+                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="{{trans('admin/project.model.name')}}">
                 @if ($errors->has('name'))
                 <span class="help-block m-b-none text-danger">{{ $errors->first('name') }}</span>
                 @endif
               </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
-              <label class="col-sm-2 control-label">{{trans('admin/platform.model.slug')}}</label>
+            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+              <label class="col-sm-2 control-label">{{trans('admin/project.model.description')}}</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="slug" value="{{old('slug')}}" placeholder="{{trans('admin/platform.model.slug')}}">
-                @if ($errors->has('slug'))
-                <span class="help-block m-b-none text-danger">{{ $errors->first('slug') }}</span>
-                @endif
-              </div>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-              <label class="col-sm-2 control-label">{{trans('admin/platform.model.url')}}</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="url" value="{{old('url')}}" placeholder="{{trans('admin/platform.model.url')}}">
-                @if ($errors->has('url'))
-                <span class="help-block m-b-none text-danger">{{ $errors->first('url') }}</span>
+                <textarea type="text" class="form-control" name="description" value="{{old('description')}}" placeholder="{{trans('admin/project.model.description')}}"></textarea>
+                @if ($errors->has('description'))
+                <span class="help-block m-b-none text-danger">{{ $errors->first('description') }}</span>
                 @endif
               </div>
             </div>
 
             <div class="hr-line-dashed"></div>
-            <div class="form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
-              <label class="col-sm-2 control-label">{{trans('admin/platform.model.logo')}}</label>
+            <div class="form-group{{ $errors->has('translation_language') ? ' has-error' : '' }}">
+              <label class="col-sm-2 control-label">{{trans('admin/project.model.translation_language')}}</label>
               <div class="col-sm-10">
-                  <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                      <div class="form-control" data-trigger="fileinput">
-                          <i class="glyphicon glyphicon-file fileinput-exists"></i>
-                          <span class="fileinput-filename">{{trans('admin/platform.model.logo')}}</span>
-                      </div>
-                      <span class="input-group-addon btn btn-default btn-file">
-                        <span class="fileinput-new">Select file</span>
-                        <span class="fileinput-exists">Change</span>
-                        <input type="file" name="logo" value="{{old('logo')}}" placeholder="{{trans('admin/platform.model.logo')}}"/>
-                    </span>
-                      <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                  </div>
-                @if ($errors->has('logo'))
-                <span class="help-block m-b-none text-danger">{{ $errors->first('logo') }}</span>
+                {!! $ProjectPresenter->showLanguages() !!}
+                @if ($errors->has('languages'))
+                <span class="help-block m-b-none text-danger">{{ $errors->first('languages') }}</span>
                 @endif
               </div>
             </div>
 
-
-
-              <div class="hr-line-dashed"></div>
+            <div class="hr-line-dashed"></div>
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
                   <a class="btn btn-white" href="{{url()->previous()}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
@@ -108,6 +85,6 @@
 
 @endsection
 @section('js')
-<script type="text/javascript" src="{{asset('vendors/jasny/jasny-bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('admin/js/platform/platform.js')}}"></script>
+<script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/js/project/project.js')}}"></script>
 @endsection

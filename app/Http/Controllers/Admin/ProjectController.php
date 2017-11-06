@@ -47,4 +47,32 @@ class ProjectController extends Controller
         return response()->json( $responseData );
     }
 
+    /**
+     * 创建项目
+     */
+    public function create()
+    {
+        return view( 'admin.project.create' );
+    }
+
+    /**
+     * 存储项目
+     */
+    public function store( ProjectCreateRequest $request )
+    {
+        $this->projectService->storeProject( $request->all() );
+        return redirect('admin/project');
+    }
+
+    /**
+     * 查看项目
+     * @param $id
+     * @return $this
+     */
+    public function show( $id )
+    {
+        $project = $this->projectService->findProjectById( $id );
+        return view('admin.project.show')->with( compact( 'project' ) );
+    }
+
 }
