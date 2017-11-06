@@ -2,6 +2,7 @@
 namespace App\Service\Admin;
 
 use App\Repositories\Eloquent\ProjectRepositoryEloquent;
+use App\Repositories\Eloquent\LanguageRepositoryEloquent;
 use App\Service\Admin\BaseService;
 use Exception;
 
@@ -11,11 +12,13 @@ use Exception;
 class ProjectService extends BaseService
 {
 
-	private $project;
+	protected $project;
+    protected $languageRepository;
 
-	function __construct(ProjectRepositoryEloquent $project)
+	function __construct(ProjectRepositoryEloquent $project, LanguageRepositoryEloquent $languageRepository)
 	{
 		$this->project =  $project;
+        $this->languageRepository = $languageRepository;
 	}
 	/**
 	 * datatables获取数据
@@ -122,11 +125,17 @@ class ProjectService extends BaseService
     public function storeProject($attributes)
     {
         try {
+            $languages = $attributes['languages'];
             /* 将 languages 转为字符串 */
             $attributes['languages'] = implode( ',', $attributes['languages'] );
             $attributes['user_id']   = getUser()->id;
             $attributes['username']  = getUser()->username;
             $result = $this->project->create( $attributes );
+            if ( $result->id )
+            {
+                $languages_data = $this->_buildLanguagesData( $result->id, $languages );
+                $this->languageRepository->insert( $languages_data );
+            }
 
             return [
                 'status' => $result,
@@ -137,6 +146,23 @@ class ProjectService extends BaseService
             $this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
             return false;
         }
+    }
+
+    /**
+     * 生成待翻译语言多条数据
+     */
+    private function _buildLanguagesData( $id, $languages )
+    {
+        $languages_data = [];
+
+        foreach ( (array)$languages as $k => $v )
+        {
+            $languages_data[$k]['project_id'] = $id;
+            $languages_data[$k]['language']   = $v;
+            $languages_data[$k]['status']     = 1;
+        }
+
+        return $languages_data;
     }
 
     /**
