@@ -14,6 +14,7 @@ class ProjectPresenter
     public function showLanguages( $projectLanguage = [] )
     {
         $languages = config( 'languages' );
+        $projectLanguage = explode( ',', $projectLanguage );
 
         $html = '';
         foreach ( (array)$languages as $key => $value )

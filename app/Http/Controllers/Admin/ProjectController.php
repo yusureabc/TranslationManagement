@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Admin\ProjectService;
+use App\Service\Admin\languageService;
 use App\Http\Requests\ProjectCreateRequest;
+use App\Http\Requests\ProjectUpdateRequest;
+
 
 class ProjectController extends Controller
 {
@@ -18,9 +21,10 @@ class ProjectController extends Controller
      * @date   2017-11-03
      * @param  [param]
      */
-    public function __construct( ProjectService $projectService )
+    public function __construct( ProjectService $projectService, languageService $languageService )
     {
-        $this->projectService = $projectService;
+        $this->projectService  = $projectService;
+        $this->languageService = $languageService;
     }
 
     /**
@@ -74,6 +78,46 @@ class ProjectController extends Controller
     {
         $project = $this->projectService->findProjectById( $id );
         return view('admin.project.show')->with( compact( 'project' ) );
+    }
+
+    /**
+     * 编辑项目
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-06
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function edit( $id )
+    {
+        $project = $this->projectService->findProjectById( $id );
+        return view( 'admin.project.edit', compact( 'project' ) );
+    }
+
+    /**
+     * 更新项目
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-06
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function update( ProjectUpdateRequest $request, $id )
+    {
+        $project = $this->projectService->updateProject( $request->all(), $id );
+        return redirect( 'admin/project' );
+    }
+
+    /**
+     * 销毁项目数据
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-06
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function destroy( $id )
+    {
+
     }
 
 }

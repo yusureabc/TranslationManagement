@@ -5,12 +5,11 @@ use App\Repositories\Eloquent\ProjectRepositoryEloquent;
 use App\Repositories\Eloquent\LanguageRepositoryEloquent;
 use App\Service\Admin\BaseService;
 use Exception;
-use DB;
 
 /**
-* Project Service
+* Language Service
 */
-class ProjectService extends BaseService
+class LanguageService extends BaseService
 {
 
 	protected $project;
@@ -185,71 +184,37 @@ class ProjectService extends BaseService
 
     /**
      * 修改数据
+     * @author Sheldon
+     * @date   2017-04-18
+     * @param  [type]     $attributes [表单数据]
+     * @param  [type]     $id         [resource路由id]
+     * @return [type]                 [Array]
      */
-    public function updateProject( $attributes, $id )
+    public function updateProject($attributes,$id)
     {
         // 防止用户恶意修改表单id，如果id不一致直接跳转500
-        if ( $attributes['id'] != $id )
-        {
+        if ($attributes['id'] != $id) {
             return [
                 'status' => false,
                 'message' => trans('admin/errors.user_error'),
             ];
         }
         try {
-            DB::beginTransaction();
-            /* 关联子表操作：存储多语言 */
-            $this->_storeLanguage( $attributes['languages'], $id );
-            $attributes['languages'] = implode( ',', $attributes['languages'] );
-            $attributes['user_id']   = getUser()->id;
-            $attributes['username']  = getUser()->username;
-            $isUpdate = $this->project->update( $attributes, $id );
-            DB::commit();
+
+            $isUpdate = $this->project->update($attributes, $id);
 
             return [
                 'status' => $isUpdate,
                 'message' => $isUpdate ? trans('admin/alert.project.edit_success'):trans('admin/alert.project.edit_error'),
             ];
         } catch (Exception $e) {
-            DB::rollBack();
             // 错误信息发送邮件
             $this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
             return false;
         }
+
+
     }
-
-    /**
-     * 存储 多语言
-     * @author Yusure  http://yusure.cn
-     * @date   2017-11-08
-     * @param  [param]
-     * @return [type]     [description]
-     */
-    private function _storeLanguage( $languages, $id )
-    {
-        /* 查找旧的 language 用来作比对 */
-        $old_languages = $this->languageRepository->getOldLanguage( $id );
-
-        /* 删除其他未选中的语言 */
-        $this->languageRepository->deleteOtherLanguage( $languages, $id );
-
-        /* foreach 新的 languages 判断是否存在，不存在就写入 */
-        foreach ( $languages as $k => $language )
-        {
-            $result = array_search( $language, $old_languages );
-            if ( false === $result )
-            {
-                /* 写入 languages */
-                $data = [
-                    'project_id' => $id,
-                    'language'   => $language,
-                    'status'     => 1,
-                ];
-                $this->languageRepository->insert( $data );
-            }
-        }
-    }
-
     /**
      * 删除
      * @author Sheldon

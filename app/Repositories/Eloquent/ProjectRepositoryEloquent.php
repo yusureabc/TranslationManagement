@@ -25,17 +25,6 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    /*public function validator()
-    {
-
-        return ProjectValidator::class;
-    }*/
-
-    /**
      * 查询平台并分页
      * @author Sheldon
      * @date   2017-04-18T12:56:28+0800
@@ -78,6 +67,18 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     {
         $model = new $this->model;
         return $model->fill($attributes)->save();
+    }
+
+    public function getProjectLanguage( $id )
+    {
+        $result = [];
+        $languages = $this->model->where( 'id', $id )->value( 'languages' );
+        if ( $languages )
+        {
+            $result = explode( ',', $languages );
+        }
+        
+        return $result;
     }
 
     /**

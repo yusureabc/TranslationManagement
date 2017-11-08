@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Contracts\LanguageRepository;
 use App\Models\Language;
 use App\Repositories\Validators\LanguageValidator;
+use DB;
 
 /**
  * Class LanguageRepositoryEloquent
@@ -74,6 +75,27 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
     {
         $model = new $this->model;
         return $model->fill($attributes)->save();
+    }
+
+    public function getOldLanguage( $id )
+    {
+        $result = [];
+        $languages = $this->model->where( 'project_id', $id )->pluck( 'language' );
+        if ( $languages->isNotEmpty() )
+        {
+            $result = $languages->toArray();
+        }
+        
+        return $result;
+    }
+
+    /**
+     * 删除其他语言
+     */
+    public function deleteOtherLanguage( $languages, $id )
+    {
+        $result = $this->model->where( 'project_id', $id )->whereNotIn( 'language', $languages )->delete();
+        return $result;
     }
 
     /**
