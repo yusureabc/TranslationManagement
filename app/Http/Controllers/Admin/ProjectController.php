@@ -109,6 +109,18 @@ class ProjectController extends Controller
     }
 
     /**
+     * 录入翻译 key 源内容
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-09
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function input( $id )
+    {
+        return view( 'admin.project.input' );
+    }
+
+    /**
      * 销毁项目数据
      * @author Yusure  http://yusure.cn
      * @date   2017-11-06

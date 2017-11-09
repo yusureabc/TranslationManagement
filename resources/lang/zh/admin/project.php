@@ -5,6 +5,8 @@ return [
     'create'    => '添加项目',
     'edit'      => '修改项目',
     'info'      => '项目信息',
+    'input'     => '录入信息',
+    'source'    => '源内容',
     'model'     => [
         'id'          => 'ID',
         'name'        => '项目名称',

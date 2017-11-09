@@ -49,6 +49,7 @@ return [
         'create'    => '<i class="fa fa-plus"></i> 添加项目',
         'edit'      => '<i class="fa fa-pencil"></i> 修改项目',
         'info'      => '<i class="fa fa-pencil"></i> 项目信息',
+        'input'     => '<i class="fa fa-pencil"></i> 录入信息',
     ],
     'language' => [
         'list'      => '<i class="fa fa-diamond"></i> 语言列表',
