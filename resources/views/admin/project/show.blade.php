@@ -1,103 +1,98 @@
 @extends('layouts.admin')
 @section('css')
-<link href="{{asset('vendors/iCheck/custom.css')}}" rel="stylesheet">
+<link href="{{asset('vendors/dataTables/datatables.min.css')}}" rel="stylesheet">
+    <style>
+        .fadeInRight img{
+            max-height: 100px;
+            max-width: 100px;
+        }
+    </style>
 @endsection
 @section('content')
-@inject('userPresenter','App\Presenters\Admin\UserPresenter')
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h2>{!!trans('admin/user.title')!!}</h2>
+    <h2>{!!trans('admin/language.title')!!}</h2>
     <ol class="breadcrumb">
         <li>
             <a href="{{url('admin/dash')}}">{!!trans('admin/breadcrumb.home')!!}</a>
         </li>
-        <li>
-            <a href="{{url('admin/user')}}">{!!trans('admin/breadcrumb.user.list')!!}</a>
-        </li>
         <li class="active">
-            <strong>{!!trans('admin/breadcrumb.user.info')!!}</strong>
+            <strong>{!!trans('admin/breadcrumb.language.list')!!}</strong>
         </li>
     </ol>
   </div>
+  @permission(config('admin.permissions.language.create'))
+  <div class="col-lg-2">
+    <div class="title-action">
+      <a href="{{url('admin/language/create')}}" class="btn btn-info">{!!trans('admin/language.action.create')!!}</a>
+    </div>
+  </div>
+  @endpermission
+  <div class="col-lg-2">
+    <div class="title-action">
+      <a href="{{url('admin/language/create')}}" class="btn btn-info">{!!trans('admin/language.action.create')!!}</a>
+    </div>
+  </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
+    <input type="hidden" id="project_id" value="{{$project->id}}">
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>{!!trans('admin/user.create')!!}</h5>
+          <h5>{!!trans('admin/language.desc')!!}</h5>
           <div class="ibox-tools">
-              <a class="collapse-link">
-                  <i class="fa fa-chevron-up"></i>
-              </a>
-              <a class="close-link">
-                  <i class="fa fa-times"></i>
-              </a>
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
           </div>
         </div>
         <div class="ibox-content">
-          <form class="form-horizontal">
-            <div class="form-group">
-              <label class="col-sm-2 control-label">{{trans('admin/user.model.name')}}</label>
-              <div class="col-sm-10">
-                <p class="form-control-static">{{$user->name}}</p>
-              </div>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-              <label class="col-sm-2 control-label">{{trans('admin/user.model.username')}}</label>
-              <div class="col-sm-10">
-                <p class="form-control-static">{{$user->username}}</p>
-              </div>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-              <label class="col-sm-2 control-label">{{trans('admin/user.model.email')}}</label>
-              <div class="col-sm-10">
-                <p class="form-control-static">{{$user->email}}</p>
-              </div>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">{{trans('admin/user.role')}}</label>
-              <div class="col-sm-10">
-                {!!$userPresenter->showUserRoles($user->roles)!!}
-              </div>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">{{trans('admin/user.permission')}}</label>
-              <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                  <table class="table table-bordered">
-                    <thead>
+          @include('flash::message')
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover dataTablesAjax" >
+                  <thead>
                       <tr>
-                          <th class="col-md-1 text-center">{{trans('admin/user.module')}}</th>
-                          <th class="col-md-10 text-center">{{trans('admin/user.permission')}}</th>
+                        <th>{{trans('admin/language.model.id')}}</th>
+                        <th>{{trans('admin/language.model.language')}}</th>
+                        <th>{{trans('admin/language.model.name')}}</th>
+                        <th>{{trans('admin/language.model.submit_at')}}</th>
+                        <th>{{trans('admin/language.model.download_at')}}</th>
+                        <th>{{trans('admin/action.title')}}</th>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {!! $userPresenter->showUserPermissions($user->userPermissions) !!}
-                    </tbody>
-                  </table>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+              <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <a class="btn btn-white" href="{{url()->previous()}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
                 </div>
               </div>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
-              <div class="col-sm-4 col-sm-offset-2">
-                  <a class="btn btn-white" href="{{url()->previous()}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
-    </div>
+      </div>
     </div>
   </div>
 </div>
-@include('admin.user.modal')
 @endsection
 @section('js')
-<script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('admin/js/user/user.js')}}"></script>
+<script src="{{asset('vendors/dataTables/datatables.min.js')}}"></script>
+<script src="{{asset('vendors/layer/layer.js')}}"></script>
+<script src="{{asset('admin/js/language/language-datatable.js')}}"></script>
+<script type="text/javascript">
+  $(document).on('click','.destroy_item',function() {
+    var _item = $(this);
+    layer.confirm('{{trans('admin/alert.deleteTitle')}}', {
+      btn: ['{{trans('admin/action.actionButton.destroy')}}', '{{trans('admin/action.actionButton.no')}}'],
+      icon: 5,
+    },function(index){
+      _item.children('form').submit();
+      layer.close(index);
+    });
+  });
+</script>
 @endsection

@@ -44,26 +44,28 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
      */
     public function getLanguageList($start,$length,$search,$order)
     {
-        $project = $this->model;
+        $language = $this->model;
         if ($search['value']) {
             if($search['regex'] == 'true'){
-                $project = $project->where('name', 'like', "%{$search['value']}%")
+                $language = $language->where('name', 'like', "%{$search['value']}%")
                     ->orWhere('slug','like', "%{$search['value']}%")
                     ->orWhere('url','like', "%{$search['value']}%");
             }else{
-                $project = $project->where('name', $search['value'])
-                    ->orWhere('slug', $search['value'])
-                    ->orWhere('url', $search['value']);
+                $language = $language->where('name', $search['value']);
             }
         }
+        if ( isset( $search['project_id'] ) )
+        {
+            $language = $language->where( 'project_id', $search['project_id'] );
+        }
 
-        $count = $project->count();
+        $count = $language->count();
 
-        $project = $project->orderBy($order['name'], $order['dir']);
+        $language = $language->orderBy($order['name'], $order['dir']);
 
-        $projects = $project->offset($start)->limit($length)->get();
+        $languages = $language->offset($start)->limit($length)->get();
 
-        return compact('count','projects');
+        return compact('count','languages');
     }
 
     public function allLanguages()
@@ -92,10 +94,14 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
     /**
      * 删除其他语言
      */
-    public function deleteOtherLanguage( $languages, $id )
+    public function deleteOtherLanguage( $languages, $project_id )
     {
-        $result = $this->model->where( 'project_id', $id )->whereNotIn( 'language', $languages )->delete();
-        return $result;
+        return $this->model->where( 'project_id', $project_id )->whereNotIn( 'language', $languages )->delete();
+    }
+
+    public function showLanguageList( $project_id )
+    {
+        return $this->model->where( 'project_id', $project_id )->get();
     }
 
     /**

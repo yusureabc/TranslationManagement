@@ -50,4 +50,10 @@ return [
         'edit'      => '<i class="fa fa-pencil"></i> 修改项目',
         'info'      => '<i class="fa fa-pencil"></i> 项目信息',
     ],
+    'language' => [
+        'list'      => '<i class="fa fa-diamond"></i> 语言列表',
+        'create'    => '<i class="fa fa-plus"></i> 添加语言',
+        'edit'      => '<i class="fa fa-pencil"></i> 修改语言',
+        'info'      => '<i class="fa fa-pencil"></i> 语言信息',
+    ],
 ];

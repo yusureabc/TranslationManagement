@@ -3,33 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
+use App\Http\Controllers\Controller;
+use App\Service\Admin\LanguageService;
 use App\Http\Requests\LanguageCreateRequest;
 use App\Http\Requests\LanguageUpdateRequest;
-use App\Repositories\Contracts\LanguageRepository;
-use App\Repositories\Validators\LanguageValidator;
 
 
-class LanguagesController extends Controller
+class LanguageController extends Controller
 {
 
     /**
-     * @var LanguageRepository
+     * @var languageService
      */
-    protected $repository;
+    protected $languageService;
 
     /**
      * @var LanguageValidator
      */
     protected $validator;
 
-    public function __construct(LanguageRepository $repository, LanguageValidator $validator)
+    public function __construct( LanguageService $languageService )
     {
-        $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->languageService = $languageService;
     }
 
 
@@ -40,17 +35,20 @@ class LanguagesController extends Controller
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $languages = $this->repository->all();
 
-        if (request()->wantsJson()) {
+    }
 
-            return response()->json([
-                'data' => $languages,
-            ]);
-        }
-
-        return view('languages.index', compact('languages'));
+    /**
+     * ajax 获取数据
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-03
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function ajaxIndex()
+    {
+        $responseData = $this->languageService->ajaxIndex();
+        return response()->json( $responseData );
     }
 
     /**

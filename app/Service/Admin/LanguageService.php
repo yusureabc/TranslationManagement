@@ -12,157 +12,61 @@ use Exception;
 class LanguageService extends BaseService
 {
 
-	protected $project;
+    protected $project;
     protected $languageRepository;
 
-	function __construct(ProjectRepositoryEloquent $project, LanguageRepositoryEloquent $languageRepository)
-	{
-		$this->project =  $project;
+    function __construct(ProjectRepositoryEloquent $project, LanguageRepositoryEloquent $languageRepository)
+    {
+        $this->project =  $project;
         $this->languageRepository = $languageRepository;
-	}
-	/**
-	 * datatables获取数据
-	 * @author Sheldon
-	 * @date   2017-04-18T15:54:46+0800
-	 * @return [type]                   [description]
-	 */
-	public function ajaxIndex()
-	{
-		// datatables请求次数
-		$draw = request('draw', 1);
-		// 开始条数
-		$start = request('start', config('admin.golbal.list.start'));
-		// 每页显示数目
-		$length = request('length', config('admin.golbal.list.length'));
-		// datatables是否启用模糊搜索
-		$search['regex'] = request('search.regex', false);
-		// 搜索框中的值
-		$search['value'] = request('search.value', '');
-		// 排序
-		$order['name'] = request('columns.' .request('order.0.column',0) . '.name');
-		$order['dir'] = request('order.0.dir','asc');
-
-		$result = $this->project->getProjectList($start,$length,$search,$order);
-
-		$projects = [];
-
-		if ($result['projects']) {
-			foreach ($result['projects'] as $v) {
-				$v->actionButton = $v->getActionButtonAttribute();
-				$projects[] = $v;
-			}
-		}
-
-		return [
-			'draw' => $draw,
-			'recordsTotal' => $result['count'],
-			'recordsFiltered' => $result['count'],
-			'data' => $projects,
-		];
-	}
-
-    /**
-     * 获取所有平台并缓存
-     * @author Sheldon
-     * @date   2017-04-18T16:12:11+0800
-     * @return [type]                   [Array]
-     */
-    public function getProjectSetCache()
-    {
-        $projectList = $this->project->allProjects();
-        if ($projectList) {
-            // 缓存数据
-            cache()->forever(config('admin.global.cache.projectList'), $projectList);
-            return $projectList;
-
-        }
-        return '';
     }
-
     /**
-     * 获取所以平台数据
-     * @author Sheldon
-     * @date   2016-11-04T10:45:38+0800
-     * @return [type]                   [description]
+     * datatables获取数据
      */
-    public function getProjectList()
+    public function ajaxIndex()
     {
-        // 判断数据是否缓存
-        if (cache()->has(config('admin.global.cache.projectList'))) {
-            return cache()->get(config('admin.global.cache.projectList'));
-        }
+        // datatables请求次数
+        $draw = request('draw', 1);
+        // 开始条数
+        $start = request('start', config('admin.golbal.list.start'));
+        // 每页显示数目
+        $length = request('length', config('admin.golbal.list.length'));
+        // datatables是否启用模糊搜索
+        $search['regex'] = request('search.regex', false);
+        // 搜索框中的值
+        $search['value'] = request('search.value', '');
+        // 排序
+        $order['name'] = request('columns.' .request('order.0.column',0) . '.name');
+        $order['dir'] = request('order.0.dir','asc');
 
-        return $this->getProjectSetCache();
-    }
+        $search['project_id'] = request( 'project_id', 0 );
 
+        $result = $this->languageRepository->getLanguageList($start,$length,$search,$order);
 
-    /**
-     * 根据ID从缓冲中查找数据
-     * @author Sheldon
-     * @date   2017-04-21T16:25:59+0800
-     * @param  [type]                   $id [description]
-     * @return [type]                       [description]
-     */
-    public function findProjectByIdFromCache ($id)
-    {
-        $projects = $this->getProjectList();
-        $return = [];
-        if (!empty($projects)) {
-            foreach ($projects as $project) {
-                if ($project['id'] == $id) {
-                    $return = $project;
-                    break;
-                }
+        $languages = [];
+
+        if ($result['languages']) {
+            foreach ($result['languages'] as $v) {
+                $v->name = trans( 'languages.'.$v->language );
+                $v->actionButton = $v->getActionButtonAttribute();
+                $languages[] = $v;
             }
         }
 
-        return $return;
+        return [
+            'draw' => $draw,
+            'recordsTotal' => $result['count'],
+            'recordsFiltered' => $result['count'],
+            'data' => $languages,
+        ];
     }
 
     /**
-     * 添加项目
+     * 查看语言列表
      */
-    public function storeProject($attributes)
+    public function showLanguageList( $project_id )
     {
-        try {
-            $languages = $attributes['languages'];
-            /* 将 languages 转为字符串 */
-            $attributes['languages'] = implode( ',', $attributes['languages'] );
-            $attributes['user_id']   = getUser()->id;
-            $attributes['username']  = getUser()->username;
-            $result = $this->project->create( $attributes );
-            if ( $result->id )
-            {
-                $languages_data = $this->_buildLanguagesData( $result->id, $languages );
-                $this->languageRepository->insert( $languages_data );
-            }
-
-            return [
-                'status' => $result,
-                'message' => $result ? trans('admin/alert.project.create_success'):trans('admin/alert.project.create_error'),
-            ];
-        } catch (Exception $e) {
-            // 错误信息发送邮件
-            $this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
-            return false;
-        }
-    }
-
-    /**
-     * 生成待翻译语言多条数据
-     */
-    private function _buildLanguagesData( $id, $languages )
-    {
-        $languages_data = [];
-
-        foreach ( (array)$languages as $k => $v )
-        {
-            $languages_data[$k]['project_id'] = $id;
-            $languages_data[$k]['language']   = $v;
-            $languages_data[$k]['status']     = 1;
-        }
-
-        return $languages_data;
+        return $this->languageRepository->showLanguageList( $project_id );
     }
 
     /**
@@ -182,39 +86,6 @@ class LanguageService extends BaseService
         abort(404);
     }
 
-    /**
-     * 修改数据
-     * @author Sheldon
-     * @date   2017-04-18
-     * @param  [type]     $attributes [表单数据]
-     * @param  [type]     $id         [resource路由id]
-     * @return [type]                 [Array]
-     */
-    public function updateProject($attributes,$id)
-    {
-        // 防止用户恶意修改表单id，如果id不一致直接跳转500
-        if ($attributes['id'] != $id) {
-            return [
-                'status' => false,
-                'message' => trans('admin/errors.user_error'),
-            ];
-        }
-        try {
-
-            $isUpdate = $this->project->update($attributes, $id);
-
-            return [
-                'status' => $isUpdate,
-                'message' => $isUpdate ? trans('admin/alert.project.edit_success'):trans('admin/alert.project.edit_error'),
-            ];
-        } catch (Exception $e) {
-            // 错误信息发送邮件
-            $this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
-            return false;
-        }
-
-
-    }
     /**
      * 删除
      * @author Sheldon

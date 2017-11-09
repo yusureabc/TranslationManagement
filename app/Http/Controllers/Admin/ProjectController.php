@@ -77,7 +77,8 @@ class ProjectController extends Controller
     public function show( $id )
     {
         $project = $this->projectService->findProjectById( $id );
-        return view('admin.project.show')->with( compact( 'project' ) );
+        $languages = $this->languageService->showLanguageList( $id );
+        return view('admin.project.show')->with( compact( 'project', 'languages' ) );
     }
 
     /**

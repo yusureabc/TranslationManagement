@@ -168,14 +168,11 @@ class ProjectService extends BaseService
 
     /**
      * 根据ID查找数据
-     * @author Sheldon
-     * @date   2017-04-18T16:25:59+0800
-     * @param  [type]                   $id [description]
-     * @return [type]                       [description]
      */
-    public function findProjectById($id)
+    public function findProjectById( $id )
     {
-        $project = $this->project->find($id);
+        $project = $this->project->find( $id );
+        /* TODO 查找 language 数据 */
         if ($project){
             return $project;
         }
