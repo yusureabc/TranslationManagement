@@ -79,6 +79,28 @@ trait ActionButtonAttributeTrait
         }
         return '';
     }
+
+    /**
+     * 下载按钮
+     */
+    public function getDownloadActionButton()
+    {
+        if (auth()->user()->can(config('admin.permissions.'.$this->action.'.download'))) {
+            return '<a href="'.url('admin/'.$this->action.'/'.$this->id.'/download').'" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-info tooltips" data-container="body" data-original-title="' . trans('admin/action.actionButton.download') . '"  data-placement="top"><i class="fa fa-download"></i></a> ';
+        }
+        return '';
+    }
+
+    /**
+     * 邀请按钮
+     */
+    public function getInviteActionButton()
+    {
+        if (auth()->user()->can(config('admin.permissions.'.$this->action.'.invite'))) {
+            return '<a href="'.url('admin/'.$this->action.'/'.$this->id.'/invite').'" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-danger tooltips" data-container="body" data-original-title="' . trans('admin/action.actionButton.invite') . '"  data-placement="top"><i class="fa fa-hand-o-right"></i></a> ';
+        }
+        return '';
+    }
     
     /**
      * 获取按钮
@@ -93,6 +115,8 @@ trait ActionButtonAttributeTrait
                 $this->getResetActionButton().
                 $this->getEditActionButton().
                 $this->getInputActionButton().
+                $this->getDownloadActionButton().
+                $this->getInviteActionButton().
                 $this->getDestroyActionButton();
     }
 }

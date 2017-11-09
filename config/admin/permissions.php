@@ -87,4 +87,9 @@ return [
 		'create' => 'project.create',
 	],
 
+	'language' => [
+		'download' => 'language.download',
+		'invite' => 'language.invite',
+	],
+
 ];

@@ -45,9 +45,12 @@ class LanguageService extends BaseService
 
         $languages = [];
 
-        if ($result['languages']) {
-            foreach ($result['languages'] as $v) {
+        if ( $result['languages'] )
+        {
+            foreach ( $result['languages'] as $v )
+            {
                 $v->name = trans( 'languages.'.$v->language );
+                $v->status = $v->status == 0 ? trans( 'admin/action.lock' ) : trans( 'admin/action.open' );
                 $v->actionButton = $v->getActionButtonAttribute();
                 $languages[] = $v;
             }

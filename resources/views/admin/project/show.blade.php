@@ -61,6 +61,7 @@
                         <th>{{trans('admin/language.model.name')}}</th>
                         <th>{{trans('admin/language.model.submit_at')}}</th>
                         <th>{{trans('admin/language.model.download_at')}}</th>
+                        <th>{{trans('admin/language.model.status')}}</th>
                         <th>{{trans('admin/action.title')}}</th>
                       </tr>
                   </thead>

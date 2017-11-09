@@ -58,6 +58,10 @@ var TableDatatablesAjax = function() {
             "name": "download_at",
             "orderable" : true,
         },
+        { 
+            "data": "status",
+            "name": "status",
+        },
         {
           "data": "actionButton",
           "name": "actionButton",

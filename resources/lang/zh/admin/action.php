@@ -9,7 +9,11 @@ return [
 		'close'     => '关闭',
 		'reset'     => '重置密码',
 		'input'     => '录入',
+		'download'  => '下载',
+		'invite'    => '邀请',
 		'cancel' 	=> '<i class="fa fa-reply"></i> 返回',
 		'submit' 	=> '<i class="fa fa-paper-plane-o"></i> 提交',
-	]
+	],
+	'lock' => '锁定',
+	'open' => '开启',
 ];
