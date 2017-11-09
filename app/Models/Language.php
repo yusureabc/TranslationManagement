@@ -18,4 +18,6 @@ class Language extends Model implements Transformable
     private $action = 'language';
 
     protected $guarded  = [];
+
+    public $timestamps = false;
 }

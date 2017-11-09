@@ -50,8 +50,9 @@ class LanguageService extends BaseService
             foreach ( $result['languages'] as $v )
             {
                 $v->name = trans( 'languages.'.$v->language );
+                $status = $v->status;
                 $v->status = $v->status == 0 ? trans( 'admin/action.lock' ) : trans( 'admin/action.open' );
-                $v->actionButton = $v->getActionButtonAttribute();
+                $v->actionButton = $v->getActionButtonAttribute( true, $status );
                 $languages[] = $v;
             }
         }
@@ -87,6 +88,16 @@ class LanguageService extends BaseService
         }
         // TODO替换正查找不到数据错误页面
         abort(404);
+    }
+
+    /**
+     * 改变语言翻译状态
+     */
+    public function changeStatus( $id, $status )
+    {
+        $status = $status == 0 ? 1 : 0;
+        $data = ['status' => $status];
+        return $this->languageRepository->changeStatus( $id, $data );
     }
 
     /**

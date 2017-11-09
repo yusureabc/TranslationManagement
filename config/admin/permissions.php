@@ -90,6 +90,7 @@ return [
 	'language' => [
 		'download' => 'language.download',
 		'invite' => 'language.invite',
+		'status' => 'language.status',
 	],
 
 ];

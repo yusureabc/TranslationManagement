@@ -105,6 +105,14 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
     }
 
     /**
+     * 改变状态
+     */
+    public function changeStatus( $id, $data )
+    {
+        return $this->model->where( 'id', $id )->update( $data );
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

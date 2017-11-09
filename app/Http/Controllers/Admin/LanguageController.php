@@ -27,17 +27,6 @@ class LanguageController extends Controller
         $this->languageService = $languageService;
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-    }
-
     /**
      * ajax 获取数据
      * @author Yusure  http://yusure.cn
@@ -49,6 +38,12 @@ class LanguageController extends Controller
     {
         $responseData = $this->languageService->ajaxIndex();
         return response()->json( $responseData );
+    }
+
+    public function status( $id, $status )
+    {
+        $this->languageService->changeStatus( $id, $status );
+        return redirect()->back();
     }
 
     /**

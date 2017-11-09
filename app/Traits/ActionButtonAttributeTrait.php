@@ -101,6 +101,21 @@ trait ActionButtonAttributeTrait
         }
         return '';
     }
+
+    /**
+     * 锁定/开启  按钮
+     * $status  状态  0 lock, 1 open
+     */
+    public function getStatusActionButton( $status )
+    {
+        if (auth()->user()->can(config('admin.permissions.'.$this->action.'.status'))) 
+        {
+            $icon = $status == 0 ? 'fa fa-unlock' : 'fa fa-lock';
+            $title = $status == 0 ? trans('admin/action.open') : trans('admin/action.lock');
+            return '<a href="'.url('admin/'.$this->action.'/'.$this->id.'/status/'.$status).'" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-success tooltips" data-container="body" data-original-title="' . $title . '"  data-placement="top"><i class="'. $icon .'"></i></a> ';
+        }
+        return '';
+    }
     
     /**
      * 获取按钮
@@ -109,7 +124,7 @@ trait ActionButtonAttributeTrait
      * @param  boolean
      * @return [type]
      */
-    public function getActionButtonAttribute($showType = true)
+    public function getActionButtonAttribute($showType = true, $status = 1)
     {
         return $this->getShowActionButton($showType).
                 $this->getResetActionButton().
@@ -117,6 +132,7 @@ trait ActionButtonAttributeTrait
                 $this->getInputActionButton().
                 $this->getDownloadActionButton().
                 $this->getInviteActionButton().
+                $this->getStatusActionButton( $status ).
                 $this->getDestroyActionButton();
     }
 }
