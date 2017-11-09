@@ -28,11 +28,6 @@
     </div>
   </div>
   @endpermission
-  <div class="col-lg-2">
-    <div class="title-action">
-      <a href="{{url('admin/language/create')}}" class="btn btn-info">{!!trans('admin/language.action.create')!!}</a>
-    </div>
-  </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <input type="hidden" id="project_id" value="{{$project->id}}">
