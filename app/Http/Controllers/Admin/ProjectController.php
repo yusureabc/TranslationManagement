@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Admin\ProjectService;
 use App\Service\Admin\languageService;
+use App\Service\Admin\KeyService;
 use App\Http\Requests\ProjectCreateRequest;
 use App\Http\Requests\ProjectUpdateRequest;
 
@@ -14,6 +15,9 @@ class ProjectController extends Controller
 {
 
     protected $projectService;
+    protected $languageService;
+    protected $keyService;
+
 
     /**
      * 构造方法
@@ -21,10 +25,15 @@ class ProjectController extends Controller
      * @date   2017-11-03
      * @param  [param]
      */
-    public function __construct( ProjectService $projectService, languageService $languageService )
+    public function __construct( 
+        ProjectService $projectService, 
+        languageService $languageService, 
+        KeyService $keyService 
+    )
     {
         $this->projectService  = $projectService;
         $this->languageService = $languageService;
+        $this->keyService = $keyService;
     }
 
     /**
@@ -117,7 +126,40 @@ class ProjectController extends Controller
      */
     public function input( $id )
     {
-        return view( 'admin.project.input' );
+        $keys = $this->keyService->getKeyList( $id );
+        return view( 'admin.project.input', compact( 'keys', 'id' ) );
+    }
+
+    /**
+     * 保存录入的信息
+     */
+    public function storeKey( $id )
+    {
+        $result = $this->keyService->storeKey( $id, request()->all() );
+        if ( $result !== false )
+        {
+            if ( isset( $result->id ) )
+            {
+                $response = ['status' => 1, 'id' => $result->id];
+            }
+            else
+            {
+                $response = ['status' => 1];
+            }            
+        }
+        else
+        {
+            $response = ['status' => 0];
+        }
+        return $response;
+    }
+
+    /**
+     * 删除翻译 key
+     */
+    public function deleteKey( $id )
+    {
+        return $this->keyService->deleteKey( $id, request()->input( 'key_id' ) );
     }
 
     /**

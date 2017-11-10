@@ -6,7 +6,7 @@
 @inject( 'ProjectPresenter', 'App\Presenters\Admin\ProjectPresenter' )
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h2>{!!trans('admin/project.title')!!}</h2>
+    <h2>{!!trans('admin/project.input')!!}</h2>
     <ol class="breadcrumb">
         <li>
             <a href="{{url('admin/dash')}}">{!!trans('admin/breadcrumb.home')!!}</a>
@@ -38,56 +38,42 @@
         <div class="ibox-content">
           <form method="post" action="{{url('admin/project')}}" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} source-item">
-              <label class="col-sm-2 control-label">1</label>
+            <input type="hidden" id="project_id" value="{{ $id }}">
+            <?php if ( $keys->isNotEmpty() ) { ?>
+            <?php foreach ( $keys as $k => $item ) { ?>
+            <div class="form-group source-item">
+              <label name="key_id" class="col-sm-2 control-label"><?php echo $item->id; ?></label>
               <div class="col-sm-3">
-                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="key">
+                <input type="text" class="form-control" name="key" value="{{old( 'key', $item->key )}}" placeholder="key">
               </div>
               <div class="col-sm-3">
-                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="{{trans('admin/project.source')}}">
+                <input type="text" class="form-control" name="source" value="{{old( 'source', $item->source )}}" placeholder="{{trans('admin/project.source')}}">
               </div>
-              <button type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default" aria-label="Left Align">
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="保存" onclick="save_key( $(this) );">
                 <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
               </button>
-            </div>
-
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} source-item">
-              <label class="col-sm-2 control-label">1</label>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="key">
-              </div>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="{{trans('admin/project.source')}}">
-              </div>
-              <button type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="删除" onclick="remove_key( $(this) );">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
               </button>
-              <button type="button" class="btn btn-default" aria-label="Left Align">
+            </div>
+            <?php } ?>
+            <?php } else { ?>
+            <div class="form-group source-item">
+              <label name="key_id" class="col-sm-2 control-label"></label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="key" value="" placeholder="key">
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="source" value="" placeholder="{{trans('admin/project.source')}}">
+              </div>
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="保存" onclick="save_key( $(this) );">
                 <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
               </button>
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="删除" onclick="remove_key( $(this) );">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>              
             </div>
-
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} source-item">
-              <label class="col-sm-2 control-label">1</label>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="key">
-              </div>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="{{trans('admin/project.source')}}">
-              </div>
-              <button type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
-              </button>
-            </div>
-
-
-
+            <?php } ?>
 
             <div class="hr-line-dashed"></div>
             <div class="form-group">
@@ -109,5 +95,6 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('admin/js/project/project.js')}}"></script>
+<script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
+<script src="{{asset('admin/js/project/project.js')}}"></script>
 @endsection
