@@ -134,10 +134,8 @@ function validator( key, key_selector, source, source_selector )
  */
 function remove_key( remove )
 {
-    /* 是否确定删除 */
-    layer.confirm( '确定删除吗？', {
-        btn: ['Yes','No'] //按钮
-    }, function(){
+    if ( confirm( '确定删除吗？' ) )
+    {
         var result = trash_key( remove );
         if ( result == 1 )
         {
@@ -146,12 +144,8 @@ function remove_key( remove )
         else
         {
             layer.msg( 'Error', {icon: 2, time: 1000} );
-        }        
-    }, function(){
-      
-    });
-
-    
+        }
+    }
 }
 
 function trash_key( remove )
