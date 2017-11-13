@@ -47,6 +47,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
 
     // 多语言
     require(__DIR__ . '/admin/language.php');
+
+    // 开始翻译
+    require(__DIR__ . '/admin/translate.php');
 });
 
 // 后台系统日志

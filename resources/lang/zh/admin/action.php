@@ -14,6 +14,7 @@ return [
 		'status'    => '切换状态',
 		'cancel' 	=> '<i class="fa fa-reply"></i> 返回',
 		'submit' 	=> '<i class="fa fa-paper-plane-o"></i> 提交',
+		'start'		=> '开始',
 	],
 	'lock' => '<font color=red>锁定</font>',
 	'open' => '<font color=green>开启</font>',

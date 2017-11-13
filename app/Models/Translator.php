@@ -15,9 +15,14 @@ class Translator extends Model implements Transformable
     use TransformableTrait;
     use ActionButtonAttributeTrait;
 
-    private $action = 'translator';
+    private $action = 'translate';
 
-    protected $guarded  = [];
+    protected $guarded  = ['id'];
 
     public $timestamps = false;
+
+    public function language()
+    {
+        return $this->belongsTo( 'App\Models\Language' );
+    }
 }

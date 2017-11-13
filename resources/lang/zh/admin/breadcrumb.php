@@ -58,4 +58,7 @@ return [
         'edit'      => '<i class="fa fa-pencil"></i> 修改语言',
         'info'      => '<i class="fa fa-pencil"></i> 语言信息',
     ],
+    'translate' => [
+        'list'      => '<i class="fa fa-diamond"></i> 翻译列表',
+    ],
 ];

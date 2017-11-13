@@ -76,6 +76,7 @@ return [
 	'translate' => [
 		'manage' => 'translate.manage',
 		'start' => 'translate.start',
+		'list' => 'translate.list',
 	],
 
 	'project' => [

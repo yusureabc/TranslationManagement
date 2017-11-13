@@ -17,5 +17,5 @@ class Project extends Model implements Transformable
 
     private $action = 'project';
 
-    protected $guarded  = [];
+    protected $guarded  = ['id'];
 }

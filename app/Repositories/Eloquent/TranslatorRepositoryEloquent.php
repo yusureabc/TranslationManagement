@@ -10,7 +10,7 @@ use App\Repositories\Validators\TranslatorValidator;
 use DB;
 
 /**
- * Class LanguageRepositoryEloquent
+ * Class TranslatorRepositoryEloquent
  * @package namespace App\Repositories\Eloquent;
  */
 class TranslatorRepositoryEloquent extends BaseRepository implements TranslatorRepository
@@ -42,30 +42,32 @@ class TranslatorRepositoryEloquent extends BaseRepository implements TranslatorR
      * @param  [type]                   $order  [排序数组数据]
      * @return [type]                           [查询结果集，包含查询的数量及查询的结果对象]
      */
-    public function getLanguageList($start,$length,$search,$order)
+    public function getTranslateList($start,$length,$search,$order)
     {
-        $language = $this->model;
-        if ($search['value']) {
-            if($search['regex'] == 'true'){
-                $language = $language->where('name', 'like', "%{$search['value']}%")
-                    ->orWhere('slug','like', "%{$search['value']}%")
-                    ->orWhere('url','like', "%{$search['value']}%");
-            }else{
-                $language = $language->where('name', $search['value']);
+        $translator = $this->model;
+        if ( $search['value'] ) 
+        {
+            if ( $search['regex'] == 'true' )
+            {
+                $translator = $translator->where('project_name', 'like', "%{$search['value']}%");
+            }
+            else
+            {
+                $translator = $translator->where( 'project_name', $search['value'] );
             }
         }
-        if ( isset( $search['project_id'] ) )
+        if ( isset( $search['user_id'] ) )
         {
-            $language = $language->where( 'project_id', $search['project_id'] );
+            $translator = $translator->where( 'user_id', $search['user_id'] );
         }
 
-        $count = $language->count();
+        $count = $translator->count();
 
-        $language = $language->orderBy($order['name'], $order['dir']);
+        $translator = $translator->orderBy($order['name'], $order['dir']);
 
-        $languages = $language->offset($start)->limit($length)->get();
+        $translators = $translator->offset($start)->limit($length)->get();
 
-        return compact('count','languages');
+        return compact( 'count', 'translators' );
     }
 
     /**

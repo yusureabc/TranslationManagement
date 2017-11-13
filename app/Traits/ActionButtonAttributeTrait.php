@@ -116,6 +116,17 @@ trait ActionButtonAttributeTrait
         }
         return '';
     }
+
+    /**
+     * 开始翻译
+     */
+    public function getStartActionButton()
+    {
+        if (auth()->user()->can(config('admin.permissions.'.$this->action.'.start'))) {
+            return '<a href="'.url('admin/'.$this->action.'/'.$this->id.'/start').'" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-primary tooltips" data-container="body" data-original-title="' . trans('admin/action.actionButton.start') . '"  data-placement="top"><i class="fa fa-play"></i></a> ';
+        }
+        return '';
+    }
     
     /**
      * 获取按钮
@@ -133,6 +144,7 @@ trait ActionButtonAttributeTrait
                 $this->getDownloadActionButton().
                 $this->getInviteActionButton().
                 $this->getStatusActionButton( $status ).
+                $this->getStartActionButton().
                 $this->getDestroyActionButton();
     }
 }
