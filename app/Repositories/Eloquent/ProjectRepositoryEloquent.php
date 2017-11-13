@@ -81,6 +81,11 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
         return $result;
     }
 
+    public function getProjectName( $id )
+    {
+        return $this->model->where( 'id', $id )->value( 'name' );
+    }
+
     /**
      * Boot up the repository, pushing criteria
      */

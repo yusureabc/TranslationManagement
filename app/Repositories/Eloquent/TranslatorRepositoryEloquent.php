@@ -4,16 +4,16 @@ namespace App\Repositories\Eloquent;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\Contracts\LanguageRepository;
-use App\Models\Language;
-use App\Repositories\Validators\LanguageValidator;
+use App\Repositories\Contracts\TranslatorRepository;
+use App\Models\Translator;
+use App\Repositories\Validators\TranslatorValidator;
 use DB;
 
 /**
  * Class LanguageRepositoryEloquent
  * @package namespace App\Repositories\Eloquent;
  */
-class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepository
+class TranslatorRepositoryEloquent extends BaseRepository implements TranslatorRepository
 {
     /**
      * Specify Model class name
@@ -22,11 +22,11 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
      */
     public function model()
     {
-        return Language::class;
+        return Translator::class;
     }
 
     /**
-     * 写入待翻译语言条目
+     * 写入多条
      */
     public function insert( $data )
     {
@@ -68,56 +68,20 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
         return compact('count','languages');
     }
 
-    public function allLanguages()
+    /**
+     * 获取邀请的翻译者
+     */
+    public function getInviteUser( $language_id )
     {
-        return $this->model->orderBy('sort','desc')->get()->toArray();
-    }
-
-    public function createLanguage($attributes)
-    {
-        $model = new $this->model;
-        return $model->fill($attributes)->save();
-    }
-
-    public function getOldLanguage( $id )
-    {
-        $result = [];
-        $languages = $this->model->where( 'project_id', $id )->pluck( 'language' );
-        if ( $languages->isNotEmpty() )
-        {
-            $result = $languages->toArray();
-        }
-        
-        return $result;
+        return $this->model->where( 'language_id', $language_id )->pluck( 'user_id' )->toArray();
     }
 
     /**
-     * 删除其他语言
+     * 删除其他用户
      */
-    public function deleteOtherLanguage( $languages, $project_id )
+    public function deleteOtherUser( $language_id, $user_id )
     {
-        return $this->model->where( 'project_id', $project_id )->whereNotIn( 'language', $languages )->delete();
-    }
-
-    public function showLanguageList( $project_id )
-    {
-        return $this->model->where( 'project_id', $project_id )->get();
-    }
-
-    /**
-     * 改变状态
-     */
-    public function changeStatus( $id, $data )
-    {
-        return $this->model->where( 'id', $id )->update( $data );
-    }
-
-    /**
-     * 根据 language_id 查找 project_id
-     */
-    public function findProjectId( $id )
-    {
-        return $this->model->where( 'id', $id )->value( 'project_id' );
+        return $this->model->where( 'language_id', $language_id )->whereNotIn( 'user_id', $user_id )->delete();
     }
 
     /**

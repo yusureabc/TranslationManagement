@@ -7,6 +7,7 @@ return [
     'info'      => '项目信息',
     'input'     => '录入信息',
     'source'    => '源内容',
+    'invite'    => '邀请翻译',
     'model'     => [
         'id'          => 'ID',
         'name'        => '项目名称',
@@ -16,6 +17,7 @@ return [
         'description' => '描述',
         'sort'        => '排序',
         'translation_language' => '待翻译语言',
+        'invite'      => '邀请翻译者',
         'created_at'  => '创建时间',
         'updated_at'  => '修改时间',
     ],

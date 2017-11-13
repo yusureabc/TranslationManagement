@@ -305,4 +305,5 @@ class UserService extends BaseService
 		}
 		return $responseData;
 	}
+
 }

@@ -43,4 +43,15 @@ class ProjectPresenter
         }
     }
 
+    public function showInviteUser( $all_user, $invite_user = [] )
+    {
+        $html = '';
+        foreach ( (array)$all_user as $id => $name )
+        {
+            $html .= '<label class="checkbox-inline"><div class="i-checks"><label> <input type="checkbox" name="user_id[]" '.$this->checkLanguage( $id, $invite_user ) . ' value="'. $id .'"> '. $name .'</label></div></label>';
+        }
+
+        return $html;
+    }
+
 }

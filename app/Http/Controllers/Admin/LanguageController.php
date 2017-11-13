@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Admin\LanguageService;
-use App\Http\Requests\LanguageCreateRequest;
+use App\Service\Admin\UserService;
+
+
+use App\Http\Requests\LanguageCreateRequest; 
 use App\Http\Requests\LanguageUpdateRequest;
 
 
@@ -40,6 +43,9 @@ class LanguageController extends Controller
         return response()->json( $responseData );
     }
 
+    /**
+     * 切换状态
+     */
     public function status( $id, $status )
     {
         $this->languageService->changeStatus( $id, $status );
@@ -47,82 +53,31 @@ class LanguageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  LanguageCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
+     * 邀请翻译者
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-10
+     * @param  [param]
+     * @return [type]     [description]
      */
-    public function store(LanguageCreateRequest $request)
+    public function invite( $id )
     {
+        $all_user = $this->languageService->getAllUser();
+        $invite_user = $this->languageService->getInviteUser( $id );
+        $project_id = $this->languageService->findProjectId( $id );
 
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            $language = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Language created.',
-                'data'    => $language->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return view( 'admin.language.invite', compact( 'all_user', 'invite_user', 'project_id' ) );
     }
-
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * 存储邀请的翻译者
      */
-    public function show($id)
+    public function storeInviteUser( $id )
     {
-        $language = $this->repository->find($id);
+        $user_id = request()->input( 'user_id' );
+        $result = $this->languageService->storeInviteUser( $id, $user_id );
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $language,
-            ]);
-        }
-
-        return view('languages.show', compact('language'));
+        return redirect()->route( 'language.invite', $id );
     }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
-        $language = $this->repository->find($id);
-
-        return view('languages.edit', compact('language'));
-    }
-
 
     /**
      * Update the specified resource in storage.
@@ -167,25 +122,4 @@ class LanguageController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $deleted = $this->repository->delete($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Language deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-
-        return redirect()->back()->with('message', 'Language deleted.');
-    }
 }

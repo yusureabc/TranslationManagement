@@ -50,6 +50,7 @@ return [
         'edit'      => '<i class="fa fa-pencil"></i> 修改项目',
         'info'      => '<i class="fa fa-pencil"></i> 项目信息',
         'input'     => '<i class="fa fa-pencil"></i> 录入信息',
+        'invite'    => '<i class="fa fa-globe"></i> 邀请翻译',
     ],
     'language' => [
         'list'      => '<i class="fa fa-diamond"></i> 语言列表',

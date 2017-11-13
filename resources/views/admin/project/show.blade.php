@@ -65,7 +65,7 @@
               </table>
               <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-2">
-                    <a class="btn btn-white" href="{{url()->previous()}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
+                    <a class="btn btn-white" href="{{url( 'admin/project' )}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
                 </div>
               </div>
           </div>
