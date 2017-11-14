@@ -86,6 +86,11 @@ class TranslatorRepositoryEloquent extends BaseRepository implements TranslatorR
         return $this->model->where( 'language_id', $language_id )->whereNotIn( 'user_id', $user_id )->delete();
     }
 
+    public function updateProjectName( $project_name, $project_id )
+    {
+        return $this->model->where( 'project_id', $project_id )->update( ['project_name' => $project_name] );
+    }
+
     /**
      * Boot up the repository, pushing criteria
      */

@@ -3,6 +3,7 @@ namespace App\Service\Admin;
 
 use App\Repositories\Eloquent\ProjectRepositoryEloquent;
 use App\Repositories\Eloquent\LanguageRepositoryEloquent;
+use App\Repositories\Eloquent\translatorRepositoryEloquent;
 use App\Service\Admin\BaseService;
 use Exception;
 use DB;
@@ -15,11 +16,17 @@ class ProjectService extends BaseService
 
 	protected $project;
     protected $languageRepository;
+    protected $translatorRepository;
 
-	function __construct(ProjectRepositoryEloquent $project, LanguageRepositoryEloquent $languageRepository)
+	function __construct(
+        ProjectRepositoryEloquent $project, 
+        LanguageRepositoryEloquent $languageRepository,
+        translatorRepositoryEloquent $translatorRepository
+    )
 	{
 		$this->project =  $project;
         $this->languageRepository = $languageRepository;
+        $this->translatorRepository = $translatorRepository;
 	}
 	/**
 	 * datatables获取数据
@@ -201,6 +208,7 @@ class ProjectService extends BaseService
             $attributes['user_id']   = getUser()->id;
             $attributes['username']  = getUser()->username;
             $isUpdate = $this->project->update( $attributes, $id );
+            $this->translatorRepository->updateProjectName( $attributes['name'], $id );
             DB::commit();
 
             return [
@@ -208,6 +216,7 @@ class ProjectService extends BaseService
                 'message' => $isUpdate ? trans('admin/alert.project.edit_success'):trans('admin/alert.project.edit_error'),
             ];
         } catch (Exception $e) {
+            var_dump( $e->getMessage() );die;
             DB::rollBack();
             // 错误信息发送邮件
             $this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
