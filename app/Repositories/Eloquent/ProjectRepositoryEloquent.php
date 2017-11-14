@@ -40,12 +40,10 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
         if ($search['value']) {
             if($search['regex'] == 'true'){
                 $project = $project->where('name', 'like', "%{$search['value']}%")
-                    ->orWhere('slug','like', "%{$search['value']}%")
-                    ->orWhere('url','like', "%{$search['value']}%");
+                    ->orWhere('description','like', "%{$search['value']}%");
             }else{
                 $project = $project->where('name', $search['value'])
-                    ->orWhere('slug', $search['value'])
-                    ->orWhere('url', $search['value']);
+                    ->orWhere('description', $search['value']);
             }
         }
 
