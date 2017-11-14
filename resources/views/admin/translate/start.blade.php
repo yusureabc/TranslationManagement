@@ -60,6 +60,7 @@
             <?php if ( ! empty( $errors->first( 'translated' ) ) ) { ?>
             <div class="alert alert-warning alert-dismissable">
                 <?php echo $errors->first( 'translated' ); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             </div>
             <?php } ?>
 

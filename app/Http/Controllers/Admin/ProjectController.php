@@ -172,7 +172,8 @@ class ProjectController extends Controller
      */
     public function destroy( $id )
     {
-        var_dump( $id );die;
+        $this->projectService->destroyProject( $id );
+        return redirect()->back();
     }
 
 }

@@ -249,19 +249,11 @@ class ProjectService extends BaseService
 
     /**
      * 删除
-     * @author Sheldon
-     * @date   2017-04-18
-     * @param  [type]     $id [菜单ID]
-     * @return [type]         [description]
      */
-    public function destroyProject($id)
+    public function destroyProject( $id )
     {
         try {
-            $isDestroy = $this->project->delete($id);
-            if ($isDestroy) {
-                // 更新缓存
-                $this->getProjectSetCache();
-            }
+            $isDestroy = $this->project->delete( $id );
             flash_info($isDestroy,trans('admin/alert.project.destroy_success'),trans('admin/alert.project.destroy_error'));
             return $isDestroy;
         } catch (Exception $e) {
