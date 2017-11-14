@@ -8,6 +8,7 @@ use App\Repositories\Contracts\LanguageRepository;
 use App\Models\Language;
 use App\Repositories\Validators\LanguageValidator;
 use DB;
+use Carbon\Carbon;
 
 /**
  * Class LanguageRepositoryEloquent
@@ -126,6 +127,24 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
     public function findLanguageCode( $id )
     {
         return $this->model->where( 'id', $id )->value( 'language' );
+    }
+
+    /**
+     * 获取 language ID
+     */
+    public function getLanguageID( $project_id, $language_code )
+    {
+        $condition = ['project_id' => $project_id, 'language' => $language_code];
+        return $this->model->where( $condition )->value( 'id' );
+    }
+
+    /**
+     * 完成翻译，更新最后的提交时间
+     */
+    public function finshTranslate( $id )
+    {
+        $data = ['submit_at' => Carbon::now()];
+        return $this->model->where( 'id', $id )->update( $data );
     }
 
     /**

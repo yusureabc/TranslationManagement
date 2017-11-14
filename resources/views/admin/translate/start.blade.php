@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="ibox-content">
-          <form method="post" action="" class="form-horizontal" enctype="multipart/form-data">
+          <form method="post" action="{{url( route( 'translate.finish', ['id' => $id] ) )}}" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
             <input type="hidden" id="language_id" value="{{ $id }}">
             <?php if ( $source->isNotEmpty() ) { ?>
@@ -48,7 +48,7 @@
                 <input type="text" class="form-control" name="content" value="{{old( 'content', $item->content )}}">
               </div>
               <div class="col-sm-3">
-                <input type="text" class="form-control" name="translated" value="" placeholder="{{trans('admin/project.translated')}}">
+                <input type="text" class="form-control" name="translated" value="{{ $translated[$item->key_id] or '' }}" placeholder="{{trans('admin/project.translated')}}">
               </div>
               <button type="button" class="btn btn-default" aria-label="Left Align" title="保存" onclick="save_translated( $(this) );">
                 <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
@@ -57,11 +57,17 @@
             <?php } ?>
             <?php } ?>
 
+            <?php if ( ! empty( $errors->first( 'translated' ) ) ) { ?>
+            <div class="alert alert-warning alert-dismissable">
+                <?php echo $errors->first( 'translated' ); ?>
+            </div>
+            <?php } ?>
+
             <div class="hr-line-dashed"></div>
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
-                  <a class="btn btn-white" href="{{url()->previous()}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
-                  <button class="btn btn-primary" type="submit">{!!trans('admin/action.actionButton.submit')!!}</button>
+                    <a class="btn btn-white" href="{{url( 'admin/translate' )}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
+                    <button type="submit" class="btn btn-primary">{!!trans('admin/action.actionButton.submit')!!}</button>
               </div>
             </div>
           </form>

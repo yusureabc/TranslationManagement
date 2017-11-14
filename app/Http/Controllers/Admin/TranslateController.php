@@ -56,8 +56,9 @@ class TranslateController extends Controller
     public function start( $id )
     {
         $source = $this->translateService->getTranslateSource( $id );
-        // var_dump( $source->toArray() );die;
-        return view( 'admin.translate.start', compact( 'id', 'source' ) );
+        $translated = $this->translateService->getTranslatedContents( $id );
+
+        return view( 'admin.translate.start', compact( 'id', 'source', 'translated' ) );
     }
 
     /**
@@ -85,9 +86,9 @@ class TranslateController extends Controller
     /**
      * 完成翻译
      */
-    public function finish( ProjectUpdateRequest $request, $id )
+    public function finish( TranslateUpdateRequest $request, $id )
     {
-        $project = $this->translateService->updateProject( $request->all(), $id );
+        $result = $this->translateService->finshTranslate( $id );
         return redirect( 'admin/translate' );
     }
 

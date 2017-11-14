@@ -19,19 +19,19 @@ class TranslateService extends BaseService
     protected $translateRepository;
     protected $languageRepository;
     protected $keyRepository;
-    protected $contentRopesitory;
+    protected $contentRepository;
 
     public function __construct( 
         TranslatorRepositoryEloquent $translateRepository,
         LanguageRepositoryEloquent $languageRepository,
         KeyRepositoryEloquent $keyRepository,
-        ContentRepositoryEloquent $contentRopesitory
+        ContentRepositoryEloquent $contentRepository
     )
     {
         $this->translateRepository = $translateRepository;
         $this->languageRepository  = $languageRepository;
         $this->keyRepository       = $keyRepository;
-        $this->contentRopesitory   = $contentRopesitory;
+        $this->contentRepository   = $contentRepository;
     }
 
     /**
@@ -114,12 +114,24 @@ class TranslateService extends BaseService
         }
         else
         {
-            die( 'other' );
+            $contrast_language_id = $this->languageRepository->getLanguageID( $project_id, $contrast_code );
             /* 查找 contents 表 */
-            $contrast_contents = $this->contentRepository->getSourceContents( $id );
+            $contrast_contents = $this->contentRepository->getSourceContents( $contrast_language_id );
         }
 
         return $contrast_contents;
+    }
+
+    /**
+     * 获取 翻译者 的译文
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-14
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function getTranslatedContents( $id )
+    {
+        return $this->contentRepository->getTranslatedContents( $id );
     }
 
     /**
@@ -137,11 +149,11 @@ class TranslateService extends BaseService
     {
         $project_id = $this->languageRepository->findProjectId( $data['language_id'] );
         /* 检查 contents 表是否存在 存在就更新 不存在就写入 */
-        $exist = $this->contentRopesitory->translated_exist( $data['language_id'], $data['key_id'] );
+        $exist = $this->contentRepository->translated_exist( $data['language_id'], $data['key_id'] );
         if ( $exist )
         {
             /* update */
-            $result = $this->contentRopesitory->update_content( $data['language_id'], $data['key_id'], $data['translated'] );
+            $result = $this->contentRepository->update_content( $data['language_id'], $data['key_id'], $data['translated'] );
         }
         else
         {
@@ -153,10 +165,18 @@ class TranslateService extends BaseService
                 'content'     => $data['translated']
             ];
 
-            $result = $this->contentRopesitory->create( $create_data );
+            $result = $this->contentRepository->create( $create_data );
         }
 
         return $result;
+    }
+
+    /**
+     * 完成翻译
+     */
+    public function finshTranslate( $id )
+    {
+        return $this->languageRepository->finshTranslate( $id );
     }
 
 }

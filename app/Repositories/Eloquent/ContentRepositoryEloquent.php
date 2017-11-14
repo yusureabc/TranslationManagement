@@ -47,6 +47,22 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
     }
 
     /**
+     * 获取 翻译者 的译文
+     */
+    public function getTranslatedContents( $id )
+    {
+        return $this->model->where( 'language_id', $id )->pluck( 'content', 'key_id' )->toArray();
+    }
+
+    /**
+     * 获取源对照内容
+     */
+    public function getSourceContents( $id )
+    {
+        return $this->model->where( 'language_id', $id )->select( 'key_id', 'content' )->get();
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
