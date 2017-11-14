@@ -14,30 +14,24 @@ $(function () {
  */
 function save_translated( save )
 {
-    var project_id = $( '#project_id' ).val();
+    var language_id = $( '#language_id' ).val();
     var item = save.parent( '.source-item' );
-    var key_selector = item.find( "input[name='key']" );
-    var source_selector = item.find( "input[name='source']" );
-    var key_id_selector = item.find( "label[name='key_id']" );
+    var key_id_selector = item.find( "input[name='key_id']" );
+    var translated_selector = item.find( "input[name='translated']" );
     var _token = $( "input[name='_token']" ).val();
 
-    var key = key_selector.val();
-    var source = source_selector.val();
-    var key_id = key_id_selector.html();
+    var key_id = key_id_selector.val();
+    var translated = translated_selector.val();
     /* 验证数据 */
-    if ( ! validator( key, key_selector, source, source_selector ) )
+    if ( ! validator( translated, translated_selector ) )
     {
         return;
     }
 
-    var data = ajax_save( project_id, key_id, key, source, _token );
+    var data = ajax_save( language_id, key_id, translated, _token );
 
     if ( data.status == 1 )
     {
-        if ( data.id != undefined )
-        {
-            key_id_selector.html( data.id );
-        }
         /* 页面提示 */
         layer.msg( 'Success',{icon: 1, time: 1000} );
         item.addClass( 'has-success' );
@@ -57,15 +51,15 @@ function save_translated( save )
 }
 
 /**
- * 保存 key + 源语言
+ * 保存 翻译完成的结果
  */
-function ajax_save( project_id, key_id, key, source, _token )
+function ajax_save( language_id, key_id, translated, _token )
 {
     var data = {
-        project_id: project_id,
+        language_id: language_id,
         key_id: key_id,
-        key: key,
-        source: source,
+        translated: translated,
+        _method: 'PATCH',
         _token: _token,
     }
 
@@ -78,26 +72,16 @@ function ajax_save( project_id, key_id, key, source, _token )
     return result;
 }
 
-function validator( key, key_selector, source, source_selector )
+function validator( translated, translated_selector )
 {
-    if ( key == '' )
+    if ( translated == '' )
     {
-        key_selector.parent().addClass( 'has-error' );
+        translated_selector.parent().addClass( 'has-error' );
         return false;
     }
     else
     {
-        key_selector.parent().removeClass( 'has-error' );
-    }
-
-    if ( source == '' )
-    {
-        source_selector.parent().addClass( 'has-error' );
-        return false;
-    }
-    else
-    {
-        source_selector.parent().removeClass( 'has-error' );
+        translated_selector.parent().removeClass( 'has-error' );
     }
 
     return true;

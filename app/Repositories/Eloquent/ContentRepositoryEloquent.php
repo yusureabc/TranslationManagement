@@ -24,6 +24,29 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
     }
 
     /**
+     * 判断译文是否存在
+     */
+    public function translated_exist( $language_id, $key_id )
+    {
+        $condition = ['language_id' => $language_id, 'key_id' => $key_id];
+        return $this->model->where( $condition )->value( 'id' );
+    }
+
+    /**
+     * 更新译文
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-14
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function update_content( $language_id, $key_id, $content )
+    {
+        $condition = ['language_id' => $language_id, 'key_id' => $key_id];
+        $data = ['content' => $content];
+        return $this->model->where( $condition )->update( $data );
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

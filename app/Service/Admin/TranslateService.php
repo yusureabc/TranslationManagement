@@ -130,4 +130,33 @@ class TranslateService extends BaseService
         return config( 'sourcelang.' . $code );
     }
 
+    /**
+     * 存储译文
+     */
+    public function storeTranslated( $data )
+    {
+        $project_id = $this->languageRepository->findProjectId( $data['language_id'] );
+        /* 检查 contents 表是否存在 存在就更新 不存在就写入 */
+        $exist = $this->contentRopesitory->translated_exist( $data['language_id'], $data['key_id'] );
+        if ( $exist )
+        {
+            /* update */
+            $result = $this->contentRopesitory->update_content( $data['language_id'], $data['key_id'], $data['translated'] );
+        }
+        else
+        {
+            /* insert */
+            $create_data = [
+                'project_id'  => $project_id,
+                'language_id' => $data['language_id'],
+                'key_id'      => $data['key_id'],
+                'content'     => $data['translated']
+            ];
+
+            $result = $this->contentRopesitory->create( $create_data );
+        }
+
+        return $result;
+    }
+
 }

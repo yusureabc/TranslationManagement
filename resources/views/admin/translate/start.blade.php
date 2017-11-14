@@ -38,7 +38,7 @@
         <div class="ibox-content">
           <form method="post" action="" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
-
+            <input type="hidden" id="language_id" value="{{ $id }}">
             <?php if ( $source->isNotEmpty() ) { ?>
             <?php foreach ( $source as $k => $item ) { ?>
             <div class="form-group source-item">
@@ -75,5 +75,5 @@
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/project/project.js')}}"></script>
+<script src="{{asset('admin/js/translate/translate.js')}}"></script>
 @endsection

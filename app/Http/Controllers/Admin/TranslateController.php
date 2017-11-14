@@ -57,7 +57,29 @@ class TranslateController extends Controller
     {
         $source = $this->translateService->getTranslateSource( $id );
         // var_dump( $source->toArray() );die;
-        return view( 'admin.translate.start', compact( 'source' ) );
+        return view( 'admin.translate.start', compact( 'id', 'source' ) );
+    }
+
+    /**
+     * 存储译文
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-14
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function store()
+    {
+        $result = $this->translateService->storeTranslated( request()->all() );
+        if ( $result !== false )
+        {
+            $response = ['status' => 1];
+        }
+        else
+        {
+            $response = ['status' => 0];   
+        }
+
+        return $response;
     }
 
     /**
