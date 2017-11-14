@@ -60,5 +60,6 @@ return [
     ],
     'translate' => [
         'list'      => '<i class="fa fa-diamond"></i> 翻译列表',
+        'start'     => '<i class="fa fa-play"></i> 开始翻译',
     ],
 ];

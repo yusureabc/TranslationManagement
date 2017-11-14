@@ -55,8 +55,9 @@ class TranslateController extends Controller
      */
     public function start( $id )
     {
-        $project = $this->translateService->findProjectById( $id );
-        return view( 'admin.translate.start', compact( 'project' ) );
+        $source = $this->translateService->getTranslateSource( $id );
+        // var_dump( $source->toArray() );die;
+        return view( 'admin.translate.start', compact( 'source' ) );
     }
 
     /**

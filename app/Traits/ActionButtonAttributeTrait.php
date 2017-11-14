@@ -123,7 +123,7 @@ trait ActionButtonAttributeTrait
     public function getStartActionButton()
     {
         if (auth()->user()->can(config('admin.permissions.'.$this->action.'.start'))) {
-            return '<a href="'.url('admin/'.$this->action.'/'.$this->id.'/start').'" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-primary tooltips" data-container="body" data-original-title="' . trans('admin/action.actionButton.start') . '"  data-placement="top"><i class="fa fa-play"></i></a> ';
+            return '<a href="'.url('admin/'.$this->action.'/'.$this->language_id.'/start').'" data-id="'.$this->language_id.'" class="btn btn-xs btn-outline btn-primary tooltips" data-container="body" data-original-title="' . trans('admin/action.actionButton.start') . '"  data-placement="top"><i class="fa fa-play"></i></a> ';
         }
         return '';
     }

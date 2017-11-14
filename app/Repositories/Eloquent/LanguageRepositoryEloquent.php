@@ -121,6 +121,14 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
     }
 
     /**
+     * 根据 language_id 查找 language 简称
+     */
+    public function findLanguageCode( $id )
+    {
+        return $this->model->where( 'id', $id )->value( 'language' );
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

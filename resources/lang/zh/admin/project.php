@@ -8,6 +8,7 @@ return [
     'input'     => '录入信息',
     'source'    => '源内容',
     'invite'    => '邀请翻译',
+    'translated' => '翻译结果',
     'model'     => [
         'id'          => 'ID',
         'name'        => '项目名称',

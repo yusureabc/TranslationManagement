@@ -50,6 +50,13 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
         return $this->model->where( $condition )->delete();
     }
 
+    /**
+     * 获取源内容
+     */
+    public function getSourceContents( $project_id )
+    {
+        return $this->model->where( 'project_id', $project_id )->select( 'id as key_id', 'source as content' )->get();
+    }
 
     /**
      * Boot up the repository, pushing criteria

@@ -20,7 +20,7 @@ var TableDatatablesAjax = function() {
       ],
       "columns": [
         {
-            "data": "id",
+            "data": "language_id",
             "name" : "id",
         },
         {

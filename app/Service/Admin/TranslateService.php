@@ -2,6 +2,9 @@
 namespace App\Service\Admin;
 
 use App\Repositories\Eloquent\TranslatorRepositoryEloquent;
+use App\Repositories\Eloquent\LanguageRepositoryEloquent;
+use App\Repositories\Eloquent\KeyRepositoryEloquent;
+use App\Repositories\Eloquent\ContentRepositoryEloquent;
 
 use App\Service\Admin\BaseService;
 use Exception;
@@ -14,10 +17,21 @@ class TranslateService extends BaseService
 {
 
     protected $translateRepository;
+    protected $languageRepository;
+    protected $keyRepository;
+    protected $contentRopesitory;
 
-    public function __construct( TranslatorRepositoryEloquent $translateRepository )
+    public function __construct( 
+        TranslatorRepositoryEloquent $translateRepository,
+        LanguageRepositoryEloquent $languageRepository,
+        KeyRepositoryEloquent $keyRepository,
+        ContentRepositoryEloquent $contentRopesitory
+    )
     {
         $this->translateRepository = $translateRepository;
+        $this->languageRepository  = $languageRepository;
+        $this->keyRepository       = $keyRepository;
+        $this->contentRopesitory   = $contentRopesitory;
     }
 
     /**
@@ -77,6 +91,43 @@ class TranslateService extends BaseService
     public function getTranslateList( $user_id )
     {
         return $this->translateRepository->getTranslateList( $user_id );
+    }
+
+    /**
+     * 获取翻译源语言
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-13
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function getTranslateSource( $id )
+    {
+        $project_id = $this->languageRepository->findProjectId( $id );
+        $language_code = $this->languageRepository->findLanguageCode( $id );
+        /* 获取对照语言 */
+        $contrast_code = $this->_contrastLang( $language_code );
+        if ( $contrast_code == config( 'sourcelang.base_lang' ) )
+        {
+            /* 查找 keys 表 */
+            $contrast_contents = $this->keyRepository->getSourceContents( $project_id );
+        }
+        else
+        {
+            die( 'other' );
+            /* 查找 contents 表 */
+            $contrast_contents = $this->contentRepository->getSourceContents( $id );
+        }
+
+        return $contrast_contents;
+    }
+
+    /**
+     * 获取对照语言
+     */
+    private function _contrastLang( $code )
+    {
+        return config( 'sourcelang.' . $code );
     }
 
 }

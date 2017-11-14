@@ -7,36 +7,12 @@ $(function () {
     $(".modal").on("hidden.bs.modal",function(e){
        $(this).removeData("bs.modal");
     });
-    /* 追加行按钮 */
-    $( '#append_line' ).click( function() {
-        var item_html = "<div class=\"form-group source-item\">\n" +
-            "              <label name=\"key_id\" class=\"col-sm-2 control-label\"></label>\n" +
-            "              <div class=\"col-sm-3\">\n" +
-            "                <input type=\"text\" class=\"form-control\" name=\"key\" value=\"\" placeholder=\"key\">\n" +
-            "              </div>\n" +
-            "              <div class=\"col-sm-3\">\n" +
-            "                <input type=\"text\" class=\"form-control\" name=\"source\" value=\"\" placeholder=\"源内容\">\n" +
-            "              </div>\n" +
-            "              <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"保存\" onclick=\"save_key( $(this) );\">\n" +
-            "                <span class=\"glyphicon glyphicon-saved\" aria-hidden=\"true\"></span>\n" +
-            "              </button>\n" +
-            "              <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"删除\" onclick=\"remove_key( $(this) );\">\n" +
-            "                <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n" +
-            "              </button>              \n" +
-            "            </div>";
-        var i = 0;
-        for ( i; i < 10; i++ )
-        {
-            $( '.source-item:last' ).after( item_html );
-        }
-    });
-
 });
 
 /**
- * 保存翻译 key
+ * 保存翻译结果
  */
-function save_key( save )
+function save_translated( save )
 {
     var project_id = $( '#project_id' ).val();
     var item = save.parent( '.source-item' );
@@ -125,61 +101,4 @@ function validator( key, key_selector, source, source_selector )
     }
 
     return true;
-}
-
-/**
- * 移除 key + source
- */
-function remove_key( remove )
-{
-    if ( confirm( '确定删除吗？' ) )
-    {
-        var result = trash_key( remove );
-        if ( result == 1 )
-        {
-            layer.msg( 'Success', {icon: 1, time: 1000} );
-        }
-        else
-        {
-            layer.msg( 'Error', {icon: 2, time: 1000} );
-        }
-    }
-}
-
-function trash_key( remove )
-{
-    /* 获取 ID */
-    var item = remove.parent( '.source-item' );
-
-    var key_id_selector = item.find( "label[name='key_id']" );
-    var _token = $( "input[name='_token']" ).val();
-
-    var key_id = key_id_selector.html();
-
-    /* 判断 是否存在ID */
-    if ( key_id == '' )
-    {
-        /* 没有ID 直接remove */
-        item.remove();
-        return 1;
-    }
-    else
-    {
-        /* 有ID 调用接口删除，成功remove数据 */
-        $.ajaxSettings.async = false;
-        var url = '';
-        var data = {
-            key_id: key_id,
-            _method: 'delete',
-            _token: _token,
-        };
-
-        var result = [];
-        $.post( url, data, function( res ) {
-            result = res;
-            if ( result == 1 ) { item.remove(); }
-        } );
-
-        return result;
-    }
 }
