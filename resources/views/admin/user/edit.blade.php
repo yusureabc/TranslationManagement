@@ -77,22 +77,6 @@
               </div>
             </div>
 
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">{{trans('admin/user.platform')}}</label>
-                  <div class="col-sm-10">
-                      {!!$userPresenter->platformList($platforms,array_column($user->platforms->toArray(),'id'))!!}
-                  </div>
-              </div>
-
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">{{trans('admin/user.product')}}</label>
-                  <div class="col-sm-10">
-                      {!!$userPresenter->productList($products,array_column($user->products->toArray(),'id'))!!}
-                  </div>
-              </div>
-
             <div class="hr-line-dashed"></div>
             <div class="form-group">
               <label class="col-sm-2 control-label">{{trans('admin/user.permission')}}</label>

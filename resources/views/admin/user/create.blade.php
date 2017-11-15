@@ -87,23 +87,6 @@
 
             <div class="hr-line-dashed"></div>
             <div class="form-group">
-              <label class="col-sm-2 control-label">{{trans('admin/user.platform')}}</label>
-              <div class="col-sm-10">
-                {!!$userPresenter->platformList($platforms)!!}
-              </div>
-            </div>
-
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">{{trans('admin/user.product')}}</label>
-              <div class="col-sm-10">
-                {!!$userPresenter->productList($products)!!}
-              </div>
-            </div>
-
-
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
               <label class="col-sm-2 control-label">{{trans('admin/user.permission')}}</label>
               <div class="col-sm-10">
                 <div class="ibox float-e-margins">
