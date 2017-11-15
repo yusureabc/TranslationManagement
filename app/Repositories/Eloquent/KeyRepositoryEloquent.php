@@ -59,6 +59,17 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     }
 
     /**
+     * 获取 key 和 译文
+     */
+    public function getTranslatedList( $project_id, $language_id )
+    {
+        $condition = ['keys.project_id' => $project_id, 'contents.language_id' => $language_id];
+        return $this->model->where( $condition )
+                ->join( 'contents', 'keys.id', '=', 'contents.key_id' )
+                ->orderBy( 'keys.id', 'asc' )->get();
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

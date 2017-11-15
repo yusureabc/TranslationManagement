@@ -160,7 +160,7 @@ class LanguageService extends BaseService
     public function getTranslateResult( $id )
     {
         $project_id = $this->languageRepository->findProjectId( $id );
-        $result = $this->keyRepository->getKeyList( $project_id );
+        $result = $this->keyRepository->getTranslatedList( $project_id, $id );
         $this->languageRepository->downloadTranslate( $id );
 
         return $this->_output_result( $result );
@@ -183,14 +183,7 @@ XML;
         $xml = simplexml_load_string($string);
         foreach ( $result as $k => $item )
         {
-            if ( is_object( $item->content ) )
-            {
-                $content = $item->content->content;
-            }
-            else
-            {
-                $content = '';
-            }
+            $content = $item->content;
             $string = $xml->addChild( 'string', $content );
             $string->addAttribute( 'name', $item->key );
         }
