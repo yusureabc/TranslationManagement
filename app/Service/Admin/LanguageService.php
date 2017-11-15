@@ -5,6 +5,7 @@ use App\Repositories\Eloquent\ProjectRepositoryEloquent;
 use App\Repositories\Eloquent\LanguageRepositoryEloquent;
 use App\Repositories\Eloquent\UserRepositoryEloquent;
 use App\Repositories\Eloquent\TranslatorRepositoryEloquent;
+use App\Repositories\Eloquent\KeyRepositoryEloquent;
 
 use App\Service\Admin\BaseService;
 use Exception;
@@ -19,18 +20,21 @@ class LanguageService extends BaseService
     protected $languageRepository;
     protected $userRepository;
     protected $translatorRepository;
+    protected $keyRepository;
 
     function __construct(
         ProjectRepositoryEloquent $project, 
         LanguageRepositoryEloquent $languageRepository,
         UserRepositoryEloquent $userRepository,
-        TranslatorRepositoryEloquent $translatorRepository
+        TranslatorRepositoryEloquent $translatorRepository,
+        KeyRepositoryEloquent $keyRepository
     )
     {
         $this->project =  $project;
         $this->languageRepository = $languageRepository;
         $this->userRepository = $userRepository;
         $this->translatorRepository = $translatorRepository;
+        $this->keyRepository = $keyRepository;
     }
     /**
      * datatables获取数据
@@ -128,7 +132,7 @@ class LanguageService extends BaseService
         $language = $this->languageRepository->find( $id );
         $project_name = $this->project->getProjectName( $language->project_id );
 
-        /*  TODO 删除没有选中的数据 */
+        /* 删除没有选中的数据 */
         $this->translatorRepository->deleteOtherUser( $id, $user_id );
         $old_invite = $this->translatorRepository->getInviteUser( $id );
 
@@ -148,6 +152,50 @@ class LanguageService extends BaseService
         }
 
         return $this->translatorRepository->insert( $selected_translator );
+    }
+
+    /**
+     * 获取翻译结果
+     */
+    public function getTranslateResult( $id )
+    {
+        $project_id = $this->languageRepository->findProjectId( $id );
+        $result = $this->keyRepository->getKeyList( $project_id );
+        $this->languageRepository->downloadTranslate( $id );
+
+        return $this->_output_result( $result );
+    }
+
+    /**
+     * 输出结果
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-14
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    private function _output_result( $result )
+    {
+$string = <<<XML
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+</resources>
+XML;
+        $xml = simplexml_load_string($string);
+        foreach ( $result as $k => $item )
+        {
+            if ( is_object( $item->content ) )
+            {
+                $content = $item->content->content;
+            }
+            else
+            {
+                $content = '';
+            }
+            $string = $xml->addChild( 'string', $content );
+            $string->addAttribute( 'name', $item->key );
+        }
+
+        return $xml->asXML();
     }
 
 }

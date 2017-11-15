@@ -121,5 +121,18 @@ class LanguageController extends Controller
         }
     }
 
+    /**
+     * 下载翻译文本
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-14
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function download( $id )
+    {
+        header('Content-Type: text/xml');
+        $result = $this->languageService->getTranslateResult( $id );
+        die( $result );
+    }
 
 }

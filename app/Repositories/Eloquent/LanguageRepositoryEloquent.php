@@ -153,6 +153,15 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
     }
 
     /**
+     * 下载翻译内容，更新时间
+     */
+    public function downloadTranslate( $id )
+    {
+        $data = ['download_at' => Carbon::now()];
+        return $this->model->where( 'id', $id )->update( $data );
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

@@ -86,7 +86,7 @@ trait ActionButtonAttributeTrait
     public function getDownloadActionButton()
     {
         if (auth()->user()->can(config('admin.permissions.'.$this->action.'.download'))) {
-            return '<a href="'.url('admin/'.$this->action.'/'.$this->id.'/download').'" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-info tooltips" data-container="body" data-original-title="' . trans('admin/action.actionButton.download') . '"  data-placement="top"><i class="fa fa-download"></i></a> ';
+            return '<a href="'.url('admin/'.$this->action.'/'.$this->id.'/download').'" target="_blank" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-info tooltips" data-container="body" data-original-title="' . trans('admin/action.actionButton.download') . '"  data-placement="top"><i class="fa fa-download"></i></a> ';
         }
         return '';
     }

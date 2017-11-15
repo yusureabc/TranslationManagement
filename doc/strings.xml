@@ -1,0 +1,804 @@
+<resources>
+    <!-- Common resources -->
+    <string name="app_name">Yeelight</string>
+    <!-- Tasker-->
+    <string name="common_text_action_on">ON</string>
+    <string name="common_text_action_off">OFF</string>
+    <string name="common_text_action_toggle">TOGGLE</string>
+    <string name="common_text_action_bright">BRIGHT</string>
+    <string name="common_text_action_bright_variable">BRIGHT VARIABLE</string>
+    <string name="common_text_action_ct_variable">COLOR TEMPERATURE VARIABLE</string>
+    <string name="common_text_action_color_variable">COLOR VARIABLE</string>
+    <string name="common_text_action_scene">SCENE</string>
+
+    <string name="user_default_name">Guest</string>
+    <string name="user_default_info">Log In or Create Account</string>
+
+    <!-- Activity title bar -->
+    <string name="title_device_manager">Select a light</string>
+    <string name="title_create_group">Create Light Group</string>
+
+    <!-- Ble Connect Activity -->
+    <string name="ble_connect_authing">Check Bluetooth Authentication</string>
+    <string name="ble_connect_firmware_upgrade"> Check for Firmware Upgrade</string>
+    <string name="ble_connect_sync_device">Reading Device Status</string>
+    <string name="ble_connect_success">Connected Successfully</string>
+    <string name="ble_connect_success_info">Make sure to connect to the power and enjoy the App</string>
+    <string name="ble_connect_auth_info">New device is requesting to connect. Please press the scene button on the top of the light to accept.</string>
+    <string name="ble_connect_auth_title">Waiting for authorization...</string>
+    <string name="gingko_connect_auth_info">Detected phone asked for connection, please turn the light to accept the connection</string>
+    <string name="gingko_connect_auth_title">Waiting for authorization...</string>
+
+    <!-- setting -->
+    <string name="already_last_version">This is the latest version</string>
+
+    <!-- top and bottom bar settings -->
+    <string name="title_activity_splash">Yeelight</string>
+    <string name="yeelight_splash_welcome_words">Light Up Your Life</string>
+    <string name="welcome_guide_experience">Try now</string>
+
+    <!--new navigation item-->
+    <string name="item_tab_scene">Scene</string>
+    <string name="item_tab_room">Room</string>
+    <string name="item_tab_device">Device</string>
+
+    <string name="item_device_my_group">My Group</string>
+    <string name="item_device_my_device">My Device</string>
+    <string name="item_device_my_group_info">My Group (%d)</string>
+    <string name="item_device_my_device_info">My Device (%d)</string>
+    <string name="item_device_all_on">Turn All On</string>
+    <string name="item_device_all_off">Turn All Off</string>
+
+    <!-- device name -->
+    <string name="yeelight_device_name_color">LED Bulb (Color)</string>
+    <string name="yeelight_device_name_lamp">Mi LED Desk Lamp</string>
+    <string name="yeelight_device_name_mono">LED Bulb (White)</string>
+    <string name="yeelight_device_name_ct">LED Bulb (CT)</string>
+    <string name="yeelight_device_name_strip">Lightstrip</string>
+    <string name="yeelight_device_name_cherry">Bedside Lamp</string>
+    <string name="yeelight_device_name_group">Light Group</string>
+    <string name="yeelight_device_name_ceiling">LED Ceiling Light</string>
+    <string name="yeelight_device_name_ceiling2">LED Ceiling Light SE</string>
+    <string name="yeelight_device_name_ceiling3">LED Ceiling Light Moon</string>
+    <string name="yeelight_device_name_ceiling4">LED Ceiling Light Moon Pro</string>
+    <string name="yeelight_device_name_ceiling5">Mi LED Ceiling Light</string>
+    <string name="yeelight_device_name_bslamp">Mi Bedside Lamp</string>
+    <string name="yeelight_device_name_remote">Remote Controller</string>
+    <string name="yeelight_device_name_gingko">Ambiance Lamp</string>
+    <string name="yeelight_device_name_gingko_group">Candela Group</string>
+    <string name="yeelight_device_name_donut">Smart Speaker</string>
+
+    <!-- Common -->
+    <string name="common_text_ok">OK</string>
+    <string name="common_text_cancel">Cancel</string>
+    <string name="common_text_settings">Settings</string>
+    <string name="common_text_ignore">Ignore</string>
+    <string name="common_text_start">Start</string>
+    <string name="common_text_stop">Stop</string>
+    <string name="common_text_complete">Done</string>
+    <string name="common_text_disabled">Disabled</string>
+    <string name="common_text_unbind">Unbind</string>
+    <string name="common_text_rename">Rename</string>
+    <string name="common_text_notice">Reminder</string>
+    <string name="common_text_delete">Delete</string>
+    <string name="common_text_save">Save</string>
+    <string name="common_text_unbind_sure">Confirm unbind</string>
+    <string name="common_text_reset_sure">Confirm reset</string>
+    <string name="common_text_upgrade_firmware">Firmware version is out of date</string>
+    <string name="common_text_sw_check">Software Upgrade</string>
+    <string name="common_text_feedback">Feedback</string>
+    <string name="common_text_set_complete">Setup completed</string>
+    <string name="common_text_more">More</string>
+    <string name="common_text_unnamed">Untitled</string>
+    <string name="common_text_discard">Keep the changes?</string>
+    <string name="common_text_open">Turn on the light</string>
+    <string name="common_text_close">Turn off the light</string>
+    <string name="common_text_from">Start from %1$s</string>
+    <string name="common_text_to">to %1$s</string>
+    <string name="common_text_mi_band">Mi Band</string>
+    <string name="common_text_pull_to_refresh">Pull down to refresh</string>
+    <string name="common_text_release_to_refresh">Release to refresh</string>
+    <string name="common_text_browse">Browse</string>
+    <string name="common_text_refresh">Refresh</string>
+    <string name="common_text_add">Add</string>
+    <string name="common_text_clear">Clear</string>
+    <string name="common_text_connect">Connect</string>
+    <string name="common_text_retry">Retry</string>
+    <string name="common_text_next_step">Next Step</string>
+    <string name="common_text_login">Login</string>
+    <string name="common_text_faq">Frequently Asked Questions</string>
+    <string name="common_text_add_device">Add Device</string>
+    <string name="common_text_please_check_bluetooth">Please confirm bluetooth is turned on</string>
+    <string name="common_text_please_check_network">Please confirm your device is connected to Internet</string>
+    <string name="common_text_please_check_bluetooth_and_network">Please confirm Bluetooth, Wi-Fi or Mobile Data of your device is turned on</string>
+    <string name="common_text_alarm_no_time_setting">Set at least one time to enable this timer!</string>
+    <string name="common_text_confirm_leave">Confirm to leave</string>
+    <string name="common_text_allow">Allow</string>
+    <string name="common_text_go_setting">Go to Settings</string>
+    <string name="common_text_ble_prompt">Bluetooth is off!</string>
+    <string name="common_text_wifi_prompt"> Failed to connect to server, please check your internet setting！</string>
+    <string name="common_text_agree">Agree</string>
+    <string name="common_text_buy_now">Buy now</string>
+    <string name="common_text_save_succeed">Saved Successfully</string>
+    <string name="common_text_save_failed">Failed to save</string>
+    <string name="common_text_no_available_device">No available device</string>
+    <string name="common_text_quit">Confirm to quit?</string>
+    <string name="common_text_select_device">Select Device</string>
+    <string name="common_text_select_again">Cancel</string>
+    <string name="common_text_no_selected">No Selected Device</string>
+    <string name="common_text_all_devices">Devices</string>
+    <string name="common_text_name_no_empty">Name cannot be empty</string>
+    <string name="common_text_change_without_save">Unsaved Changes</string>
+    <string name="common_text_quit_without_save">Are you sure to discard changes?</string>
+    <string name="common_text_wait">Please wait\u2026</string>
+    <string name="common_text_apply_success">Applied Successfully</string>
+
+    <!-- device card status -->
+    <string name="common_text_status_on">On</string>
+    <string name="common_text_status_off">Off</string>
+    <string name="common_text_status_offline">Offline</string>
+    <string name="common_text_status_online">Online</string>
+    <string name="common_text_status_disconnect">Disconnected</string>
+    <string name="common_text_status_upgrade">Updating</string>
+    <string name="common_text_status_connecting">Connecting</string>
+    <string name="common_text_status_connect_failed">Connection Failed</string>
+    <string name="common_text_status_all_on">Turn on all</string>
+    <string name="common_text_status_all_off">Turn off all</string>
+    <string name="common_text_status_all_offline">All Offline</string>
+    <string name="common_text_status_all_online">All Online</string>
+    <string name="common_text_status_some_on">Turn On</string>
+    <string name="common_text_status_some_off">Turn Off</string>
+    <string name="common_text_status_some_offline">Light is disconnected</string>
+    <string name="common_text_switch_on_off">Switch</string>
+    <string name="common_text_focus_mode">Focus Mode</string>
+    <string name="common_text_eye_caring">Eye Protection Mode</string>
+    <string name="common_text_awake">Wake-up Light</string>
+    <string name="common_text_delay_off">Timer</string>
+    <string name="common_text_group_switch_on_off">Switch for all</string>
+
+    <string name="common_text_status_subtitle_offline">Offline</string>
+    <string name="common_text_status_subtitle_online">Online</string>
+    <string name="common_text_status_subtitle_off_job_min">Turn off after %1$d min</string>
+    <string name="common_text_status_subtitle_off_job_at_time">Turn off at %1s</string>
+    <string name="common_text_status_subtitle_on_job_min">Turn on after %1$d min(s)</string>
+    <string name="common_text_status_subtitle_on_job_at_time">Turn on at %1s</string>
+    <string name="common_text_status_subtitle_off">Off</string>
+    <string name="common_text_status_subtitle_on">On</string>
+    <string name="common_text_status_subtitle_music_flow">Music Flow</string>
+    <string name="common_text_status_subtitle_kids_mode">Child Mode</string>
+    <string name="common_text_status_subtitle_color_mode">Color</string>
+    <string name="common_text_status_subtitle_white_mode">Sun</string>
+    <string name="common_text_status_subtitle_flow_mode">Flowing</string>
+    <string name="common_text_status_subtitle_pc_mode">PC</string>
+    <string name="common_text_status_subtitle_reading_mode">Reading</string>
+    <string name="common_text_status_subtitle_moon_light">Moon</string>
+
+    <!-- Device mode -->
+    <string name="common_text_colors">Color</string>
+    <string name="common_text_sunshine">White</string>
+    <string name="common_text_flow">Flow Mode</string>
+    <string name="common_text_favorite">Favorites</string>
+    <string name="common_text_color_camera">Color Picker</string>
+    <string name="common_text_day">Sun</string>
+    <string name="common_text_night_light">Moon</string>
+
+    <string name="common_text_no_settings">Default</string>
+    <string name="common_text_alarm_scene_name">Start Scene</string>
+    <string name="common_text_name">Name</string>
+    <string name="common_text_alarm_name">My Schedule</string>
+    <string name="common_text_repeat">Repeat</string>
+    <string name="common_text_repeat_once">Never</string>
+    <string name="common_text_repeat_everyday">Everyday</string>
+    <string name="common_text_repeat_1">Monday</string>
+    <string name="common_text_repeat_2">Tuesday</string>
+    <string name="common_text_repeat_3">Wednesday</string>
+    <string name="common_text_repeat_4">Thursday</string>
+    <string name="common_text_repeat_5">Friday</string>
+    <string name="common_text_repeat_6">Saturday</string>
+    <string name="common_text_repeat_7">Sunday</string>
+    <string name="common_text_repeat_1_5">Monday to Friday</string>
+    <string name="common_text_repeat_weekday">Weekdays</string>
+    <string name="common_text_repeat_weekend">Weekend</string>
+    <string name="common_text_repeat_custom">Custom</string>
+    <string name="common_text_repeat_date">%1$d month %2$d day</string>
+    <string name="common_text_create_name">Create Name</string>
+    <string name="common_text_select_an_icon">Please select an icon</string>
+    <string name="common_text_icon">Icon</string>
+    <string name="common_text_dialog_error_title">Oops…</string>
+    <string name="common_text_mac_address">Mac Address</string>
+
+    <string-array name="weeks">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
+    <string name="general_setting_ble_share">LAN accessible device</string>
+    <string name="general_setting_about">About Yeelight</string>
+    <string name="general_setting_about_version">Version: %1$s</string>
+    <string name="general_setting_locale">Server</string>
+
+    <string name="account_login_ouath_failed_info">Login failed, please try again!</string>
+
+    <!-- about -->
+    <string name="yeelight_wechat">Yeelight WeChat</string>
+    <string name="yeelight_weibo">Yeelight Weibo</string>
+    <string name="yeelight_website">Yeelight Website</string>
+    <string name="yeelight_appstore">Rate Yeelight</string>
+
+    <!-- Error Code -->
+    <string name="error_network_error">Network error!</string>
+    <string name="error_invalid_group_name">Light Group name cannot be empty</string>
+    <string name="error_group_name_exist">Light Group name is existed, please rename</string>
+
+    <!-- CaptureActivity 二维码相关,待整理 -->
+    <string name="msg_camera_framework_bug">I\'m sorry,the device camera has issue,please restart your device.</string>
+
+    <!-- Feature -->
+    <string name="feature_group_connect">Connect</string>
+    <string name="feature_group_service">Service</string>
+    <string name="feature_group_restore">Reset</string>
+    <string name="feature_group_device">Device</string>
+    <string name="feature_group_group">Light Group</string>
+    <string name="feature_alarm">Schedules</string>
+    <string name="feature_delay">Timer</string>
+    <string name="feature_night_light">Night Mode</string>
+    <string name="feature_call_alarm">Caller Notification</string>
+    <string name="feature_focus">Focus Mode</string>
+    <string name="feature_group_manage">Light Group Management</string>
+    <string name="feature_fw_upgrade">Firmware Update</string>
+    <string name="feature_fw_version">Firmware Version</string>
+    <string name="feature_disconnect_bt">Disconnect</string>
+    <string name="feature_unbind">Unbind</string>
+    <string name="feature_mi_band">Mi Band</string>
+    <string name="feature_feedback">Feedback</string>
+    <string name="feature_restore">Reset</string>
+    <string name="feature_wechat">Control via WeChat</string>
+    <string name="feature_set_default">Default State</string>
+    <string name="feature_share_device">Share Device</string>
+    <string name="feature_kid_mode">Child Mode</string>
+    <string name="feature_geek_mode">LAN Control</string>
+    <string name="feature_short_key_mode">Double Click</string>
+    <string name="feature_music_mode">Music Mode</string>
+    <string name="feature_led_indicator">LED Indicator</string>
+    <string name="feature_add_shortcut">Homescreen Shortcut</string>
+    <string name="feature_remote_management">Remote</string>
+    <string name="feature_mesh_group">Create Bluetooth Mesh Light Group</string>
+
+    <!-- SaveDefaultActivity -->
+    <string name="activity_save_default_success">Setup Successfully</string>
+    <string name="activity_save_default_fail">Setup Failed</string>
+    <string name="activity_save_default_btn_text">Save</string>
+
+    <string name="save_default_last">Save light state automatically</string>
+    <string name="save_default_last_info">The device will remember the last light state and use it when the light is powered on.</string>
+    <string name="save_default_current">Set default light</string>
+    <string name="save_default_current_info">Save your favorite light as default.</string>
+    <string name="save_default_msg_flow_error">Flowing state cannot be used as default</string>
+    <string name="save_default_msg_save_success">Current state saved as default</string>
+
+    <!-- time/date picker -->
+    <string name="picker_hour">Hour</string>
+    <string name="picker_minute">Minute</string>
+    <string name="picker_minite">Minute</string>
+    <string name="picker_year">Year</string>
+    <string name="picker_month">Month</string>
+    <string name="picker_day">Day</string>
+
+    <!-- rename -->
+    <string name="common_dialog_input_rename">Bedside Lamp Name</string>
+    <string name="common_dialog_input_too_long">Name is too long</string>
+
+    <!-- alarm -->
+    <string name="alarm_disable">Disabled</string>
+    <string name="alarm_set_time">Schedule</string>
+    <string name="alarm_time_to_switch_on">Start Time</string>
+    <string name="alarm_time_to_switch_off">End Time</string>
+    <string name="alarm_def_1_min">1 minute</string>
+    <string name="alarm_action">Schedule Timer</string>
+    <string name="alarm_action_turn_on">Turn On</string>
+    <string name="alarm_action_turn_off">Turn Off</string>
+
+    <!-- delay light -->
+    <string name="delay_light_time">Turn off after %1$d minute(s)</string>
+    <string name="delay_light_time_detail">Long press\"on/off switch\"to start delay timer, turn off after \n%1$d minute(s)</string>
+    <string name="delay_light_introduce">Long press\"on/off switch\" on top of the Bedside Lamp to start delay timer</string>
+    <string name="delay_light_time_text">Delay Time</string>
+    <string name="feature_delay_info">Turn off the light after %1$d minute(s)</string>
+    <string name="feature_delay_not_available">Timer can only be set when the light is on</string>
+
+    <!-- night light -->
+    <string name="night_light_text">Night Light</string>
+    <string name="night_light_text_on">Night Light</string>
+    <string name="night_light_text_off">Night Light</string>
+    <string name="night_light_sub_info">Within the time you set, you can swipe the touch wheel to turn on your lamp with gentle light that makes your eyes comfortable</string>
+    <string name="night_light_retrieve_failed">Failed to retrieve data from Night Light, Please try again later</string>
+
+    <!-- wake up -->
+    <string name="wake_up_sub_info">The brightness of the light will be gradually increasing 30 minutes before waking up to simulate a natural and gentle sunrise. It helps to prepare your body for wake up</string>
+    <string name="wake_up_time">Wake-up time %1$s:%2$s</string>
+    <string name="wake_up_retrieve_failed">Failed to retrieve data from Wake-up Light, Please try again</string>
+
+    <!-- Call Alarm -->
+    <string name="call_alarm_text">Caller Notification</string>
+    <string name="call_alarm_text_on">Caller Notification</string>
+    <string name="call_alarm_text_off">Caller Notification</string>
+    <string name="call_alarm_sub_info">After "Caller Notification\" is activated,Bedside Lamp will flicker to notify you within the time set </string>
+
+    <!-- Add Shortcut -->
+    <string name="add_shortcut_toggle">Add Toggle Shortcut</string>
+    <string name="add_shortcut_dimmer">Add Dimmer Shortcut</string>
+    <string name="add_shortcut_scene">Add Scene Shortcut</string>
+    <string name="toast_add_shortcut_toggle">Toggle Shortcut added to home screen</string>
+    <string name="toast_add_shortcut_dimmer">Dimmer Shortcut added to home screen</string>
+    <string name="toast_add_shortcut_scene">Scene Shortcut added to home screen</string>
+
+    <!-- Ble disconnect -->
+    <string name="setting_disconnect_text_1">Are you sure to disconnect?</string>
+
+    <!-- unbind -->
+    <string name="setting_unbind_text_1">Your device won\'t be able to control the device after unlink.</string>
+
+    <!-- wechat -->
+    <string name="wechat_progressing">Syncing &#8230;</string>
+    <string name="wechat_not_available">WeChat control is not available</string>
+
+    <!-- Feedback -->
+    <string name="feedback_info_hint"> Please describe the issue to help us provide the best solution.</string>
+    <string name="feedback_network_err">Network error, please check your network setting</string>
+    <string name="feedback_server_error">Server error, please try again later</string>
+    <string name="feedback_say_something">Say something…</string>
+    <string name="feedback_sending">Sending…</string>
+    <string name="feedback_label_description">Issue Description</string>
+    <string name="feedback_label_select_question_type">Issue type</string>
+    <string name="feedback_label_question_type">Issue Type</string>
+    <string name="feedback_select_none">None</string>
+    <string name="feedback_commit">Submit</string>
+    <string name="feedback_label_device_type">Device Model</string>
+    <string name="feedback_label_contact">Contact</string>
+    <string name="feedback_contact_hint_v3">E-mail/Phone</string>
+    <string name="feedback_label_optional_info">Additional Information(optional)</string>
+    <string name="feedback_select_question_type_info">Please select your issue</string>
+    <string name="feedback_select_device_type_info">Please select device model</string>
+    <string name="feedback_success">Thank you!</string>
+    <string name="feedback_success_info">Your feedback helps us make Yeelight better.</string>
+    <string-array name="feedback_questions">
+        <item>Account Login and Registration</item>
+        <item>Device Setup</item>
+        <item>Device Control</item>
+        <item>Works with Third Party</item>
+        <item>Language</item>
+        <item>Others</item>
+    </string-array>
+
+    <!-- recovery -->
+    <string name="recovery_info">Are you sure to erase all the data and settings stored on the device?</string>
+
+    <!-- device add -->
+    <string name="common_open_bt">Turn on Bluetooth</string>
+    <string name="common_open_bt_intro">Please turn on bluetooth of your phone and keep your device close to the phone.</string>
+    <string name="common_open_bt_ok">On</string>
+    <string name="common_open_failed">Turn on Bluetooth failed!</string>
+    <string name="install_your_device">Install your device</string>
+    <string name="install_your_device_info">1.Device is correctly powered; \n2. If it was not the initial installation, please reset your device.</string>
+    <string name="reset_dolphin_introduce">Switch the bulb on and off five times in a row (2 seconds on and 2 seconds off), then the bulb will start flashing. After 5 seconds, it will restart and show white color, which means the bulb has been reset to default.</string>
+    <string name="reset_wonder_introduce">Switch the bulb on and off five times in a row (2 seconds on and 2 seconds off), then the bulb will start flashing color. After 5 seconds, it will restart and show white color, which means the bulb has been reset to default.</string>
+    <string name="reset_mango_introduce">Directly press and hold the RESET button on the bottom panel with a pin for approximately 5 seconds, release the RESET button after the light start to flash. If you can see the light flash for 5 seconds and then go off, that means the light has been reset successfully.</string>
+    <string name="reset_ceiling_introduce">Switch the ceiling light on and off five times in a row (2 seconds on and 2 seconds off), then the ceiling light will start breathing. After 5 seconds, it will restart automatically and turn on white light, which means the ceiling light has been reset to default.</string>
+    <string name="reset_bslamp_introduce">Simultaneously press the “on/off” and “Mode” button for 5 seconds, it will start flashing color. After 3 seconds, the bedside lamp will restart automatically and turn on white light, which means the ceiling light has been reset to default.</string>
+    <string name="reset_pitaya_introduce">Unplug the power adapter, press the on/off button and meanwhile plug in the power adapter. Holding the button for 5 more seconds until the strip begins to show red, green, blue in turn. Release the button and the LED indicator will turn yellow, which means reset successfully.</string>
+    <string name="add_device_add_to_network_desc">Please make sure your network is under 2.4 GHz frequency band Wi-Fi and key in the correct password in order to add new device</string>
+    <string name="add_device_add_to_network">Add network</string>
+    <string name="add_device_how_to_reset">How to reset</string>
+    <string name="add_device_scanning">Scanning</string>
+    <string name="add_device_rescan">Click to restart scan</string>
+    <string name="add_device_select_desc">Please select device to add. If it’s not on the list, please make sure it is reset correctly.</string>
+    <string name="delete_device_confirm_message">Are you sure to delete this device?</string>
+    <string name="delete_remote_confirm_message">Are you sure to delete this remote?</string>
+
+    <!-- mi band -->
+    <string name="mi_band_search_title">Searching Mi Band&#8230;</string>
+    <string name="mi_band_common_sub_title">Automatic turn off, after you full sleep</string>
+    <string name="mi_band_search_sub_text">Keep your Mi Band close to the phone and make sure your Mi Band is paired with Mi Fit</string>
+    <string name="mi_band_nodevice_title">No Mi Band found</string>
+    <string name="mi_band_nodevice_sub_text">Keep your Mi Band close to the phone and make sure your Mi Band is paired with Mi Fit</string>
+    <string name="mi_band_check_mi_health_exist">Please make sure Mi Fit is the lastest version</string>
+    <string name="mi_band_nodevice_btn_text">Try Again</string>
+    <string name="mi_band_single_title">Mi Band detected</string>
+    <string name="mi_band_single_sub_text">A Mi Band paired with your phone, tap \"Pair\" to complete</string>
+    <string name="mi_band_single_btn_text_quick">Pair</string>
+    <string name="mi_band_bind_sub_text_unbind">Pair with Mi Band, Lamp will be auto-turned off after you fall asleep</string>
+    <string name="mi_band_bind_sub_text_bind">Mi Band paired,the lamp will auto-off after you fall asleep</string>
+    <string name="mi_band_bind_failed">Connecting failed!</string>
+    <string name="mi_band_bind_shake">Mi Band vibrating?</string>
+    <string name="mi_band_add_failed">Pairing failed!</string>
+    <string name="mi_band_bind_connect_failed_retry">Failed! Try again</string>
+    <string name="mi_band_connecting">Connecting&#8230;</string>
+    <string name="mi_band_reopen_broadcast">Make sure \"Discoverable\" is on</string>
+    <string name="mi_band_reopen_broadcast_ok">Yes, bind now</string>
+    <string name="mi_band_open_broadcast">Make sure \"Discoverable\" is on</string>
+    <string name="mi_band_bind_autoclose">Auto Turn Off</string>
+    <string name="mi_band_bind_unbindtext">Unpair Mi Band</string>
+    <string name="mi_band_bind_bindtext">Pair to Mi Band</string>
+    <string name="mi_band_bind_unbind">Unpaired</string>
+    <string name="mi_band_bind_unbind_sub">The lamp will not auto-off once it’s unpaired</string>
+    <string name="mi_band_bind_unbind_confirm_btn">Unpair</string>
+
+    <!-- wifi Timers -->
+    <string name="wifi_alarm_start_to_end">Power on time frame</string>
+    <string name="wifi_alarm_start">Turn the light on</string>
+    <string name="wifi_alarm_end">Turn the light off</string>
+    <string name="wifi_alarm_delete">Delete timer?</string>
+    <string name="wifi_alarm_start_time_clear">Clear turn on timer?</string>
+    <string name="wifi_alarm_end_action_clear">Clear turn off timer?</string>
+    <string name="wifi_alarm_scene_clear">Clear turn on scene?</string>
+
+    <!-- light scene -->
+    <string name="scene_share">Share</string>
+    <string name="scene_cache_get_list_fail">Failed to retrieve scene list</string>
+    <string name="scene_cache_save_limitation">Saved scene has reached its maximum limit</string>
+    <string name="scene_cache_save_repeat">Scene name is repeated, please rename</string>
+    <string name="scene_bundle_name_save_repeat">The scene name is taken, please rename</string>
+    <string name="scene_cache_save_fail">Failed to Save</string>
+    <string name="scene_cache_del_success">Deleted Successfully</string>
+    <string name="scene_cache_del_fail">Failed to delete</string>
+    <string name="scene_cache_update_success">Update Successfully</string>
+    <string name="scene_cache_update_fail">Update Failed</string>
+    <string name="scene_recommend">Recommend</string>
+    <string name="scene_favorite">Favorites</string>
+    <string name="scene_apply">Apply</string>
+    <string name="scene_save_succeed">Saved Successfully</string>
+
+    <!-- ColorflowModeActivity -->
+    <string name="activity_color_flow_pickup">Colors</string>
+    <string name="activity_color_flow_picture">Pictures</string>
+    <string name="activity_color_flow_btn_add">Add</string>
+    <string name="activity_color_flow_btn_picture">Photo Gallery</string>
+    <string name="activity_color_flow_btn_photo">Snap a picture</string>
+
+    <!-- WifiLightAlarmActivity -->
+    <string name="activity_wifi_alarm_add">Add Schedule</string>
+    <string name="activity_wifi_alarm_repeat_today">Today</string>
+    <string name="activity_wifi_alarm_repeat_all">Everyday</string>
+    <string name="activity_wifi_alarm_no_added_tips">No Schedule</string>
+
+    <!-- 设备共享 -->
+    <string name="toast_share_device_success">Device is shared successfully</string>
+
+    <!-- 图片库用到,待删除 -->
+    <string name="error_dialog_name">Multiple picture selection</string>
+    <string name="capture_save">Save</string>
+    <string name="capture_apply">Apply</string>
+
+    <string name="login_agreement2"><u>Terms of Use and Privacy Policy</u></string>
+    <string name="pdo_txt_work">to start working</string>
+    <string name="pdo_txt_rest">to have a break</string>
+    <string name="kid_mode_info">After enabling Child Mode, the color temperature will be limited between 2700K-4000K to reduce the blue light ratio. This will help to prevent eyes from blue light damage. </string>
+    <string name="title_reset_device">Reset device</string>
+
+    <string name="dialog_location_permission_title">Require Location Permissions</string>
+    <string name="dialog_location_permission_message">Yeelight app requires Location Permissions in order to discover and set up nearby devices.</string>
+    <string name="dialog_location_service_message">Yeelight app requires Location Service in order to discover and set up nearby devices.</string>
+    <string name="dialog_location_permission_service_title">Require Location Service</string>
+
+    <string name="geek_mode_info">Yeelight will enable Third Party Control Protocol. User can discover and control LED devices by using the provided protocol. </string>
+    <string name="short_key_mode_focus">Enable Focus Mode</string>
+    <string name="short_key_mode_delay">Start Timer</string>
+    <string name="short_key_mode_diy">Switch to Favorites</string>
+
+    <string name="mango_set_default_title">Default Light</string>
+    <string name="mango_set_default_save">Save</string>
+    <string name="mango_set_default_info">Click “Save” to save the current state as the default power state.Turn on this state after power outage.</string>
+
+    <string name="music_mode">Music Flow</string>
+    <string name="music_mode_btn_start">Start now</string>
+    <string name="music_mode_open_failed">Music Flow failed</string>
+    <string name="music_mode_wifi_notice">The music flow only works when your phone and lights are under the same local network</string>
+    <string name="music_mode_sub_info">Start Music Flow to change the colors of your light\n based on the surrounding sound.</string>
+    <string name="music_mode_current_music">Music Flow devices: %1$d/%2$d</string>
+    <string name="music_mode_flowing">Music Flow is on</string>
+    <string name="music_mode_firmware_update">Please upgrade firmware</string>
+    <string name="music_mode_not_available">Not Available</string>
+    <string name="music_mode_group_music_flow">Light Group Music Flow</string>
+    <string name="music_mode_group_start_all">Start All</string>
+    <string name="music_mode_group_stop_all">Stop All</string>
+
+    <!-- Ble Share -->
+    <string name="ble_share_info">"Enabling “Bluetooth Device Sharing within LAN”, authorized user within the same local network can discover and control a Bluetooth device. \n Please note: \n1. Only connected online devices can be shared. \n2. Device sharing are permitted to toggle(on/off), adjust brightness, apply scene and color pick."</string>
+    <!-- ceiling related -->
+    <string name="night_light_start_time">Start Time</string>
+    <string name="night_light_end_time">End Time</string>
+    <string name="night_light_auto_delay_off">Auto-off Timer</string>
+    <string name="night_light_delay_off_time">Delay Time</string>
+    <string name="night_light_delay_off_unit">mins</string>
+    <string name="remote_control_management">Remote Controller</string>
+    <string name="remote_control_experience">Experience Remote Controller</string>
+    <string name="remote_control_not_bind_prompt"> There is no linked remote controller!</string>
+    <string name="remote_control_handle">Remote Controller</string>
+    <string name="remote_control_name">Remote Controller</string>
+    <string name="remote_control_unbind">Delete Remote Controller</string>
+    <string name="remote_connection_new_device_how"><u>How to bind a remote？</u></string>
+
+    <!-- locale related -->
+    <string name="application_locale_title">Select Server</string>
+    <string name="application_locale_cn">Mainland China</string>
+    <string name="application_locale_sg">Singapore</string>
+    <string name="application_locale_us">United States</string>
+    <string name="application_locale_confirm_dialog_title">Switch server</string>
+
+    <!-- scene bundle related -->
+    <string name="scene_bundle_edit">Edit scene</string>
+    <string name="scene_bundle_rename">Scene name</string>
+    <string name="scene_bundle_not_configured_confirm">Scene is not set. Set it up now?</string>
+    <string name="scene_bundle_list_device_num">%d device(s)</string>
+    <string name="scene_bundle_select_device">Scene Management</string>
+    <string name="scene_bundle_no_device_select">No device was selected, please select again</string>
+    <string name="scene_bundle_action">Action [%s]</string>
+    <string name="scene_bundle_unknown_device">未知设备</string>
+
+    <string name="common_text_bright">Brightness</string>
+    <string name="common_text_white_mode">White</string>
+    <string name="common_text_color">Color</string>
+
+    <!--scene bundle select item-->
+    <string name="scene_select_from_favorite">Select Favorite Scene</string>
+    <string name="scene_select_from_current_state">Save Current State</string>
+    <string name="scene_select_from_adjust_and_save">Dim and Save State</string>
+    <string name="scene_select_from_personality">Select Customized Light</string>
+
+    <string name="my_pomodoro_statistic">My Details</string>
+
+    <string name="scene_bundle_item_delete_confirm">Confirm to delete this scene?</string>
+    <string name="create_scene_device_state_off">Light Off</string>
+
+    <string name="custom_knob_custom_kidmode_notice">You have turned on Child Mode, the color temperature of the light is  %sk, exceeded the range（2700K－4000K）.</string>
+    <string name="favorite_scene_bar_kidmode_exceed">Beyond limitation of child mode: 2700K-4000K</string>
+
+    <!-- Device share related-->
+    <string name="device_share_title">Share %s</string>
+    <string name="device_share_title_dialog">Share Device</string>
+    <string name="device_share_management_title">Share Management</string>
+    <string name="device_share_info_1">Share device with your family</string>
+    <string name="device_share_info_2">He/She can turn on/off the device</string>
+    <string name="device_share_info_3">change the color temperature, etc.</string>
+    <string name="device_share_account_hint">&#160;Mi ID/Phone/E-mail</string>
+    <string name="device_share_recently">Recent Sharing</string>
+    <string name="device_share_search_result">Search Result</string>
+    <string name="device_share_search_no_result">No recent sharing</string>
+    <string name="device_share_search_history_no_result">No sharing history</string>
+    <string name="device_share_confirm_dialog_info">Are you sure to share this device with\"%s\" ?</string>
+    <string name="device_share_accepted">Accepted</string>
+    <string name="device_share_reject">Rejected</string>
+    <string name="device_share_pending">Waiting to accept</string>
+    <string name="device_share_user_not_found">Cannot find the user</string>
+    <string name="device_share_repeat_request">Invitation has been sent, waiting for response</string>
+    <string name="device_share_to_yourself">The device cannot be shared to yourself</string>
+    <string name="device_share_have_share">The device has been shared to him/her</string>
+    <string name="device_share_others">Sharing failed, please check your information and retry</string>
+    <string name="device_share_have_sent_msg">Sharing invitation has been sent, please wait for response</string>
+
+    <!-- Sile menu -->
+    <string name="slide_item_third_party">Integration</string>
+    <string name="slide_item_personality">Customization</string>
+    <string name="slide_item_easy_control">Fast control</string>
+    <string name="slide_item_firmware_upgrade">Firmware Update</string>
+    <string name="slide_item_mail_center">Message Center</string>
+    <string name="slide_item_faq">FAQ</string>
+    <string name="slide_item_more">More</string>
+
+    <!-- Device firmware upgrade -->
+    <string name="firmware_update">Update</string>
+    <string name="firmware_update_all">Update All</string>
+    <string name="firmware_update_latest_version">Latest Version</string>
+    <string name="firmware_update_already_latest_version">This is the latest version</string>
+    <string name="firmware_update_already_all_latest_version">All are the latest version</string>
+    <string name="firmware_update_device_title">Firmware Update</string>
+    <string name="firmware_update_device_current_version">Current Version: %s</string>
+    <string name="firmware_update_device_latest_version">Latest Version: %s</string>
+    <string name="firmware_update_device_update_now">Update</string>
+    <string name="firmware_update_device_updating">Updating…</string>
+    <string name="firmware_update_device_update_complete">Update is finished</string>
+    <string name="firmware_update_device_update_failed">Update is failed</string>
+    <string name="firmware_update_device_release_title">Release Note:</string>
+    <string name="firmware_updating_all_complete">All are updated</string>
+
+    <string name="user_account_center">Account Center</string>
+    <string name="user_account_logout">Logout</string>
+
+    <!-- more activity-->
+    <string name="application_check_update">Check for Update</string>
+    <string name="application_no_update">Up to date</string>
+    <string name="application_user_agreement">Terms of Use</string>
+    <string name="application_priavcy_policy">Privacy Policy</string>
+    <string name="application_about_yeelight">About Yeelight</string>
+
+    <!-- personality lighting-->
+    <string name="personality_produce_info_1">Customize Your Light</string>
+    <string name="personality_produce_info_2">Experience the brand new lighting scene with fully</string>
+    <string name="personality_produce_info_3">customized color and brightness</string>
+    <string name="personality_light_creat">Start Now</string>
+    <string name="personality_light_select_type">Select Icon</string>
+    <string name="personality_light_select_next_step">Next</string>
+    <string name="personality_light_preview">Preview</string>
+    <string name="personality_light_apply">Apply</string>
+    <string name="personality_light_add_frame">Add Frame</string>
+    <string name="personality_light_add_frame_color">Color Frame</string>
+    <string name="personality_light_add_frame_ct">Color Temp Frame</string>
+    <string name="personality_light_add_frame_suspend">Pause Frame</string>
+    <string name="personality_light_add_color">Color</string>
+    <string name="personality_light_add_ct">Color Temp</string>
+    <string name="personality_light_add_suspend">Pause</string>
+    <string name="personality_light_add_duration">Duration</string>
+    <string name="personality_light_frame_count">Frames</string>
+    <string name="personality_light_add_time">Duration</string>
+    <string name="personality_light_create_repeat">Repeat Type</string>
+    <string name="personality_light_create_repeat_loop">Forever</string>
+    <string name="personality_light_create_repeat_once">Never</string>
+    <string name="personality_light_create_repeat_custom">Repeat Times</string>
+    <string name="personality_light_create_repeat_custom_dialog_error_tips">Invalid, please set a number between 2～99.</string>
+    <string name="personality_light_create_repeat_custom_dialog_tips">Please set the number of execution for customized light</string>
+    <string name="personality_light_select_repeat_count">Repeat Type</string>
+    <string name="personality_light_select_stop_status_title">Action after Execution</string>
+    <string name="personality_light_create_stop_status">After execution</string>
+    <string name="personality_light_create_stop_status_1">Recover to previous state</string>
+    <string name="personality_light_create_stop_status_2">Keep current state</string>
+    <string name="personality_light_create_stop_status_3">Turn off</string>
+    <string name="personality_light_create_save">Save</string>
+    <string name="personality_light_create_save_and_continue">Save and continue</string>
+    <string name="personality_light_duration_min">m</string>
+    <string name="personality_light_duration_second">s</string>
+    <string name="personality_light_duration_millisecond">ms</string>
+    <string name="personality_light_preview_not_support">Not Support</string>
+    <string name="personality_light_preview_device_offline">Offline</string>
+    <string name="personality_light_preview_dialog_title">Preview</string>
+    <string name="personality_light_preview_dialog_info">Confirm to preview on \"%s\"?</string>
+    <string name="personality_light_apply_dialog_title">Apply</string>
+    <string name="personality_light_apply_dialog_info">Confirm to apply on \"%s\"?</string>
+    <string name="personality_light_flowing">Flowing</string>
+    <string name="personality_light_can_not_add_tips">10 frames at most</string>
+    <string name="personality_light_item_copy">Copy</string>
+    <string name="personality_light_item_delete">Delete</string>
+    <string name="personality_light_item_sort">Sort</string>
+    <string name="personality_light_item_sort_complete">Done</string>
+    <string name="personality_light_create_state">Execute</string>
+    <string name="personality_light_create_name_no_input">Please enter name</string>
+    <string name="personality_light_add_time_suspend">Pause Duration</string>
+    <string name="personality_light_duration_error_msg">Duration cannot be zero, please change and retry</string>
+    <string name="personality_light_preview_error_msg">Unable to preview without a frame</string>
+    <string name="personality_light_save_error_msg">Customized light will be automatically deleted if saved without a frame</string>
+    <string name="personality_light_cannot_add_more_frame">10 frames at most</string>
+    <string name="common_text_save_error">Saving failed, please check your network and retry</string>
+    <string name="personality_light_copy_no_select">Please select a frame</string>
+    <string name="personality_light_delete_no_select">Please select a frame</string>
+    <string name="personality_light_delete_confirm">Are you sure to delete this customized light?</string>
+
+    <string name="message_center_no_message">No response</string>
+    <string name="message_center_share_device_pending">Accept</string>
+    <string name="message_center_share_device_have_accepted">Accepted</string>
+    <string name="message_center_share_device_title">Shared by %s</string>
+    <string name="message_center_share_item_title">Device Sharing Invitation</string>
+
+    <string name="common_text_notice_item"><u>Attention</u></string>
+
+    <!-- Room -->
+    <string name="room_select_device_title_number">Added %d device</string>
+    <string name="room_add_success">Added Successfully</string>
+    <string name="room_setting_manage">Device Management</string>
+    <string name="room_setting_device_num">%d device</string>
+    <string name="room_input_name_hint">Please enter the room name</string>
+    <string name="room_device_manage">Device Management</string>
+    <string name="room_device_manage_group_added">Device Added</string>
+    <string name="room_device_manage_group_no_added">Device to Add</string>
+    <string name="room_device_manage_has_added_format">added to「%s」</string>
+    <string name="room_device_manage_remove">Remove</string>
+    <string name="room_device_manage_no_added">Not added</string>
+    <string name="room_device_manage_add">Add</string>
+    <string name="room_device_manage_move_device">Move Device</string>
+    <string name="room_device_manage_move_info_format">This device was added to \"%1$s\", are you sure to move it to current room?</string>
+    <string name="room_setting_confirm_delete">Are you sure to delete this room?</string>
+    <string name="room_device_has_added">Added</string>
+    <string name="room_create_no_device_title">No Device Added</string>
+    <string name="room_create_no_device_select_info">No device added to this room, confirm to save?</string>
+    <string name="room_main_no_device">No device</string>
+    <string name="room_quick_create_scene_desc">Scene can only be created under Wi-Fi with network connection</string>
+    <string name="room_create_scene_no_device">No available device</string>
+
+    <!-- Group -->
+    <string name="group_no_device_add_select_again">No device added to this light group, please reselect.</string>
+    <string name="group_delete_confirm">Are you sure to delete this light group?</string>
+    <string name="group_management_title">Device Management</string>
+    <string name="mesh_group_connect_exist">Connect existed light group</string>
+    <string name="mesh_group_pwd">Enter password</string>
+    <string name="mesh_group_pwd_info">Please enter password of light group\"%s\"</string>
+    <string name="mesh_group_add_device">Adde new device</string>
+    <string name="mesh_group_device_num">Total %d device/s\</string>
+    <string name="mesh_group_add_device_select_device">Select device to add</string>
+    <string name="mesh_group_add_device_select_device_info">Select device to add. If no device is found, please make sure the device battery is sufficient.</string>
+    <string name="mesh_group_add_device_connecting_title">Connecting...（%1$d/%2$d)</string>
+    <string name="mesh_group_add_device_connecting_info">Adding devices, please wait patiently. Do not this page.</string>
+    <string name="mesh_group_add_device_complete_info">Devices added. If there is any device is failed to be added, please click to retry.</string>
+    <string name="mesh_group_add_device_add">Add now</string>
+    <string name="mesh_password_error">Incorrect password</string>
+    <string name="mesh_password_error_desc">The network information of the light had been modified, please enter the network ID and password of the light.</string>
+    <string name="mesh_add_network"> Create New Group</string>
+    <string name="mesh_add_pwd_hint">Group Password</string>
+    <string name="mesh_add_network_name_hint">Group Name</string>
+    <string name="mesh_device_power_on">PowerOn</string>
+    <string name="mesh_device_power_off">PowerOff</string>
+
+    <string name="application_experience_now">Experience now</string>
+    <string name="geek_mode_protocol_link"><u>《Third Party Control Protocol》</u></string>
+    <string name="led_indicator_info_new">After enabling this function, LED indicator will be turned on all the time. Disabling this function will not affect the usage of the device, but the power state of the lightstrip cannot be determined through light.</string>
+    <string name="feature_delay_info_new">The device will be automatically turned off when timer ends.</string>
+    <string name="delay_count_remain">Remaining</string>
+    <string name="delay_count_unit">mins</string>
+    <string name="pomodoro_info_new">Device will be flashing to notify in order to help you manage your working and resting time.</string>
+    <string name="pomodoro_work">Working</string>
+    <string name="pomodoro_rest">Resting</string>
+    <string name="pomodoro_history">History</string>
+
+    <string name="items_and_conditions_agree">I agree</string>
+    <string name="items_and_conditions_usage">Terms of Use</string>
+    <string name="items_and_conditions_and">and</string>
+    <string name="items_and_conditions_privacy">Privacy Policy</string>
+
+    <string name="scene_fragment_no_scene_msg">Seize the beauty of light</string>
+    <string name="scene_fragment_no_scene_info">Have Yeelight save the color you want to\nremember of your precious moment.</string>
+    <string name="scene_fragment_create_scene">Create Scene</string>
+    <string name="scene_fragment_no_room_msg">Room Management</string>
+    <string name="scene_fragment_no_room_info">Manage your devices in a more efficient\n way using room</string>
+    <string name="scene_fragment_create_room">Create Room</string>
+    <string name="scene_fragment_no_device_msg">Make lighting brighter</string>
+    <string name="scene_fragment_no_device_info">Yeelight lights up your life, a companion\n of lifetime.</string>
+    <string name="scene_fragment_create_device">Add Device</string>
+
+    <string name="favorite_scene_view_bar_red">Red</string>
+    <string name="favorite_scene_view_bar_green">Green</string>
+    <string name="favorite_scene_view_bar_blue">Blue</string>
+    <string name="favorite_scene_view_bar_yellow">Yellow</string>
+    <string name="favorite_scene_view_bar_purple">Purple</string>
+
+    <string name="save_favorite_dialog_sub_title">Save current state into favorite</string>
+    <string name="save_favorite_tips_cannot_save_in_close">Cannot save current state if the light is off</string>
+
+    <!-- locale change -->
+    <string name="change_locale_to_cn">Switched to Mainland China Server</string>
+    <string name="change_locale_to_sg">Switched to Singapore Server</string>
+    <string name="change_locale_to_us">Switched to United State Server</string>
+
+    <!-- welcome guild page -->
+    <string name="welcom_guild_page_info_1">New User Interface\n Brand new User Experience</string>
+    <string name="welcom_guild_page_info_2">Room\n Easier for device management</string>
+    <string name="welcom_guild_page_info_3">Customized Light\n Define light on your own terms</string>
+    <string name="welcom_guild_page_info_4">Device Sharing\n Share your joy with your loved ones</string>
+    <string name="welcom_guild_page_info_5">Third Party Integration\n More creative ways to control</string>
+
+    <!-- favorite -->
+    <string name="common_text_no_favorite">No Favorites</string>
+    <string name="cherry_color_flow_load_photo_failed">Failed to load photos</string>
+
+    <string name="add_device_connecting_title">Connecting&#8230;</string>
+    <string name="ble_connect_auth_failed">Authorization Failed</string>
+    <string name="ble_connect_success_sub">Connected successfully. Enjoy!</string>
+    <string name="ble_connect_failed_desc">Please turn on your device and have your phone close by</string>
+    <string name="ble_connect_connecting_desc">Please turn on your device and have your phone close by</string>
+
+    <string name="night_light_info">The device will automatically switch to lower brightness Night Mode when it is turned on through remote controller or app.</string>
+    <string name="night_light_auto_delay_not_set">Not set</string>
+    <string name="common_text_min_count">%1$d mins</string>
+
+    <string name="control_view_eos_pro_main">Main Light</string>
+    <string name="control_view_eos_pro_ambient">Ambilight</string>
+    <string name="on_from_power">Auto on upon power resumption</string>
+
+    <string name="mesh_update_network_success">Join group \"%s\"</string>
+    <string name="mesh_select_network_title"> Join Existing Group</string>
+    <string name="mesh_select_network_desc">Joining existing Ambiance Lamp group, a single light switch in the group could control all the devices at the same time.</string>
+    <string name="mesh_add_network_title">Create New Group</string>
+    <string name="mesh_add_network_desc">Group name and password are used to access this group, please keep them secure. If you forgot the password, please reset your Ambiance Lamp to factory default.</string>
+
+</resources>

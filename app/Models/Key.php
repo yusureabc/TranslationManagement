@@ -20,4 +20,9 @@ class Key extends Model implements Transformable
     protected $guarded  = [];
 
     public $timestamps = false;
+
+    public function content()
+    {
+        return $this->hasOne( 'App\Models\Content' );
+    }
 }
