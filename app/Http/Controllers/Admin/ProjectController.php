@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Admin\ProjectService;
-use App\Service\Admin\languageService;
+use App\Service\Admin\LanguageService;
 use App\Service\Admin\KeyService;
 use App\Http\Requests\ProjectCreateRequest;
 use App\Http\Requests\ProjectUpdateRequest;
@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function __construct( 
         ProjectService $projectService, 
-        languageService $languageService, 
+        LanguageService $languageService, 
         KeyService $keyService 
     )
     {

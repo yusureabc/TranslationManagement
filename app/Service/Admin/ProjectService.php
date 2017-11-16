@@ -3,7 +3,7 @@ namespace App\Service\Admin;
 
 use App\Repositories\Eloquent\ProjectRepositoryEloquent;
 use App\Repositories\Eloquent\LanguageRepositoryEloquent;
-use App\Repositories\Eloquent\translatorRepositoryEloquent;
+use App\Repositories\Eloquent\TranslatorRepositoryEloquent;
 use App\Service\Admin\BaseService;
 use Exception;
 use DB;
@@ -21,7 +21,7 @@ class ProjectService extends BaseService
 	function __construct(
         ProjectRepositoryEloquent $project, 
         LanguageRepositoryEloquent $languageRepository,
-        translatorRepositoryEloquent $translatorRepository
+        TranslatorRepositoryEloquent $translatorRepository
     )
 	{
 		$this->project =  $project;
