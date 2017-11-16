@@ -85,5 +85,7 @@ return [
         'destroy_error'     => '删除项目失败',
         'order_success'     => '排序项目成功',
         'order_error'       => '排序项目失败',
+        'invite_success'    => '邀请成功',
+        'invite_error'      => '邀请失败',
     ],
 ];

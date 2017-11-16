@@ -22,6 +22,7 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
+    @include('flash::message')
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">

@@ -75,6 +75,7 @@ class LanguageController extends Controller
     {
         $user_id = request()->input( 'user_id' );
         $result = $this->languageService->storeInviteUser( $id, $user_id );
+        flash_info( $result, trans('admin/alert.project.invite_success'), trans('admin/alert.project.invite_error') );
 
         return redirect()->route( 'language.invite', $id );
     }
