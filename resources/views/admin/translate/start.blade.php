@@ -44,15 +44,12 @@
             <div class="form-group source-item">
               <label class="col-sm-2 control-label"></label>
               <input type="hidden" name="key_id" value="<?php echo $item->key_id; ?>">
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="content" value="{{old( 'content', $item->content )}}">
+              <div class="col-sm-4">
+                <textarea class="form-control" name="content" rows="1" style="resize: none;" readonly>{{old( 'content', $item->content )}}</textarea>
               </div>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="translated" value="{{ $translated[$item->key_id] or '' }}" placeholder="{{trans('admin/project.translated')}}">
+              <div class="col-sm-4">
+                <textarea class="form-control" name="translated" rows="1" style="resize: none;" placeholder="{{trans('admin/project.translated')}}" onchange="save_translated( $(this) );">{{ $translated[$item->key_id] or '' }}</textarea>
               </div>
-              <button type="button" class="btn btn-default" aria-label="Left Align" title="保存" onclick="save_translated( $(this) );">
-                <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
-              </button>
             </div>
             <?php } ?>
             <?php } ?>
@@ -82,5 +79,7 @@
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
+<script type="text/javascript" src="{{asset('vendors/autosize/autosize.min.js')}}"></script>
+<script> autosize(document.querySelectorAll( 'textarea' )); </script>
 <script src="{{asset('admin/js/translate/translate.js')}}"></script>
 @endsection

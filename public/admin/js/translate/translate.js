@@ -15,9 +15,9 @@ $(function () {
 function save_translated( save )
 {
     var language_id = $( '#language_id' ).val();
-    var item = save.parent( '.source-item' );
+    var item = save.parents( '.source-item' );
     var key_id_selector = item.find( "input[name='key_id']" );
-    var translated_selector = item.find( "input[name='translated']" );
+    var translated_selector = item.find( "textarea[name='translated']" );
     var _token = $( "input[name='_token']" ).val();
 
     var key_id = key_id_selector.val();
@@ -33,7 +33,7 @@ function save_translated( save )
     if ( data.status == 1 )
     {
         /* 页面提示 */
-        layer.msg( 'Success',{icon: 1, time: 1000} );
+        // layer.msg( 'Success',{icon: 1, time: 1000} );
         item.addClass( 'has-success' );
         setTimeout( function() { 
             item.removeClass( 'has-success' );
