@@ -55,7 +55,7 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
      */
     public function getSourceContents( $project_id )
     {
-        return $this->model->where( 'project_id', $project_id )->select( 'id as key_id', 'source as content' )->get();
+        return $this->model->where( 'project_id', $project_id )->select( 'id as key_id', 'source as content' )->orderBy( 'id', 'asc' )->get();
     }
 
     /**
