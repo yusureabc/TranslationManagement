@@ -186,7 +186,7 @@ class ProjectController extends Controller
      */
     public function import( $id )
     {
-        $url = env( 'IMPORT_KEY_URL' );
+        $url = config( 'import.key_url' );
         $result = $this->keyService->importSource( $id, $url );
         if ( $result )
         {

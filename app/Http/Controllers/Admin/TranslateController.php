@@ -101,7 +101,7 @@ class TranslateController extends Controller
      */
     public function import( $id )
     {
-        $url = env( 'IMPORT_TRANSLATED_URL' );
+        $url = config( 'import.translated_url' );
         $result = $this->translateService->importTranslated( $id, $url );
         if ( $result )
         {
