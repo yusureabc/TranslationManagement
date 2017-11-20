@@ -8,5 +8,7 @@ $router->group( ['prefix' => 'translate'], function ($router)
     $router->post( '{id}/finish', 'TranslateController@finish' )->name( 'translate.finish' );
     /* 存储译文 */
     $router->patch( '{id}/start', 'TranslateController@store' );
+    /* 导入译文 */
+    $router->get( '{id}/import', 'TranslateController@import' );
 });
 $router->resource( 'translate', 'TranslateController' );

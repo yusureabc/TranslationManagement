@@ -179,4 +179,59 @@ class TranslateService extends BaseService
         return $this->languageRepository->finshTranslate( $id );
     }
 
+    /**
+     * 导入译文
+     */
+    public function importTranslated( $id, $url )
+    {
+        $project_id = $this->languageRepository->findProjectId( $id );
+        $xml_res = xmlToArray( $url );
+
+        $keys = array_keys( $xml_res );
+        $exist = $this->keyRepository->keyExist( $project_id, $keys )->toArray();
+        $all_translated = [];
+        foreach ( $exist as $item )
+        {
+            $all_translated[] = [
+                'project_id'  => $project_id,
+                'language_id' => $id,
+                'key_id'      => $item['id'],
+                'content'     => $xml_res[ $item['key'] ]
+            ];
+        }
+
+        $key_ids = array_column( $all_translated, 'key_id' );
+        $exist_content = $this->contentRepository->contentExist( $id, $key_ids );
+        /* 处理重复译文 */
+        $all_translated = $this->_handle_exist_content( $all_translated, $exist_content, $key_ids );
+
+        return $this->contentRepository->batchInsertContent( $all_translated );
+    }
+
+    /**
+     * 处理已存在的译文内容
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-20
+     * @param  [param]
+     * @param  [type]     $exist_content [description]
+     * @param  [type]     $key_ids       [description]
+     * @return [type]                    [description]
+     */
+    private function _handle_exist_content( $all_translated, $exist_content, $key_ids )
+    {
+        if ( $exist_content->isNotEmpty() )
+        {
+            foreach ( $exist_content as $content )
+            {
+                $index = array_search( $content['key_id'], $key_ids );
+                if ( $index !== false )
+                {
+                    unset( $all_translated[ $index ] );
+                }
+            }
+        }
+
+        return $all_translated;
+    }
+
 }

@@ -92,4 +92,25 @@ class TranslateController extends Controller
         return redirect( 'admin/translate' );
     }
 
+    /**
+     * 导入译文
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-20
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function import( $id )
+    {
+        $url = env( 'IMPORT_TRANSLATED_URL' );
+        $result = $this->translateService->importTranslated( $id, $url );
+        if ( $result )
+        {
+            return 'import successful';
+        }
+        else
+        {
+            return 'import error';
+        }
+    }
+
 }

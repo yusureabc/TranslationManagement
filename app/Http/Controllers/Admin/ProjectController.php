@@ -177,7 +177,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * 导入数据
+     * 导入 key + source
      * @author Yusure  http://yusure.cn
      * @date   2017-11-20
      * @param  [param]
@@ -186,7 +186,7 @@ class ProjectController extends Controller
      */
     public function import( $id )
     {
-        $url = 'http://test.com/values-zh-rCN/strings.xml';
+        $url = env( 'IMPORT_KEY_URL' );
         $result = $this->keyService->importSource( $id, $url );
         if ( $result )
         {

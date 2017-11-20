@@ -63,6 +63,26 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
     }
 
     /**
+     * 译文是否存在
+     */
+    public function contentExist( $language_id, $key_ids )
+    {
+        return $this->model->where( 'language_id', $language_id )->whereIn( 'key_id', $key_ids )->get();
+    }
+
+    /**
+     * 批量写入译文
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-20
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function batchInsertContent( $data )
+    {
+        return $this->model->insert( $data );
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
