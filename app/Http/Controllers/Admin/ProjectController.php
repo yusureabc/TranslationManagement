@@ -176,4 +176,26 @@ class ProjectController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * 导入数据
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-20
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function import( $id )
+    {
+        $url = 'http://test.com/values-zh-rCN/strings.xml';
+        $result = $this->keyService->importSource( $id, $url );
+        if ( $result )
+        {
+            return 'import successful';
+        }
+        else
+        {
+            return 'import error';
+        }
+    }
+
 }

@@ -70,4 +70,34 @@ class KeyService extends BaseService
         return $this->keyRepository->deleteKey( $project_id, $key_id );
     }
 
+    /**
+     * 导入源语言
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-20
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function importSource( $id, $url )
+    {
+        $res = xmlToArray( $url );
+        $keys = array_keys( $res );
+        $exist = $this->keyRepository->keyExist( $id, $keys );
+        /* 如果有重复数据就从结果里面去除 */
+        if ( $exist )
+        {
+            foreach ( $exist as $k => $item )
+            {
+                unset( $res[$item->key] );
+            }
+        }
+
+        $sources = [];
+        foreach ( $res as $key => $source )
+        {
+            $sources[] = ['project_id' => $id, 'key' => $key, 'source' => $source];
+        }
+        return $this->keyRepository->batchInsertKey( $sources );
+    }
+    
 }

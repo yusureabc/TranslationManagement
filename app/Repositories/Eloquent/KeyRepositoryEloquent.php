@@ -70,6 +70,32 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     }
 
     /**
+     * 检查存在的key
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-20
+     * @param  [param]
+     * @param  [type]     $project_id [description]
+     * @param  array      $keys       [description]
+     * @return [type]                 [description]
+     */
+    public function keyExist( $project_id, $keys = [] )
+    {
+        return $this->model->where( 'project_id', $project_id )->whereIn( 'key', $keys )->get();
+    }
+
+    /**
+     * 批量写入key
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-20
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function batchInsertKey( $data )
+    {
+        return $this->model->insert( $data );
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
