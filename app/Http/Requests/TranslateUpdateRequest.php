@@ -24,7 +24,7 @@ class TranslateUpdateRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'translated'  => 'required',
+            'translated_content'  => 'required',
         ];
 
         return $rules;
@@ -51,7 +51,7 @@ class TranslateUpdateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'translated' => trans('admin/project.translated'),
+            'translated_content' => trans('admin/project.translated'),
         ];
     }
 }

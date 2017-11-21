@@ -1,12 +1,5 @@
 $(function () {
-    $('.i-checks').iCheck({
-      checkboxClass: 'icheckbox_square-green',
-      radioClass: 'iradio_square-green',
-    });
-    // 关闭modal清空内容
-    $(".modal").on("hidden.bs.modal",function(e){
-       $(this).removeData("bs.modal");
-    });
+
 });
 
 /**
@@ -17,11 +10,14 @@ function save_translated( save )
     var language_id = $( '#language_id' ).val();
     var item = save.parents( '.source-item' );
     var key_id_selector = item.find( "input[name='key_id']" );
-    var translated_selector = item.find( "textarea[name='translated']" );
+    var translated_selector = item.find( "div[name='translated']" );
+    var translated_content_selector = item.find( "input[name='translated_content']" );
+
     var _token = $( "input[name='_token']" ).val();
 
     var key_id = key_id_selector.val();
-    var translated = translated_selector.val();
+    var translated = translated_selector.html();
+    $( translated_content_selector ).val( translated );
     /* 验证数据 */
     if ( ! validator( translated, translated_selector ) )
     {

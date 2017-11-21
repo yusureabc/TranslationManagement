@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 @section('css')
 <link href="{{asset('vendors/iCheck/custom.css')}}" rel="stylesheet">
+<style type="text/css">
+    .old-content
+    {
+        height: auto;
+    }
+</style>
 @endsection
 @section( 'content' )
 @inject( 'ProjectPresenter', 'App\Presenters\Admin\ProjectPresenter' )
@@ -45,10 +51,11 @@
               <label class="col-sm-2 control-label"></label>
               <input type="hidden" name="key_id" value="<?php echo $item->key_id; ?>">
               <div class="col-sm-4">
-                <textarea class="form-control" name="content" rows="1" style="resize: none;" readonly>{{old( 'content', $item->content )}}</textarea>
+                <div class="form-control old-content">{{old( 'content', $item->content )}}</div> 
               </div>
               <div class="col-sm-4">
-                <textarea class="form-control" name="translated" rows="1" style="resize: none;" placeholder="{{trans('admin/project.translated')}}" onchange="save_translated( $(this) );">{{ $translated[$item->key_id] or '' }}</textarea>
+                <div class="form-control old-content" name="translated" contenteditable="true" onblur="save_translated( $(this) );">{{ $translated[$item->key_id] or '' }}</div>
+                <input type="hidden" name="translated_content" value="{{ $translated[$item->key_id] or '' }}">
               </div>
             </div>
             <?php } ?>
@@ -77,9 +84,6 @@
 
 @endsection
 @section('js')
-<script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-<script type="text/javascript" src="{{asset('vendors/autosize/autosize.min.js')}}"></script>
-<script> autosize(document.querySelectorAll( 'textarea' )); </script>
 <script src="{{asset('admin/js/translate/translate.js')}}"></script>
 @endsection
