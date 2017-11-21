@@ -55,6 +55,13 @@ if ( ! function_exists( 'xmlToArray' ) )
 
         $reader->close(); 
 
+        $attribute_num = count( $attribute );
+        $value_num = count( $value );
+        if ( $attribute_num != $value_num )
+        {
+            throw new Exception( "数据不匹配 key:" . $attribute_num . " value:" . $value_num );
+        }
+
         $res = array_combine( $attribute, $value );
         return $res;
     }
