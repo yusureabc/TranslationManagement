@@ -91,4 +91,19 @@
     });
   });
 </script>
+<script type="text/javascript">
+  $(document).on('click','.download_item',function() {
+    var _item = $(this);
+    var language_id = _item.attr( 'data-id' );
+    var url = '/admin/language/' + language_id + '/download';
+
+    layer.open({
+      type: 2,
+      title: '',
+      skin: 'layui-layer-rim', //加上边框
+      area: ['320px', '180px'], //宽高
+      content: url
+    });
+  });
+</script>
 @endsection

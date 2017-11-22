@@ -157,23 +157,37 @@ class LanguageService extends BaseService
     /**
      * 获取翻译结果
      */
-    public function getTranslateResult( $id )
+    public function getTranslateResult( $id, $method )
     {
         $project_id = $this->languageRepository->findProjectId( $id );
         $result = $this->keyRepository->getTranslatedList( $project_id, $id );
         $this->languageRepository->downloadTranslate( $id );
+        /* 根据要输出的格式用不同的方法处理 */
+        switch ( $method )
+        {
+            case 'xml':
+                return $this->_output_xml_result( $result );
+            break;
 
-        return $this->_output_result( $result );
+            case 'iOS_strings':
+                return $this->_output_iOS_strings_result( $result );
+            break;
+
+            case 'iOS_js':
+                return $this->_output_iOS_js_result( $result );
+            break;
+        }
+        
     }
 
     /**
-     * 输出结果
+     * 输出 XML 结果
      * @author Yusure  http://yusure.cn
      * @date   2017-11-14
      * @param  [param]
      * @return [type]     [description]
      */
-    private function _output_result( $result )
+    private function _output_xml_result( $result )
     {
 $string = <<<XML
 <?xml version='1.0' encoding='utf-8'?>
@@ -189,6 +203,42 @@ XML;
         }
 
         return $xml->asXML();
+    }
+
+    /**
+     * 输出 iOS 的语言文件
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-22
+     * @param  [param]
+     * @param  [type]     $result [description]
+     * @return [type]             [description]
+     */
+    private function _output_iOS_strings_result( $result )
+    {
+        $output = '';
+        foreach ( $result as $k => $item )
+        {
+            $output .= '"' . $item->key . '" = "' . $item->content . '";<br>';
+        }
+        return $output;
+    }
+
+    /**
+     * 输出 iOS 插件 js 的语言文件
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-22
+     * @param  [param]
+     * @param  [type]     $result [description]
+     * @return [type]             [description]
+     */
+    private function _output_iOS_js_result( $result )
+    {
+        $output = '';
+        foreach ( $result as $k => $item )
+        {
+            $output .= $item->key . ': "' . $item->content . '",<br>';
+        }
+        return $output;
     }
 
 }

@@ -131,8 +131,25 @@ class LanguageController extends Controller
      */
     public function download( $id )
     {
-        header('Content-Type: text/xml');
-        $result = $this->languageService->getTranslateResult( $id );
+        return view( 'admin.language.download', compact( 'id' ) );
+    }
+
+    /**
+     * 输出下载内容
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-22
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function downloadOutput( $id, $method = 'xml' )
+    {
+        $result = $this->languageService->getTranslateResult( $id, $method );
+        switch ( $method )
+        {
+            case 'xml':
+                header('Content-Type: text/xml');
+            break;
+        }
         die( $result );
     }
 

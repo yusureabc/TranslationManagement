@@ -7,6 +7,7 @@ $router->group( ['prefix' => 'language'], function ($router)
     $router->get( '{id}/invite', 'LanguageController@invite' )->name( 'language.invite' );
     $router->post( '{id}/invite', 'LanguageController@storeInviteUser' );
     /* 下载翻译 */
-    $router->get( '{id}/download', 'LanguageController@download' )->name( 'language.download' );    
+    $router->get( '{id}/download', 'LanguageController@download' )->name( 'language.download' );
+    $router->get( '{id}/download/{method}', 'LanguageController@downloadOutput' )->name( 'language.output' );
 });
 $router->resource( 'language', 'LanguageController' );
