@@ -13,6 +13,8 @@ return [
     'ru'    => 'Russian',
     /* 西班牙语 */
     'es'    => 'Spanish',
+    /* 中文(简体) */
+    'zh' => 'Chinese',
     /* 中文(香港) */
     'zh-HK' => 'Hongkong',
     /* 中文(台湾) */

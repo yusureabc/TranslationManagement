@@ -160,7 +160,18 @@ class LanguageService extends BaseService
     public function getTranslateResult( $id, $method )
     {
         $project_id = $this->languageRepository->findProjectId( $id );
-        $result = $this->keyRepository->getTranslatedList( $project_id, $id );
+
+        /* 获取 language_code  源语言 和 译文 不同查询 */
+        $language_code = $this->languageRepository->getLanguageCode( $id );
+        if ( $language_code == config( 'sourcelang.base_lang' ) )
+        {
+            $result = $this->keyRepository->getBaseList( $project_id, $id );
+        }
+        else
+        {
+            $result = $this->keyRepository->getTranslatedList( $project_id, $id );
+        }
+        /* 记录下载时间 */
         $this->languageRepository->downloadTranslate( $id );
         /* 根据要输出的格式用不同的方法处理 */
         switch ( $method )

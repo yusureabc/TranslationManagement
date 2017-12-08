@@ -101,6 +101,19 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     }
 
     /**
+     * 获取 基础语言
+     * @author Yusure  http://yusure.cn
+     * @date   2017-12-08
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function getBaseList( $project_id, $language_id )
+    {
+        return $this->model->where( 'project_id', $project_id )
+        ->orderBy( 'sort', 'asc' )->orderBy( 'id', 'asc' )->select( 'key', 'source as content' )->get();
+    }
+
+    /**
      * 检查存在的key
      * @author Yusure  http://yusure.cn
      * @date   2017-11-20

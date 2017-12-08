@@ -118,6 +118,11 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
         return $this->model->where( 'id', $id )->value( 'status' );
     }
 
+    public function getLanguageCode( $id )
+    {
+        return $this->model->where( 'id', $id )->value( 'language' );
+    }
+
     /**
      * 根据 language_id 查找 project_id
      */
