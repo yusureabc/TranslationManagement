@@ -55,7 +55,6 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-control old-content" name="translated" contenteditable="true" onblur="save_translated( $(this) );">{{ $translated[$item->key_id] or '' }}</div>
-                <input type="hidden" name="translated_content" value="{{ $translated[$item->key_id] or '' }}">
               </div>
             </div>
             <?php } ?>
@@ -85,5 +84,5 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/translate/translate.js')}}"></script>
+<script src="{{asset('admin/js/translate/translate.js?ver=20171208')}}"></script>
 @endsection

@@ -2,7 +2,7 @@ var item_html = "<div class=\"form-group source-item\">\n" +
     "                <input type=\"hidden\" name=\"sort\" value=\"0\" onchange=\"sort_change( this.value );\">\n" +
     "                <label name=\"key_id\" class=\"col-sm-2 control-label\"></label>\n" +
     "                <div class=\"col-sm-3\">\n" +
-    "                  <input type=\"text\" class=\"form-control\" name=\"key\" value=\"\" placeholder=\"key\">\n" +
+    "                  <input type=\"text\" class=\"form-control\" name=\"key\" value=\"\" onchange=\"save_key( $(this) );\" placeholder=\"key\">\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-3\">\n" +
     "                  <input type=\"text\" class=\"form-control\" name=\"source\" value=\"\" onchange=\"save_key( $(this) );\" placeholder=\"源语言\">\n" +
@@ -75,7 +75,6 @@ function sort()
  */
 function sort_change( key_id, index )
 {
-    console.log( key_id, index );
     var _token = $( "input[name='_token']" ).val();
     var data = {
         key_id: key_id,

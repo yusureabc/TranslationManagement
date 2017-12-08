@@ -11,18 +11,11 @@ function save_translated( save )
     var item = save.parents( '.source-item' );
     var key_id_selector = item.find( "input[name='key_id']" );
     var translated_selector = item.find( "div[name='translated']" );
-    var translated_content_selector = item.find( "input[name='translated_content']" );
 
     var _token = $( "input[name='_token']" ).val();
 
     var key_id = key_id_selector.val();
     var translated = translated_selector.html();
-    $( translated_content_selector ).val( translated );
-    /* 验证数据 */
-    if ( ! validator( translated, translated_selector ) )
-    {
-        return;
-    }
 
     var data = ajax_save( language_id, key_id, translated, _token );
 

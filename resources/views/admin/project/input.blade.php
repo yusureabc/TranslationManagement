@@ -45,7 +45,7 @@
                 <input type="hidden" name="sort" value="<?php echo $item->sort; ?>" onchange="sort_change( this.value );">
                 <label name="key_id" class="col-sm-2 control-label"><?php echo $item->id; ?></label>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" name="key" value="{{old( 'key', $item->key )}}" placeholder="key">
+                  <input type="text" class="form-control" name="key" value="{{old( 'key', $item->key )}}" onchange="save_key( $(this) );" placeholder="key">
                 </div>
                 <div class="col-sm-3">
                   <input type="text" class="form-control" name="source" value="{{old( 'source', $item->source )}}" onchange="save_key( $(this) );" placeholder="{{trans('admin/project.source')}}">
@@ -63,7 +63,7 @@
                 <input type="hidden" name="sort" value="0" onchange="sort_change( this.value );">
                 <label name="key_id" class="col-sm-2 control-label"></label>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" name="key" value="" placeholder="key">
+                  <input type="text" class="form-control" name="key" value="" onchange="save_key( $(this) );" placeholder="key">
                 </div>
                 <div class="col-sm-3">
                   <input type="text" class="form-control" name="source" value="" onchange="save_key( $(this) );" placeholder="{{trans('admin/  project.source')}}">
@@ -99,5 +99,5 @@
 <script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/ddsort/ddsort.js')}}"></script>
-<script src="{{asset('admin/js/project/project.js?ver=20171208')}}"></script>
+<script src="{{asset('admin/js/project/project.js?ver=2017120802')}}"></script>
 @endsection

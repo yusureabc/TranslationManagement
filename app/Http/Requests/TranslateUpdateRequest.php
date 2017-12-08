@@ -24,7 +24,7 @@ class TranslateUpdateRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'translated_content'  => 'required',
+            
         ];
 
         return $rules;
@@ -39,7 +39,7 @@ class TranslateUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'  => trans('validation.required'),
+            
         ];
     }
     /**
@@ -51,7 +51,7 @@ class TranslateUpdateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'translated_content' => trans('admin/project.translated'),
+            
         ];
     }
 }
