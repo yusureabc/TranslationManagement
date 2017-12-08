@@ -1,3 +1,20 @@
+var item_html = "<div class=\"form-group source-item\">\n" +
+    "                <input type=\"hidden\" name=\"sort\" value=\"0\" onchange=\"sort_change( this.value );\">\n" +
+    "                <label name=\"key_id\" class=\"col-sm-2 control-label\"></label>\n" +
+    "                <div class=\"col-sm-3\">\n" +
+    "                  <input type=\"text\" class=\"form-control\" name=\"key\" value=\"\" placeholder=\"key\">\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-3\">\n" +
+    "                  <input type=\"text\" class=\"form-control\" name=\"source\" value=\"\" onchange=\"save_key( $(this) );\" placeholder=\"源语言\">\n" +
+    "                </div>\n" +
+    "                <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"下方插入\" onclick=\"below_insert( $(this) );\">\n" +
+    "                  <span class=\"fa fa-plus\" aria-hidden=\"true\"></span>\n" +
+    "                </button>\n" +
+    "                <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"删除\" onclick=\"remove_key( $(this) );\">\n" +
+    "                  <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n" +
+    "                </button>\n" +
+    "            </div>";
+
 $(function () {
     $('.i-checks').iCheck({
       checkboxClass: 'icheckbox_square-green',
@@ -9,21 +26,7 @@ $(function () {
     });
     /* 追加行按钮 */
     $( '#append_line' ).click( function() {
-        var item_html = "<div class=\"form-group source-item\">\n" +
-            "              <label name=\"key_id\" class=\"col-sm-2 control-label\"></label>\n" +
-            "              <div class=\"col-sm-3\">\n" +
-            "                <input type=\"text\" class=\"form-control\" name=\"key\" value=\"\" placeholder=\"key\">\n" +
-            "              </div>\n" +
-            "              <div class=\"col-sm-3\">\n" +
-            "                <input type=\"text\" class=\"form-control\" name=\"source\" value=\"\" placeholder=\"源内容\">\n" +
-            "              </div>\n" +
-            "              <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"保存\" onclick=\"save_key( $(this) );\">\n" +
-            "                <span class=\"glyphicon glyphicon-saved\" aria-hidden=\"true\"></span>\n" +
-            "              </button>\n" +
-            "              <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"删除\" onclick=\"remove_key( $(this) );\">\n" +
-            "                <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n" +
-            "              </button>              \n" +
-            "            </div>";
+        
         var i = 0;
         for ( i; i < 10; i++ )
         {
@@ -34,12 +37,68 @@ $(function () {
 });
 
 /**
+ * 下方插入一行
+ */
+function below_insert( item_this )
+{
+    var item = item_this.parents( '.source-item' );
+    item.after( item_html );
+}
+
+/**
+ * 排序
+ */
+function sort()
+{
+    var key_id_set = [];
+    var sort_set = [];
+
+    $( '.source-item' ).each( function ( index ) {
+        var sort_selector = $(this).children("input[name='sort']");
+        var sort = sort_selector.val();
+        var key_id = $(this).find( "label[name='key_id']" ).html();
+        if ( key_id == '' ) return true;
+
+        if ( sort != index )
+        {
+            sort_selector.val( index );
+            key_id_set.push( key_id );
+            sort_set.push( index );            
+        }
+    });
+
+    sort_change( key_id_set, sort_set );
+}
+
+/**
+ * 改变排序
+ */
+function sort_change( key_id, index )
+{
+    console.log( key_id, index );
+    var _token = $( "input[name='_token']" ).val();
+    var data = {
+        key_id: key_id,
+        sort: index,
+        _token: _token
+    }
+
+    var result = [];
+    $.ajaxSettings.async = false;
+    $.post( "/admin/project/key/sort", data, function( res ) {
+        result = res;
+    }, 'json' );
+
+    return result;
+}
+
+/**
  * 保存翻译 key
  */
 function save_key( save )
 {
     var project_id = $( '#project_id' ).val();
-    var item = save.parent( '.source-item' );
+    var item = save.parents( '.source-item' );
     var key_selector = item.find( "input[name='key']" );
     var source_selector = item.find( "input[name='source']" );
     var key_id_selector = item.find( "label[name='key_id']" );
@@ -67,6 +126,7 @@ function save_key( save )
         item.addClass( 'has-success' );
         setTimeout( function() { 
             item.removeClass( 'has-success' );
+            sort();
         }, 1000 ); 
     }
     else
@@ -183,3 +243,23 @@ function trash_key( remove )
         return result;
     }
 }
+
+/* 拖动排序 */
+$('.ibox-content').DDSort({
+    target: '.source-item',       // 示例而用，默认即 li，
+    delay: 100,         // 延时处理，默认为 50 ms，防止手抖点击 A 链接无效
+    floatStyle: {
+        'border': '1px solid #ccc',
+        'background-color': '#fff'
+    },
+    down: function ( left, top ) {
+        // console.log( 'down' );
+    },
+    move: function ( left, top ) {
+        // console.log( 'move' );
+    },
+    /* 鼠标抬起时执行的函数 */
+    up: function ( left, top ) {
+        sort();
+    }
+});

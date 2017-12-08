@@ -71,6 +71,14 @@ class KeyService extends BaseService
     }
 
     /**
+     * 更新排序
+     */
+    public function updateSort( $key_id, $sort )
+    {
+        return $this->keyRepository->batchUpdate( 'id', 'sort', $key_id, $sort );
+    }
+
+    /**
      * 导入源语言
      * @author Yusure  http://yusure.cn
      * @date   2017-11-20

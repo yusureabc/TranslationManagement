@@ -42,36 +42,38 @@
             <?php if ( $keys->isNotEmpty() ) { ?>
             <?php foreach ( $keys as $k => $item ) { ?>
             <div class="form-group source-item">
-              <label name="key_id" class="col-sm-2 control-label"><?php echo $item->id; ?></label>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="key" value="{{old( 'key', $item->key )}}" placeholder="key">
-              </div>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="source" value="{{old( 'source', $item->source )}}" placeholder="{{trans('admin/project.source')}}">
-              </div>
-              <button type="button" class="btn btn-default" aria-label="Left Align" title="保存" onclick="save_key( $(this) );">
-                <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default" aria-label="Left Align" title="删除" onclick="remove_key( $(this) );">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-              </button>
+                <input type="hidden" name="sort" value="<?php echo $item->sort; ?>" onchange="sort_change( this.value );">
+                <label name="key_id" class="col-sm-2 control-label"><?php echo $item->id; ?></label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="key" value="{{old( 'key', $item->key )}}" placeholder="key">
+                </div>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="source" value="{{old( 'source', $item->source )}}" onchange="save_key( $(this) );" placeholder="{{trans('admin/project.source')}}">
+                </div>
+                <button type="button" class="btn btn-default" aria-label="Left Align" title="下方插入" onclick="below_insert( $(this) );">
+                  <span class="fa fa-plus" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align" title="删除" onclick="remove_key( $(this) );">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
             </div>
             <?php } ?>
             <?php } else { ?>
             <div class="form-group source-item">
-              <label name="key_id" class="col-sm-2 control-label"></label>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="key" value="" placeholder="key">
-              </div>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" name="source" value="" placeholder="{{trans('admin/project.source')}}">
-              </div>
-              <button type="button" class="btn btn-default" aria-label="Left Align" title="保存" onclick="save_key( $(this) );">
-                <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="btn btn-default" aria-label="Left Align" title="删除" onclick="remove_key( $(this) );">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-              </button>              
+                <input type="hidden" name="sort" value="0" onchange="sort_change( this.value );">
+                <label name="key_id" class="col-sm-2 control-label"></label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="key" value="" placeholder="key">
+                </div>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="source" value="" onchange="save_key( $(this) );" placeholder="{{trans('admin/  project.source')}}">
+                </div>
+                <button type="button" class="btn btn-default" aria-label="Left Align" title="下方插入" onclick="below_insert( $(this) );">
+                  <span class="fa fa-plus" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align" title="删除" onclick="remove_key( $(this) );">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
             </div>
             <?php } ?>
 
@@ -96,5 +98,6 @@
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/project/project.js')}}"></script>
+<script type="text/javascript" src="{{asset('vendors/ddsort/ddsort.js')}}"></script>
+<script src="{{asset('admin/js/project/project.js?ver=20171208')}}"></script>
 @endsection

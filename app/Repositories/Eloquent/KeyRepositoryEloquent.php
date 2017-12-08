@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Contracts\KeyRepository;
 use App\Models\Key;
+use DB;
 
 /**
  * Class KeyRepositoryEloquent
@@ -28,7 +29,7 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
      */
     public function getKeyList( $project_id )
     {
-        return $this->model->where( 'project_id', $project_id )->orderBy( 'id', 'asc')->get();
+        return $this->model->where( 'project_id', $project_id )->orderBy( 'sort', 'asc')->orderBy( 'id', 'asc')->get();
     }
 
     /**
@@ -51,6 +52,36 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     }
 
     /**
+     * 批量更新表的值，防止阻塞
+     * @note 生成的SQL语句如下：
+     * update `keys` set sort = case id
+     *      when 13 then 1
+     *      when 1 then 4
+     *      when 7 then 5
+     *      when 8 then 6
+     *      when 9 then 7
+     *      when 10 then 8
+     *      when 11 then 9
+     *      when 12 then 10
+     * end where id in (13,1,7,8,9,10,11,12)
+     * @param $conditions_field 条件字段
+     * @param $values_field  需要被更新的字段
+     * @param $conditions
+     * @param $values
+     * @return int
+     */
+    public function batchUpdate($conditions_field, $values_field, $conditions, $values)
+    {
+        $table = $this->model->getFullTableName(); // 返回完整表名
+        $sql   = 'update ' . '`' . $table . '`' . ' set '. $values_field .' = case ' .$conditions_field;
+        foreach ($conditions as $key => $condition) {
+            $sql .= ' when ' . $condition . ' then ?';
+        }
+        $sql .= ' end where id in (' . implode(',', $conditions) . ')';
+        return DB::update($sql, $values);//项目中需要引入DB  facade
+    }
+
+    /**
      * 获取源内容
      */
     public function getSourceContents( $project_id )
@@ -66,7 +97,7 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
         $condition = ['keys.project_id' => $project_id, 'contents.language_id' => $language_id];
         return $this->model->where( $condition )
                 ->join( 'contents', 'keys.id', '=', 'contents.key_id' )
-                ->orderBy( 'keys.id', 'asc' )->get();
+                ->orderBy( 'keys.sort', 'asc' )->orderBy( 'keys.id', 'asc' )->get();
     }
 
     /**

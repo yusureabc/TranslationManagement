@@ -163,6 +163,16 @@ class ProjectController extends Controller
     }
 
     /**
+     * 排序 key
+     */
+    public function sortKey( Request $request )
+    {
+        $key_id = $request->input( 'key_id' );
+        $sort = $request->input( 'sort' );
+        return $this->keyService->updateSort( $key_id, $sort );
+    }
+
+    /**
      * 销毁项目数据
      * @author Yusure  http://yusure.cn
      * @date   2017-11-06

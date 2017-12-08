@@ -17,6 +17,8 @@ class Key extends Model implements Transformable
 
     private $action = 'key';
 
+    protected $table = 'keys';
+
     protected $guarded  = [];
 
     public $timestamps = false;
@@ -24,5 +26,10 @@ class Key extends Model implements Transformable
     public function content()
     {
         return $this->hasOne( 'App\Models\Content' );
+    }
+
+    public function getFullTableName()
+    {
+        return $this->table;
     }
 }
