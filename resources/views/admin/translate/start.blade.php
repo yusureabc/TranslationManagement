@@ -84,5 +84,5 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/translate/translate.js?ver=20171208')}}"></script>
+<script src="{{asset('admin/js/translate/translate.js?ver=20171212')}}"></script>
 @endsection
