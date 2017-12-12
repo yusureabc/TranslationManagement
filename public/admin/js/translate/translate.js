@@ -16,6 +16,7 @@ function save_translated( save )
 
     var key_id = key_id_selector.val();
     var translated = translated_selector.html();
+    translated = removeHTMLTag( translated );
 
     var data = ajax_save( language_id, key_id, translated, _token );
 
@@ -74,4 +75,16 @@ function validator( translated, translated_selector )
     }
 
     return true;
+}
+
+/**
+ * 去除空行 html 标签
+ */
+function removeHTMLTag( str )
+{
+    str = str.replace(/<\/?[^>]*>/g,''); //去除HTML tag
+    str = str.replace(/[ | ]*\n/g,'\n'); //去除行尾空白
+    //str = str.replace(/\n[\s| | ]*\r/g,'\n'); //去除多余空行
+    str=str.replace(/&nbsp;/ig,'');//去掉&nbsp;
+    return str;
 }
