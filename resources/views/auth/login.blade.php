@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <title>后台登录</title>
+  <title>Login</title>
   <link rel="stylesheet" type="text/css" href="{{asset('admin/css/login.css')}}" />
   <style>
   body{height:100%;background:#333333;overflow:hidden;}
@@ -14,8 +14,8 @@
   {{ csrf_field() }}
   <dl class="admin_login">
     <dt>
-    <strong>站点后台管理系统</strong>
-    <em>Management System</em>
+    <strong>翻译管理系统</strong>
+    <em>Translation management system</em>
     </dt>
     <dd class="user_icon">
     <input type="text" placeholder="{{trans('validation.attributes.username')}}" name="{{config('admin.global.username')}}" class="login_txtbx" value="{{old(config('admin.global.username'))}}" />
@@ -34,7 +34,7 @@
     @endif
     </dd>
     <dd>
-    <input type="submit" value="立即登陆" class="submit_btn"/>
+    <input type="submit" value="Log in" class="submit_btn"/>
     </dd>
     <dd>
     <p></p>

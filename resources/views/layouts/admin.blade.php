@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>管理后台</title>
+  <title> Backend management </title>
   <link href="{{asset('vendors/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
   <link href="{{asset('vendors/animate/animate.css')}}" rel="stylesheet">
@@ -73,7 +73,7 @@
               </li>
               <li>
                   <a href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                      <i class="fa fa-sign-out"></i> 退出
+                      <i class="fa fa-sign-out"></i> Logout
                       <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                   </a>
               </li>
@@ -84,9 +84,6 @@
       <div class="footer">
           <div class="pull-right">
               <strong>Copyright</strong> Yeelight
-          </div>
-          <div>
-               管理后台
           </div>
       </div>
 

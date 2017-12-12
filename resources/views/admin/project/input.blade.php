@@ -66,7 +66,7 @@
                   <input type="text" class="form-control" name="key" value="" onchange="save_key( $(this) );" placeholder="key">
                 </div>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" name="source" value="" onchange="save_key( $(this) );" placeholder="{{trans('admin/  project.source')}}">
+                  <input type="text" class="form-control" name="source" value="" onchange="save_key( $(this) );" placeholder="源语言">
                 </div>
                 <button type="button" class="btn btn-default" aria-label="Left Align" title="下方插入" onclick="below_insert( $(this) );">
                   <span class="fa fa-plus" aria-hidden="true"></span>
