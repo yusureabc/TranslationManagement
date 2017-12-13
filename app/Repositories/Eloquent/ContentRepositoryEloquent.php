@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Contracts\ContentRepository;
 use App\Models\Content;
+use DB;
 
 /**
  * Class ContentRepositoryEloquent
@@ -59,7 +60,12 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
      */
     public function getSourceContents( $id )
     {
-        return $this->model->where( 'language_id', $id )->select( 'key_id', 'content' )->get();
+        return $this->model
+                ->join( 'keys', 'contents.key_id', '=', 'keys.id' )
+                ->where( 'contents.language_id', $id )
+                ->orderBy( 'keys.sort' )
+                ->select( 'contents.key_id', 'contents.content' )
+                ->get();
     }
 
     /**

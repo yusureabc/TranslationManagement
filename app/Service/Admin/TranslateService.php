@@ -107,6 +107,10 @@ class TranslateService extends BaseService
         $language_code = $this->languageRepository->findLanguageCode( $id );
         /* 获取对照语言 */
         $contrast_code = $this->_contrastLang( $language_code );
+
+        /**
+         * 例如：英文翻译需要参照中文（源语言）
+         */
         if ( $contrast_code == config( 'sourcelang.base_lang' ) )
         {
             /* 查找 keys 表 */
