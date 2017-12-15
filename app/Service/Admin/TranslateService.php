@@ -135,7 +135,8 @@ class TranslateService extends BaseService
      */
     public function getTranslatedContents( $id )
     {
-        return $this->contentRepository->getTranslatedContents( $id );
+        $contents = $this->contentRepository->getTranslatedContents( $id );
+        return replace_array_key( $contents, 'key_id' );
     }
 
     /**

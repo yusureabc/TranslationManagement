@@ -8381,3 +8381,10 @@ body.md-skin {
     margin: 0;
   }
 }
+/* 翻译页面  参考 key */
+.reference-key
+{
+    padding-top: 8px;
+    color: #8f8fe9;
+    font-weight: bold;
+}

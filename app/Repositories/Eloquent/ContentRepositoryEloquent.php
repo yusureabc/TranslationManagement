@@ -52,7 +52,7 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
      */
     public function getTranslatedContents( $id )
     {
-        return $this->model->where( 'language_id', $id )->pluck( 'content', 'key_id' )->toArray();
+        return $this->model->where( 'language_id', $id )->select( 'id', 'content', 'key_id' )->get()->toArray();
     }
 
     /**

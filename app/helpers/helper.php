@@ -66,3 +66,22 @@ if ( ! function_exists( 'xmlToArray' ) )
         return $res;
     }
 }
+
+if ( ! function_exists( 'replace_array_key' ) )
+{
+    /**
+     * 用二维数组的某个元素做key
+     */
+    function replace_array_key( $data, $field, $append = [] )
+    {
+        $result = [];
+        foreach ( (array)$data as $key => $val )
+        {
+            $append && $val = $val + $append;
+
+            $result[ $val[$field] ] = $val;
+        }
+
+        return $result;
+    }
+}

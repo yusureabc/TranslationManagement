@@ -50,20 +50,21 @@
             <div class="form-group source-item">
               <input type="hidden" name="key_id" value="<?php echo $item->key_id; ?>">
               <div class="col-sm-3">
-                <div class="form-control">{{old( 'key', $item->key )}}</div> 
+                <div class="reference-key">{{old( 'key', $item->key )}}</div> 
               </div>
               <div class="col-sm-4">
                 <div class="form-control old-content">{{old( 'content', $item->content )}}</div> 
               </div>
               <div class="col-sm-4">
-                <div class="form-control old-content" name="translated" contenteditable="true" onblur="save_translated( $(this) );">{{ $translated[$item->key_id] or '' }}</div>
+                <div class="form-control old-content" name="translated" contenteditable="true" onblur="save_translated( $(this) );">{{ $translated[$item->key_id]['content'] or '' }}</div>
               </div>
-              <!-- <button type="button" class="btn btn-default" aria-label="Left Align" title="下方插入" onclick="below_insert( $(this) );">
-                <span class="fa fa-plus" aria-hidden="true"></span>
+              <input type="hidden" name="content_id" value="{{ $translated[$item->key_id]['id'] or '' }}">
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="Comments" onclick="alert( 'developing' );">
+                <span class="fa fa-commenting-o" aria-hidden="true"></span>
               </button>
-              <button type="button" class="btn btn-default" aria-label="Left Align" title="下方插入" onclick="below_insert( $(this) );">
-                <span class="fa fa-plus" aria-hidden="true"></span>
-              </button> -->
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="Flag" onclick="alert( 'developing' );">
+                <span class="fa fa-flag-o" aria-hidden="true"></span>
+              </button>
             </div>
             <?php } ?>
             <?php } ?>

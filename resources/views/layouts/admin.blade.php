@@ -8,7 +8,7 @@
   <link href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
   <link href="{{asset('vendors/animate/animate.css')}}" rel="stylesheet">
   @yield('css')
-  <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
+  <link href="{{asset('admin/css/style.css?VER=20171215')}}" rel="stylesheet">
 </head>
 <body class="">
   <div id="wrapper">
