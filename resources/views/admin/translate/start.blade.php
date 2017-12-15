@@ -48,14 +48,22 @@
             <?php if ( $source->isNotEmpty() ) { ?>
             <?php foreach ( $source as $k => $item ) { ?>
             <div class="form-group source-item">
-              <label class="col-sm-2 control-label"></label>
               <input type="hidden" name="key_id" value="<?php echo $item->key_id; ?>">
+              <div class="col-sm-3">
+                <div class="form-control">{{old( 'key', $item->key )}}</div> 
+              </div>
               <div class="col-sm-4">
                 <div class="form-control old-content">{{old( 'content', $item->content )}}</div> 
               </div>
               <div class="col-sm-4">
                 <div class="form-control old-content" name="translated" contenteditable="true" onblur="save_translated( $(this) );">{{ $translated[$item->key_id] or '' }}</div>
               </div>
+              <!-- <button type="button" class="btn btn-default" aria-label="Left Align" title="下方插入" onclick="below_insert( $(this) );">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+              </button>
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="下方插入" onclick="below_insert( $(this) );">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+              </button> -->
             </div>
             <?php } ?>
             <?php } ?>

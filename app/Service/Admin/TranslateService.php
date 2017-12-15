@@ -154,6 +154,7 @@ class TranslateService extends BaseService
         $project_id = $this->languageRepository->findProjectId( $data['language_id'] );
         /* 检查 contents 表是否存在 存在就更新 不存在就写入 */
         $exist = $this->contentRepository->translated_exist( $data['language_id'], $data['key_id'] );
+        $data['translated'] = strip_tags( htmlspecialchars_decode( $data['translated'] ) );
         if ( $exist )
         {
             /* update */
