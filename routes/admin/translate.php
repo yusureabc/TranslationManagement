@@ -10,5 +10,11 @@ $router->group( ['prefix' => 'translate'], function ($router)
     $router->patch( '{id}/start', 'TranslateController@store' );
     /* 导入译文 */
     $router->get( '{id}/import', 'TranslateController@import' );
+    /* 评论 */
+    $router->get( '{comment_id}/comment', 'TranslateController@comment' );
+    $router->post( '{comment_id}/comment', 'TranslateController@commentStore' );
+    /* Flag */
+    $router->get( '{comment_id}/flag/{flag}', 'TranslateController@flag' );
+
 });
 $router->resource( 'translate', 'TranslateController' );

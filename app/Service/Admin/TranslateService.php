@@ -178,11 +178,35 @@ class TranslateService extends BaseService
     }
 
     /**
+     * 获取翻译内容ID
+     */
+    public function getContentId( $data )
+    {
+        $condition = [
+            'language_id' => $data['language_id'],
+            'key_id'      => $data['key_id'],
+        ];
+
+        $content_id = $this->contentRepository->getField( $condition, 'id' );
+        return $content_id;
+    }
+
+    /**
      * 完成翻译
      */
     public function finshTranslate( $id )
     {
         return $this->languageRepository->finshTranslate( $id );
+    }
+
+    /**
+     * 修改标记
+     */
+    public function flag( $id, $flag )
+    {
+        $condition = [ 'id' => $id ];
+        $data = [ 'flag' => $flag ];
+        return $this->contentRepository->update_data( $condition, $data );
     }
 
     /**

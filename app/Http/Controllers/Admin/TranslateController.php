@@ -73,7 +73,8 @@ class TranslateController extends Controller
         $result = $this->translateService->storeTranslated( request()->all() );
         if ( $result !== false )
         {
-            $response = ['status' => 1];
+            $content_id = $this->translateService->getContentId( request()->all() );
+            $response = ['status' => 1, 'content_id' => $content_id];
         }
         else
         {
@@ -90,6 +91,33 @@ class TranslateController extends Controller
     {
         $result = $this->translateService->finshTranslate( $id );
         return redirect( 'admin/translate' );
+    }
+
+    /**
+     * 翻译内容评论查看
+     */
+    public function comment( $id )
+    {
+        /* TODO: 显示当前的 key source content */
+        /* TODO: 根据 content_id 查询 comments 数据 */
+        return view( 'admin.translate.comment' );
+    }
+
+    /**
+     * 保存评论内容
+     */
+    public function commentStore( $id )
+    {
+
+    }
+
+    /**
+     * 标记译文
+     */
+    public function flag( $id, $flag )
+    {
+        $result = $this->translateService->flag( $id, $flag );
+        return $result;
     }
 
     /**

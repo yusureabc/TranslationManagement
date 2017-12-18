@@ -11,6 +11,7 @@ function save_translated( save )
     var item = save.parents( '.source-item' );
     var key_id_selector = item.find( "input[name='key_id']" );
     var translated_selector = item.find( "div[name='translated']" );
+    var content_id_selector = item.find( "input[name='content_id']" );
 
     var _token = $( "input[name='_token']" ).val();
 
@@ -22,6 +23,7 @@ function save_translated( save )
 
     if ( data.status == 1 )
     {
+        content_id_selector.val( data['content_id'] );
         /* 页面提示 */
         // layer.msg( 'Success',{icon: 1, time: 1000} );
         item.addClass( 'has-success' );
@@ -87,4 +89,57 @@ function removeHTMLTag( str )
     //str = str.replace(/\n[\s| | ]*\r/g,'\n'); //去除多余空行
     str=str.replace(/&nbsp;/ig,'');//去掉&nbsp;
     return str;
+}
+
+/**
+ * 评论框
+ */
+function comments( this_item )
+{
+    var item = this_item.parents( '.source-item' );
+    // var key_id_selector = item.find( "input[name='key_id']" );
+    // var translated_selector = item.find( "div[name='translated']" );
+    var content_id_selector = item.find( "input[name='content_id']" );
+    var content_id = content_id_selector.val();
+    var url = '/admin/translate/' + content_id + '/comment';
+    layer.open({
+      type: 2,
+      title: 'Comments',
+      skin: 'layui-layer-rim', //加上边框
+      area: ['800px', '240px'], //宽高
+      content: url
+    });
+}
+
+/**
+ * 翻译标记
+ */
+function flag( this_item )
+{
+    var item = this_item.parents( '.source-item' );
+    var content_id_selector = item.find( "input[name='content_id']" );
+    var content_id = content_id_selector.val();
+    var flag_selector = item.find( "span[name='flag']" );
+    var class_val = flag_selector.attr( 'class' );
+    var flag = 0;
+    if ( class_val == 'fa fa-flag' )
+    {
+        class_val = 'fa fa-flag-o';
+        flag = 0;
+    }
+    else
+    {
+        class_val = 'fa fa-flag';
+        flag = 1;
+    }
+
+    var result = [];
+    var url = '/admin/translate/' + content_id + '/flag/' + flag;
+    $.get( url, function( res ) {
+        result = res;
+        if ( result == 1 )
+        {
+            flag_selector.attr( 'class', class_val );
+        }
+    }, 'json' );
 }

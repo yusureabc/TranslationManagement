@@ -52,7 +52,7 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
      */
     public function getTranslatedContents( $id )
     {
-        return $this->model->where( 'language_id', $id )->select( 'id', 'content', 'key_id' )->get()->toArray();
+        return $this->model->where( 'language_id', $id )->select( 'id', 'content', 'key_id', 'flag' )->get()->toArray();
     }
 
     /**
@@ -86,6 +86,22 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
     public function batchInsertContent( $data )
     {
         return $this->model->insert( $data );
+    }
+
+    /**
+     * 获取单个字段值
+     */
+    public function getField( $condition, $field = 'id' )
+    {
+        return $this->model->where( $condition )->value( $field );
+    }
+
+    /**
+     * 更新内容
+     */
+    public function update_data( $condition, $data )
+    {
+        return $this->model->where( $condition )->update( $data );
     }
 
     /**

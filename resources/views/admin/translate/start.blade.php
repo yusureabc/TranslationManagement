@@ -9,7 +9,7 @@
 </style>
 @endsection
 @section( 'content' )
-@inject( 'ProjectPresenter', 'App\Presenters\Admin\ProjectPresenter' )
+@inject( 'TranslatePresenter', 'App\Presenters\Admin\TranslatePresenter' )
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
     <h2>{!!trans('admin/project.translated')!!}</h2>
@@ -59,11 +59,11 @@
                 <div class="form-control old-content" name="translated" contenteditable="true" onblur="save_translated( $(this) );">{{ $translated[$item->key_id]['content'] or '' }}</div>
               </div>
               <input type="hidden" name="content_id" value="{{ $translated[$item->key_id]['id'] or '' }}">
-              <button type="button" class="btn btn-default" aria-label="Left Align" title="Comments" onclick="alert( 'developing' );">
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="Comments" onclick="comments( $(this) );">
                 <span class="fa fa-commenting-o" aria-hidden="true"></span>
               </button>
-              <button type="button" class="btn btn-default" aria-label="Left Align" title="Flag" onclick="alert( 'developing' );">
-                <span class="fa fa-flag-o" aria-hidden="true"></span>
+              <button type="button" class="btn btn-default" aria-label="Left Align" title="Flag" onclick="flag( $(this) );">
+                <span name="flag" class="{!! $TranslatePresenter->showFlag( $translated[$item->key_id]['flag'] ) !!}" aria-hidden="true"></span>
               </button>
             </div>
             <?php } ?>
