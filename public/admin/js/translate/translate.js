@@ -106,7 +106,7 @@ function comments( this_item )
       type: 2,
       title: 'Comments',
       skin: 'layui-layer-rim', //加上边框
-      area: ['800px', '240px'], //宽高
+      area: ['800px', '600px'], //宽高
       content: url
     });
 }

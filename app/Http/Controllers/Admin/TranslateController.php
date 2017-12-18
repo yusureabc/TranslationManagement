@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Service\Admin\TranslateService;
@@ -100,15 +101,19 @@ class TranslateController extends Controller
     {
         /* TODO: 显示当前的 key source content */
         /* TODO: 根据 content_id 查询 comments 数据 */
-        return view( 'admin.translate.comment' );
+        $comments = $this->translateService->getComment( $id );
+        return view( 'admin.translate.comment', compact( 'comments' ) );
     }
 
     /**
      * 保存评论内容
      */
-    public function commentStore( $id )
+    public function commentStore( Request $request, $id )
     {
+        $comment = $request->input( 'comment' );
+        $this->translateService->commentStore( $id, $comment );
 
+        return redirect()->back();
     }
 
     /**

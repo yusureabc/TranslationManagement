@@ -1,10 +1,12 @@
 <?php
 namespace App\Service\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Eloquent\TranslatorRepositoryEloquent;
 use App\Repositories\Eloquent\LanguageRepositoryEloquent;
 use App\Repositories\Eloquent\KeyRepositoryEloquent;
 use App\Repositories\Eloquent\ContentRepositoryEloquent;
+use App\Repositories\Eloquent\CommentRepositoryEloquent;
 
 use App\Service\Admin\BaseService;
 use Exception;
@@ -25,13 +27,16 @@ class TranslateService extends BaseService
         TranslatorRepositoryEloquent $translateRepository,
         LanguageRepositoryEloquent $languageRepository,
         KeyRepositoryEloquent $keyRepository,
-        ContentRepositoryEloquent $contentRepository
+        ContentRepositoryEloquent $contentRepository,
+        CommentRepositoryEloquent $commentRepository
+
     )
     {
         $this->translateRepository = $translateRepository;
         $this->languageRepository  = $languageRepository;
         $this->keyRepository       = $keyRepository;
         $this->contentRepository   = $contentRepository;
+        $this->commentRepository   = $commentRepository;
     }
 
     /**
@@ -207,6 +212,30 @@ class TranslateService extends BaseService
         $condition = [ 'id' => $id ];
         $data = [ 'flag' => $flag ];
         return $this->contentRepository->update_data( $condition, $data );
+    }
+
+    /**
+     * 获取评论列表
+     */
+    public function getComment( $id )
+    {
+        $condition = ['content_id' => $id];
+        return $this->commentRepository->getList( $condition );
+    }
+
+    /**
+     * 存储评论
+     */
+    public function commentStore( $id, $comment )
+    {
+        $user = Auth::user();
+        $data = [
+            'content_id' => $id,
+            'user_id'    => Auth::id(),
+            'username'   => $user->username,
+            'comment'    => $comment
+        ];
+        return $this->commentRepository->create( $data );
     }
 
     /**
