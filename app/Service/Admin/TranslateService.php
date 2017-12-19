@@ -239,6 +239,44 @@ class TranslateService extends BaseService
     }
 
     /**
+     * getKeySourceContent
+     */
+    public function getKeySourceContent( $id )
+    {
+        $resource = [];
+        $condition = ['id' => $id];
+        $content_info = $this->contentRepository->getInfo( $condition );
+        $resource['content'] = $content_info->content;
+
+        $key_info = $this->keyRepository->getInfo( ['id' => $content_info->key_id] );
+        $resource['key'] = $key_info->key;
+
+        /* 获取语言code */
+        $language_code = $this->languageRepository->findLanguageCode( $content_info->language_id );
+        $contrast_code = $this->_contrastLang( $language_code );
+
+        /**
+         * 例如：英文翻译需要参照中文（源语言）
+         */
+        if ( $contrast_code == config( 'sourcelang.base_lang' ) )
+        {
+            $resource['source'] = $key_info->source;
+        }
+        else
+        {
+            /* 用 contrast_code + project_id 查询依赖的 language_id */
+            $contrast_language_id = $this->languageRepository->getLanguageID( $content_info->project_id, $contrast_code );
+            $condition = [
+                'language_id' => $contrast_language_id,
+                'key_id' => $content_info->key_id,
+            ];
+            $resource['source'] = $this->contentRepository->getField( $condition, 'content' );
+        }
+
+        return $resource;
+    }
+
+    /**
      * 导入译文
      */
     public function importTranslated( $id, $url )

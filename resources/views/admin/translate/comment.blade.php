@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="{{asset('vendors/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
-  <link href="{{asset('vendors/animate/animate.css')}}" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{asset('vendors/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/animate/animate.css')}}" rel="stylesheet">
+    <style type="text/css">
+        .comment-item
+        {
+            padding-left: 22px;
+            padding-top: 10px;
+            border: 2px solid #c1c1c1;
+            border-radius: 22px;
+        }
+    </style>
 </head>
 <body class="">
+    <ul class="list-group">
+        <li class="list-group-item"> Key: {{ $resource['key'] }} </li>
+        <li class="list-group-item"> Source: {{ $resource['source'] }} </li>
+        <li class="list-group-item"> Content: {{ $resource['content'] }} </li>
+    </ul>
     <?php if ( $comments->isNotEmpty() ) { ?>
     <?php foreach ( $comments as $comment ) { ?>
-    <div class="media">
-        <a class="media-left" href="#">
-            <!-- <img class="media-object" src="" alt="媒体对象"> -->
+    <div class="media comment-item">
+        <a class="media-left">
+            <?php echo $comment->username; ?>
         </a>
         <div class="media-body">
-            <h4 class="media-heading"> <?php echo $comment->username; ?> </h4>
-            <?php echo $comment->comment; ?>
+            <h4 class="media-heading"> <?php echo $comment->comment; ?> </h4>
         </div>
     </div>
     <?php } ?>

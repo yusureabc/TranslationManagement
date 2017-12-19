@@ -100,9 +100,12 @@ class TranslateController extends Controller
     public function comment( $id )
     {
         /* TODO: 显示当前的 key source content */
-        /* TODO: 根据 content_id 查询 comments 数据 */
+        $resource = $this->translateService->getKeySourceContent( $id );
+
+
+        /* 根据 content_id 查询 comments 数据 */
         $comments = $this->translateService->getComment( $id );
-        return view( 'admin.translate.comment', compact( 'comments' ) );
+        return view( 'admin.translate.comment', compact( 'comments', 'resource' ) );
     }
 
     /**

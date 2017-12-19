@@ -143,6 +143,14 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     }
 
     /**
+     * 获取一行信息
+     */
+    public function getInfo( $condition )
+    {
+        return $this->model->where( $condition )->first();
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

@@ -97,6 +97,14 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
     }
 
     /**
+     * 获取一行信息
+     */
+    public function getInfo( $condition )
+    {
+        return $this->model->where( $condition )->first();
+    }
+
+    /**
      * 更新内容
      */
     public function update_data( $condition, $data )
