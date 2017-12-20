@@ -4,6 +4,8 @@ namespace App\Service\Admin;
 use App\Repositories\Eloquent\ProjectRepositoryEloquent;
 use App\Repositories\Eloquent\LanguageRepositoryEloquent;
 use App\Repositories\Eloquent\TranslatorRepositoryEloquent;
+use App\Repositories\Eloquent\InviteRepositoryEloquent;
+
 use App\Service\Admin\BaseService;
 use Exception;
 use DB;
@@ -14,60 +16,64 @@ use DB;
 class ProjectService extends BaseService
 {
 
-	protected $project;
+    protected $project;
     protected $languageRepository;
     protected $translatorRepository;
+    protected $inviteRepository;
 
-	function __construct(
+    function __construct(
         ProjectRepositoryEloquent $project, 
         LanguageRepositoryEloquent $languageRepository,
-        TranslatorRepositoryEloquent $translatorRepository
+        TranslatorRepositoryEloquent $translatorRepository,
+        InviteRepositoryEloquent $inviteRepository
     )
-	{
-		$this->project =  $project;
+    {
+        $this->project =  $project;
         $this->languageRepository = $languageRepository;
         $this->translatorRepository = $translatorRepository;
-	}
-	/**
-	 * datatables获取数据
-	 * @author Sheldon
-	 * @date   2017-04-18T15:54:46+0800
-	 * @return [type]                   [description]
-	 */
-	public function ajaxIndex()
-	{
-		// datatables请求次数
-		$draw = request('draw', 1);
-		// 开始条数
-		$start = request('start', config('admin.golbal.list.start'));
-		// 每页显示数目
-		$length = request('length', config('admin.golbal.list.length'));
-		// datatables是否启用模糊搜索
-		$search['regex'] = request('search.regex', false);
-		// 搜索框中的值
-		$search['value'] = request('search.value', '');
-		// 排序
-		$order['name'] = request('columns.' .request('order.0.column',0) . '.name');
-		$order['dir'] = request('order.0.dir','asc');
+        $this->inviteRepository = $inviteRepository;
+    }
 
-		$result = $this->project->getProjectList($start,$length,$search,$order);
+    /**
+     * datatables获取数据
+     * @author Sheldon
+     * @date   2017-04-18T15:54:46+0800
+     * @return [type]                   [description]
+     */
+    public function ajaxIndex()
+    {
+        // datatables请求次数
+        $draw = request('draw', 1);
+        // 开始条数
+        $start = request('start', config('admin.golbal.list.start'));
+        // 每页显示数目
+        $length = request('length', config('admin.golbal.list.length'));
+        // datatables是否启用模糊搜索
+        $search['regex'] = request('search.regex', false);
+        // 搜索框中的值
+        $search['value'] = request('search.value', '');
+        // 排序
+        $order['name'] = request('columns.' .request('order.0.column',0) . '.name');
+        $order['dir'] = request('order.0.dir','asc');
 
-		$projects = [];
+        $result = $this->project->getProjectList($start,$length,$search,$order);
 
-		if ($result['projects']) {
-			foreach ($result['projects'] as $v) {
-				$v->actionButton = $v->getActionButtonAttribute();
-				$projects[] = $v;
-			}
-		}
+        $projects = [];
 
-		return [
-			'draw' => $draw,
-			'recordsTotal' => $result['count'],
-			'recordsFiltered' => $result['count'],
-			'data' => $projects,
-		];
-	}
+        if ($result['projects']) {
+            foreach ($result['projects'] as $v) {
+                $v->actionButton = $v->getActionButtonAttribute();
+                $projects[] = $v;
+            }
+        }
+
+        return [
+            'draw' => $draw,
+            'recordsTotal' => $result['count'],
+            'recordsFiltered' => $result['count'],
+            'data' => $projects,
+        ];
+    }
 
     /**
      * 获取所有平台并缓存
@@ -143,6 +149,8 @@ class ProjectService extends BaseService
             {
                 $languages_data = $this->_buildLanguagesData( $result->id, $languages );
                 $this->languageRepository->insert( $languages_data );
+                /* 自动邀请 */
+                $this->_auto_invite( $languages, $result->id, $attributes['name'] );
             }
 
             return [
@@ -171,6 +179,37 @@ class ProjectService extends BaseService
         }
 
         return $languages_data;
+    }
+
+    /**
+     * 自动邀请
+     */
+    private function _auto_invite( $languages, $project_id, $project_name )
+    {
+        foreach ( (array)$languages as $language_code )
+        {
+            /* 先用 language_code 去 invite 查找 user_id */
+            $condition = [ 'language_code' => $language_code ];
+            $user_id = $this->inviteRepository->getField( $condition, 'user_id' );
+            if ( ! $user_id ) continue;
+
+            /* 如果有 user_id 用 project_id + language_code 去 `languages` 表 反查 id */
+            $language_id = $this->languageRepository->getLanguageID( $project_id, $language_code );
+
+            /* 多个user_id  写入 translation 表 */
+            $user_id = explode( ',', $user_id );
+            foreach ( $user_id as $k => $id )
+            {
+                $translator_data[] = [
+                    'project_id'    => $project_id,
+                    'project_name'  => $project_name,
+                    'language_id'   => $language_id,
+                    'language_code' => $language_code,
+                    'user_id'       => $id
+                ];
+            }
+            $this->translatorRepository->insert( $translator_data );
+        }
     }
 
     /**
