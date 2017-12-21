@@ -9,6 +9,7 @@ var TableDatatablesAjax = function() {
         "search": {
             "regex": true
         },
+        "aLengthMenu": [[100, 25, 50], [100, 25, 50]],
       "ajax": {
         'url' : '/admin/language/ajaxIndex',
         'data': function (data) {
