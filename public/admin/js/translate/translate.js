@@ -122,14 +122,14 @@ function flag( this_item )
     var flag_selector = item.find( "span[name='flag']" );
     var class_val = flag_selector.attr( 'class' );
     var flag = 0;
-    if ( class_val == 'fa fa-flag' )
+    if ( class_val == 'fa fa-flag red' )
     {
         class_val = 'fa fa-flag-o';
         flag = 0;
     }
     else
     {
-        class_val = 'fa fa-flag';
+        class_val = 'fa fa-flag red';
         flag = 1;
     }
 

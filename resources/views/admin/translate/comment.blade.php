@@ -18,9 +18,9 @@
 </head>
 <body class="">
     <ul class="list-group">
-        <li class="list-group-item"> Key: {{ $resource['key'] }} </li>
-        <li class="list-group-item"> Source: {{ $resource['source'] }} </li>
-        <li class="list-group-item"> Content: {{ $resource['content'] }} </li>
+        <li class="list-group-item"> <b>Key:</b> {{ $resource['key'] }} </li>
+        <li class="list-group-item"> <b>Source:</b> {{ $resource['source'] }} </li>
+        <li class="list-group-item"> <b>Content:</b> {{ $resource['content'] }} </li>
     </ul>
     <?php if ( $comments->isNotEmpty() ) { ?>
     <?php foreach ( $comments as $comment ) { ?>
@@ -36,7 +36,7 @@
     <?php } else { ?>
 
     <?php } ?>
-
+<br>
 <form role="form" method="post">
     {{ csrf_field() }}
   <div class="form-group">

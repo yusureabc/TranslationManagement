@@ -9,6 +9,6 @@ class TranslatePresenter
      */
     public function showFlag( $flag )
     {
-        return $flag == 1 ? 'fa fa-flag' : 'fa fa-flag-o';
+        return $flag == 1 ? 'fa fa-flag red' : 'fa fa-flag-o';
     }
 }
