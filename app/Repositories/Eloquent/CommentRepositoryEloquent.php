@@ -33,6 +33,14 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
     }
 
     /**
+     * 获取单个字段值
+     */
+    public function getField( $condition, $field = 'id' )
+    {
+        return $this->model->where( $condition )->value( $field );
+    }
+
+    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
