@@ -70,6 +70,11 @@ class TranslatorRepositoryEloquent extends BaseRepository implements TranslatorR
         return compact( 'count', 'translators' );
     }
 
+    public function getList( $condition )
+    {
+        return $this->model->where( $condition )->get();
+    }
+
     /**
      * 获取邀请的翻译者
      */

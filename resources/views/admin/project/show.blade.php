@@ -105,5 +105,25 @@
       content: url
     });
   });
+
+$(document).on( 'click', '.sendmail_item', function() {
+    var _item = $(this);
+    var language_id = _item.attr( 'data-id' );
+    var url = '/admin/language/' + language_id + '/send';
+    var index = layer.load(1, {
+      shade: [0.1,'#fff'] //0.1透明度的白色背景
+    });
+    $.get( url, function( msg ) {
+        layer.closeAll( 'loading' );
+        if ( msg.status == 1 )
+        {
+            layer.msg( '发送成功' );            
+        }
+        else
+        {
+            layer.msg( '发送失败' );   
+        }
+    } );
+})
 </script>
 @endsection

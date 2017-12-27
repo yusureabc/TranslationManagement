@@ -91,6 +91,7 @@ return [
 		'download' => 'language.download',
 		'invite' => 'language.invite',
 		'status' => 'language.status',
+		'send' => 'language.send',
 	],
 
 ];

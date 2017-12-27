@@ -81,6 +81,21 @@ class LanguageController extends Controller
     }
 
     /**
+     * 发送通知
+     * @author Yusure  http://yusure.cn
+     * @date   2017-12-27
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function sendEmail( $id )
+    {
+        /* 根据 language_id 查找 user_id 关联 email */
+        $this->languageService->sendEmail( $id );
+        return ['status' => 1, 'msg' => 'success'];
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  LanguageUpdateRequest $request

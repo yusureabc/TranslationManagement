@@ -15,6 +15,7 @@ return [
 		'cancel' 	=> '<i class="fa fa-reply"></i> Cancel',
 		'submit' 	=> '<i class="fa fa-paper-plane-o"></i> Submit',
 		'start'		=> 'start',
+		'send'      => 'Send mail'
 	],
 	'lock' => '<font color=red>Lock</font>',
 	'open' => '<font color=green>Open</font>',

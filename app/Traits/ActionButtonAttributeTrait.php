@@ -118,6 +118,17 @@ trait ActionButtonAttributeTrait
     }
 
     /**
+     * 发送通知
+     */
+    public function getSendActionButton()
+    {
+        if (auth()->user()->can(config('admin.permissions.'.$this->action.'.send'))) {
+            return '<a href="javascript:;" target="_blank" data-id="'.$this->id.'" class="btn btn-xs btn-outline btn-info tooltips sendmail_item" data-container="body" data-original-title="' . trans('admin/action.actionButton.send') . '"  data-placement="top"><i class="fa fa-envelope-o"></i></a> ';
+        }
+        return '';
+    }
+
+    /**
      * 开始翻译
      */
     public function getStartActionButton()
@@ -145,6 +156,7 @@ trait ActionButtonAttributeTrait
                 $this->getInviteActionButton().
                 $this->getStatusActionButton( $status ).
                 $this->getStartActionButton().
-                $this->getDestroyActionButton();
+                $this->getDestroyActionButton().
+                $this->getSendActionButton();
     }
 }

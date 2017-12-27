@@ -25,4 +25,9 @@ class Translator extends Model implements Transformable
     {
         return $this->belongsTo( 'App\Models\Language' );
     }
+
+    public function user()
+    {
+        return $this->belongsTo( 'App\User', 'user_id', 'id' );
+    }
 }

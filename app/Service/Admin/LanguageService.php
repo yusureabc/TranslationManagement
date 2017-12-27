@@ -1,6 +1,8 @@
 <?php
 namespace App\Service\Admin;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Translator;
 use App\Repositories\Eloquent\ProjectRepositoryEloquent;
 use App\Repositories\Eloquent\LanguageRepositoryEloquent;
 use App\Repositories\Eloquent\UserRepositoryEloquent;
@@ -152,6 +154,23 @@ class LanguageService extends BaseService
         }
 
         return $this->translatorRepository->insert( $selected_translator );
+    }
+
+    public function sendEmail( $id )
+    {
+        $emails = [];
+        $language_code = $this->languageRepository->findLanguageCode( $id );
+        $language_name = config( 'languages.' . $language_code );
+        $translators = $this->translatorRepository->getList( ['language_id' => $id] );
+        foreach ( $translators as $item )
+        {
+            $emails[] = $item->user()->select( 'name', 'email' )->first();
+        }
+
+        foreach ( $emails as $user )
+        {
+            Mail::to( $user )->send( new Translator( $user, $language_name ) );
+        }
     }
 
     /**
