@@ -201,6 +201,7 @@ class TranslateService extends BaseService
      */
     public function finshTranslate( $id )
     {
+        $this->languageRepository->changeStatus( $id, ['status' => 0] );
         return $this->languageRepository->finshTranslate( $id );
     }
 

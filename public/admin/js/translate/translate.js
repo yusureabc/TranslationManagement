@@ -97,8 +97,6 @@ function removeHTMLTag( str )
 function comments( this_item )
 {
     var item = this_item.parents( '.source-item' );
-    // var key_id_selector = item.find( "input[name='key_id']" );
-    // var translated_selector = item.find( "div[name='translated']" );
     var content_id_selector = item.find( "input[name='content_id']" );
     var content_id = content_id_selector.val();
     var url = '/admin/translate/' + content_id + '/comment';
@@ -142,4 +140,41 @@ function flag( this_item )
             flag_selector.attr( 'class', class_val );
         }
     }, 'json' );
+}
+
+/**
+ * 检查译文
+ */
+function check_translated()
+{
+    /* 检查空行 */
+    var has_empty = false;
+    $("div[name='translated']").each( function(){
+        var translated = $(this).html().replace(/&nbsp;/ig,'');
+        if ( translated.trim() == '' )
+        {
+            has_empty = true;
+            return false;
+        }
+    });
+    if ( has_empty )
+    {
+        layer.msg( "The translation is incomplete and can't be saved" );
+        return false;
+    }
+
+    var has_flag = false;
+    $("span[name='flag']").each( function(){
+        var flag_class = $(this).attr( 'class' );
+        if ( flag_class == 'fa fa-flag red' )
+        {
+            has_flag = true;
+            return false;
+        }
+    });
+    if ( has_flag )
+    {
+        layer.msg( "Exist tags that can't be saved" );
+        return false;
+    }
 }

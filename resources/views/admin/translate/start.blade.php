@@ -80,7 +80,8 @@
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
                     <a class="btn btn-white" href="{{url( 'admin/translate' )}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
-                    <button type="submit" class="btn btn-primary">{!!trans('admin/action.actionButton.submit')!!}</button>
+                    <a class="btn btn-warning" href="">{!!trans('admin/action.actionButton.save')!!}</a>
+                    <button type="submit" onclick="return check_translated();" class="btn btn-primary">{!!trans('admin/action.actionButton.done')!!}</button>
               </div>
             </div>
           </form>
@@ -93,5 +94,5 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/translate/translate.js?ver=20171222')}}"></script>
+<script src="{{asset('admin/js/translate/translate.js?ver=20171229')}}"></script>
 @endsection
