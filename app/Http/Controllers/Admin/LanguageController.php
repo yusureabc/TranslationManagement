@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Admin\LanguageService;
 use App\Service\Admin\UserService;
+use App\Service\Admin\TranslateService;
 
 
 use App\Http\Requests\LanguageCreateRequest; 
@@ -25,9 +26,10 @@ class LanguageController extends Controller
      */
     protected $validator;
 
-    public function __construct( LanguageService $languageService )
+    public function __construct( LanguageService $languageService, TranslateService $translateService )
     {
         $this->languageService = $languageService;
+        $this->translateService = $translateService;
     }
 
     /**
@@ -41,6 +43,17 @@ class LanguageController extends Controller
     {
         $responseData = $this->languageService->ajaxIndex();
         return response()->json( $responseData );
+    }
+
+    /**
+     * 查看翻译
+     */
+    public function show( $id )
+    {
+        $source = $this->translateService->getTranslateSource( $id );
+        $translated = $this->translateService->getTranslatedContents( $id );
+
+        return view( 'admin.language.show', compact( 'id', 'source', 'translated' ) );
     }
 
     /**

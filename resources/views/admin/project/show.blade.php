@@ -117,11 +117,11 @@ $(document).on( 'click', '.sendmail_item', function() {
         layer.closeAll( 'loading' );
         if ( msg.status == 1 )
         {
-            layer.msg( '发送成功' );            
+            layer.msg( '发送成功' );
         }
         else
         {
-            layer.msg( '发送失败' );   
+            layer.msg( '发送失败' );
         }
     } );
 })

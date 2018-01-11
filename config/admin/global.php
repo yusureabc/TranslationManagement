@@ -46,4 +46,8 @@ return [
     'project' => [
         'show' => true,
     ],
+    // 查看语言
+    'language' => [
+        'show' => true,
+    ],
 ];

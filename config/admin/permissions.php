@@ -92,6 +92,7 @@ return [
 		'invite' => 'language.invite',
 		'status' => 'language.status',
 		'send' => 'language.send',
+		'show' => 'language.show',
 	],
 
 ];
