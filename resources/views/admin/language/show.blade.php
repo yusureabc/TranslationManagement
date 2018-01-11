@@ -79,7 +79,7 @@
             <div class="hr-line-dashed"></div>
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
-                    <a class="btn btn-white" href="{{url( 'admin/translate' )}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
+                    <a class="btn btn-white" onclick="history.back();">{!!trans('admin/action.actionButton.cancel')!!}</a>
                     <!-- <a class="btn btn-warning" href="">{!!trans('admin/action.actionButton.save')!!}</a> -->
                     <!-- <button type="submit" onclick="return check_translated();" class="btn btn-primary">{!!trans('admin/action.actionButton.done')!!}</button> -->
               </div>
