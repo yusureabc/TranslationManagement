@@ -126,6 +126,11 @@ class TranslateService extends BaseService
             $contrast_language_id = $this->languageRepository->getLanguageID( $project_id, $contrast_code );
             /* 查找 contents 表 */
             $contrast_contents = $this->contentRepository->getSourceContents( $contrast_language_id );
+            /* 适配源语言为英语，例如 Alexa 没有中文 strings */
+            if ( $contrast_contents->isEmpty() )
+            {
+                $contrast_contents = $this->keyRepository->getSourceContents( $project_id );
+            }
         }
 
         return $contrast_contents;
