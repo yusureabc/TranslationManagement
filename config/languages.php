@@ -25,4 +25,6 @@ return [
     'nl'    => 'Dutch',
     /* 波兰语 */
     'pl'    => 'Polish',
+    /* 泰语 */
+    'th'    => 'Thai',
 ];
