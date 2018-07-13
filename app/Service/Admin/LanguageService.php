@@ -184,11 +184,11 @@ class LanguageService extends BaseService
         $language_code = $this->languageRepository->getLanguageCode( $id );
         if ( $language_code == config( 'sourcelang.base_lang' ) )
         {
-            $result = $this->keyRepository->getBaseList( $project_id, $id );
+            $result = $this->keyRepository->getBaseList( $project_id, $id, $method );
         }
         else
         {
-            $result = $this->keyRepository->getTranslatedList( $project_id, $id );
+            $result = $this->keyRepository->getTranslatedList( $project_id, $id, $method );
         }
         /* 记录下载时间 */
         $this->languageRepository->downloadTranslate( $id );

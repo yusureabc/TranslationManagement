@@ -50,6 +50,7 @@ class KeyService extends BaseService
                     'project_id' => $id,
                     'key'        => $data['key'],
                     'source'     => $data['source'],
+                    'tag'        => $data['tag'],
                 ];
                 $res = $this->keyRepository->create( $data );
             }
@@ -76,6 +77,14 @@ class KeyService extends BaseService
     public function updateSort( $key_id, $sort )
     {
         return $this->keyRepository->batchUpdate( 'id', 'sort', $key_id, $sort );
+    }
+
+    /**
+     * 更新 tag
+     */
+    public function updateTag( $key_id, $tag )
+    {
+        return $this->keyRepository->updateTag( $key_id, $tag );
     }
 
     /**

@@ -1,19 +1,4 @@
-var item_html = "<div class=\"form-group source-item\">\n" +
-    "                <input type=\"hidden\" name=\"sort\" value=\"0\" onchange=\"sort_change( this.value );\">\n" +
-    "                <label name=\"key_id\" class=\"col-sm-2 control-label\"></label>\n" +
-    "                <div class=\"col-sm-3\">\n" +
-    "                  <input type=\"text\" class=\"form-control\" name=\"key\" value=\"\" onchange=\"save_key( $(this) );\" placeholder=\"key\">\n" +
-    "                </div>\n" +
-    "                <div class=\"col-sm-3\">\n" +
-    "                  <input type=\"text\" class=\"form-control\" name=\"source\" value=\"\" onchange=\"save_key( $(this) );\" placeholder=\"源语言\">\n" +
-    "                </div>\n" +
-    "                <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"下方插入\" onclick=\"below_insert( $(this) );\">\n" +
-    "                  <span class=\"fa fa-plus\" aria-hidden=\"true\"></span>\n" +
-    "                </button>\n" +
-    "                <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"删除\" onclick=\"remove_key( $(this) );\">\n" +
-    "                  <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n" +
-    "                </button>\n" +
-    "            </div>";
+
 
 $(function () {
     $('.i-checks').iCheck({
@@ -92,6 +77,42 @@ function sort_change( key_id, index )
 }
 
 /**
+ * 修改 tag
+ */
+function tag_change( key_id, tag, tag_name )
+{
+    /* 替换页面 tag 文本 */
+    $( '#dropdown_show_' + key_id ).html( tag_name );
+
+    var _token = $( "input[name='_token']" ).val();
+    var data = {
+        key_id: key_id,
+        tag: tag,
+        _token: _token
+    }
+
+    var result = [];
+    $.ajaxSettings.async = false;
+    $.post( "/admin/project/tag_change", data, function( res ) {
+        result = res;
+    }, 'json' );
+
+    return result;
+}
+
+/**
+ * 新增 key 时 tag 选择
+ */
+function tag_change_empty( tag, this_item )
+{
+    var tag_name = this_item.html();
+    this_item.parents( '.source-item' ).find( "span[name='dropdown_show']" ).html( tag_name );
+    this_item.parents( '.source-item' ).find( "input[name='tag']" ).val( tag );
+
+    save_key( this_item );
+}
+
+/**
  * 保存翻译 key
  */
 function save_key( save )
@@ -101,18 +122,21 @@ function save_key( save )
     var key_selector = item.find( "input[name='key']" );
     var source_selector = item.find( "input[name='source']" );
     var key_id_selector = item.find( "label[name='key_id']" );
+    var tag_selector = item.find( "input[name='tag']" );
+    
     var _token = $( "input[name='_token']" ).val();
 
     var key = key_selector.val();
     var source = source_selector.val();
     var key_id = key_id_selector.html();
+    var tag = tag_selector.val();
     /* 验证数据 */
     if ( ! validator( key, key_selector, source, source_selector ) )
     {
         return;
     }
 
-    var data = ajax_save( project_id, key_id, key, source, _token );
+    var data = ajax_save( project_id, key_id, key, source, tag, _token );
 
     if ( data.status == 1 )
     {
@@ -142,13 +166,14 @@ function save_key( save )
 /**
  * 保存 key + 源语言
  */
-function ajax_save( project_id, key_id, key, source, _token )
+function ajax_save( project_id, key_id, key, source, tag, _token )
 {
     var data = {
         project_id: project_id,
         key_id: key_id,
         key: key,
         source: source,
+        tag, tag,
         _token: _token,
     }
 

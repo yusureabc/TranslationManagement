@@ -38,7 +38,17 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     public function updateKey( $project_id, $data )
     {
         $condition = ['id' => $data['key_id'], 'project_id' => $project_id ];
-        $update = ['key' => $data['key'], 'source' => $data['source']];
+        $update = ['key' => $data['key'], 'source' => $data['source'], 'tag' => $data['tag']];
+        return $this->model->where( $condition )->update( $update );
+    }
+
+    /**
+     * 更新 tag
+     */
+    public function updateTag( $key_id, $tag )
+    {
+        $condition = ['id' => $key_id];
+        $update = ['tag' => $tag];
         return $this->model->where( $condition )->update( $update );
     }
 
@@ -95,10 +105,25 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     /**
      * 获取 key 和 译文
      */
-    public function getTranslatedList( $project_id, $language_id )
+    public function getTranslatedList( $project_id, $language_id, $method )
     {
+        switch ( $method )
+        {
+            case 'xml':
+                $tag = [1, 2];
+            break;
+
+            case 'iOS_strings':
+            case 'iOS_js':
+                $tag = [1, 3];
+            break;
+
+            default:
+                $tag = [1];
+            break;
+        }
         $condition = ['keys.project_id' => $project_id, 'contents.language_id' => $language_id];
-        return $this->model->where( $condition )
+        return $this->model->where( $condition )->whereIn( 'keys.tag', $tag )
                 ->join( 'contents', 'keys.id', '=', 'contents.key_id' )
                 ->orderBy( 'keys.sort', 'asc' )->orderBy( 'keys.id', 'asc' )->get();
     }
@@ -110,9 +135,25 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
      * @param  [param]
      * @return [type]     [description]
      */
-    public function getBaseList( $project_id, $language_id )
+    public function getBaseList( $project_id, $language_id, $method )
     {
-        return $this->model->where( 'project_id', $project_id )
+        $condition['project_id'] = $project_id;
+        switch ( $method )
+        {
+            case 'xml':
+                $tag = [1, 2];
+            break;
+
+            case 'iOS_strings':
+            case 'iOS_js':
+                $tag = [1, 3];
+            break;
+
+            default:
+                $tag = [1];
+            break;
+        }
+        return $this->model->where( 'project_id', $project_id )->whereIn( 'tag', $tag )
         ->orderBy( 'sort', 'asc' )->orderBy( 'id', 'asc' )->select( 'key', 'source as content' )->get();
     }
 

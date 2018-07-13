@@ -127,7 +127,9 @@ class ProjectController extends Controller
     public function input( $id )
     {
         $keys = $this->keyService->getKeyList( $id );
-        return view( 'admin.project.input', compact( 'keys', 'id' ) );
+        $tags = config( 'tag' );
+
+        return view( 'admin.project.input', compact( 'keys', 'id', 'tags' ) );
     }
 
     /**
@@ -170,6 +172,17 @@ class ProjectController extends Controller
         $key_id = $request->input( 'key_id' );
         $sort = $request->input( 'sort' );
         return $this->keyService->updateSort( $key_id, $sort );
+    }
+
+    /**
+     * 修改 tag
+     */
+    public function tagChange( Request $request )
+    {
+        $key_id = $request->input( 'key_id' );
+        $tag = $request->input( 'tag' );
+
+        return $this->keyService->updateTag( $key_id, $tag );
     }
 
     /**

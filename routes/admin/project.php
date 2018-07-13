@@ -8,5 +8,6 @@ $router->group( ['prefix' => 'project'], function ($router)
     $router->delete( '{id}/input', 'ProjectController@deleteKey' );
     $router->any( '{id}/import', 'ProjectController@import' )->name( 'project.import' );
     $router->any( 'key/sort', 'ProjectController@sortKey' );
+    $router->post( 'tag_change', 'ProjectController@tagChange' );
 });
 $router->resource( 'project', 'ProjectController' );
