@@ -58,8 +58,9 @@ class TranslateController extends Controller
     {
         $source = $this->translateService->getTranslateSource( $id );
         $translated = $this->translateService->getTranslatedContents( $id );
+        $has_comment = $this->translateService->hasComment( $translated );
 
-        return view( 'admin.translate.start', compact( 'id', 'source', 'translated' ) );
+        return view( 'admin.translate.start', compact( 'id', 'source', 'translated', 'has_comment' ) );
     }
 
     /**

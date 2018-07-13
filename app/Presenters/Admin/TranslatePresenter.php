@@ -23,11 +23,9 @@ class TranslatePresenter
     /**
      * 显示是否有评论
      */
-    public function showComments( $content_id = 0 )
+    public function showComments( $content_id = 0, $has_comment )
     {
-        $condition = ['content_id' => $content_id];
-        $id = $this->commentRepository->getField( $condition, 'id' );
-        if ( $id > 0 )
+        if ( in_array( $content_id, $has_comment ) )
         {
             return 'fa fa-commenting red';
         }

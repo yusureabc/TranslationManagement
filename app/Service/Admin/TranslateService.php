@@ -11,6 +11,7 @@ use App\Repositories\Eloquent\CommentRepositoryEloquent;
 use App\Service\Admin\BaseService;
 use Exception;
 use DB;
+use App\Models\Comment;
 
 /**
 * Translate Service
@@ -227,6 +228,30 @@ class TranslateService extends BaseService
     {
         $condition = ['content_id' => $id];
         return $this->commentRepository->getList( $condition );
+    }
+
+    /**
+     * 是否有评论
+     */
+    public function hasComment( $translated )
+    {
+        if ( empty( $translated ) )  return [];
+        foreach ( $translated as $value )
+        {
+            $ids[] = $value['id'];
+        }
+        $result = Comment::whereIn( 'content_id', $ids )->get();
+
+        $has_result = [];
+        if ( $result->isNotEmpty() )
+        {
+            foreach ( $result as $k => $v )
+            {
+                $has_result[] = $v->content_id;
+            }
+        }
+
+        return $has_result;
     }
 
     /**
