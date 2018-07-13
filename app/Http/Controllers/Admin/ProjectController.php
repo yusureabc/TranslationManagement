@@ -208,4 +208,65 @@ class ProjectController extends Controller
         }
     }
 
+    /**
+     * 导入 key + source
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-20
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function importiOS( $id )
+    {
+        $file_path = "./en_ios.strings";
+        $file_arr = file( $file_path );
+
+        $source_data = $keys = [];
+        foreach ( $file_arr as $k => $item )
+        {
+            $item_arr = explode( '=', $item );
+
+            $key = trim( $item_arr[0] );
+            $key = trim( $key, '"' );
+            if ( in_array( $key, $keys ) )
+            {
+                continue;
+            }
+            else
+            {
+                $keys[] = $key;
+            }
+
+            $value = trim( $item_arr[1] );
+            $value = trim( $value, ';' );
+            $value = trim( $value, '"' );
+
+            $source_data[] = [
+                'project_id' => 20,
+                'key' => $key,
+                'source' => $value
+            ];
+
+            /* 查看 key_id */
+            $condition = [
+                'project_id' => 20,
+                'key' => $key,
+            ];
+
+            $key_id = DB::table( 'keys' )->where( $condition )->value( 'id' );
+            $data = [
+                'project_id' => 20,
+                'language_id' => 124,
+                'key_id' => $key_id,
+                'content' => $value
+            ];
+            // var_dump( $data );die;
+            Content::create( $data );
+        }
+
+        var_dump( $source_data );die;
+
+        // DB::table( 'keys_copy' )->insert( $source_data );
+    }
+
 }
