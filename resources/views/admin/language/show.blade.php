@@ -56,14 +56,14 @@
                 <div class="form-control old-content">{{old( 'content', $item->content )}}</div> 
               </div>
               <div class="col-sm-4">
-                <div class="form-control old-content" name="translated" contenteditable="true">{{ $translated[$item->key_id]['content'] or '' }}</div>
+                <div class="form-control old-content" name="translated" contenteditable="true" onblur="save_translated( $(this) );">{{ $translated[$item->key_id]['content'] or '' }}</div>
               </div>
               <input type="hidden" name="content_id" value="{{ $translated[$item->key_id]['id'] or '' }}">
               <button type="button" class="btn btn-default" aria-label="Left Align" title="Comments" onclick="comments( $(this) );">
                 <span class="{!! $TranslatePresenter->showComments( isset( $translated[$item->key_id]['id'] ) ? $translated[$item->key_id]['id'] : 0 ) !!}" aria-hidden="true"></span>
               </button>
               <button type="button" class="btn btn-default" aria-label="Left Align" title="Flag" onclick="flag( $(this) );">
-                <span name="flag" class="{!! $TranslatePresenter->showFlag( isset($translated[$item->key_id]['flag']) ? $translated[$item->key_id]['flag'] : 0 ) !!}" aria-hidden="true"></span>
+                <span name="flag" class="{!! $TranslatePresenter->showFlag( $translated[$item->key_id]['flag'] ?? 0 ) !!}" aria-hidden="true"></span>
               </button>
             </div>
             <?php } ?>
@@ -94,5 +94,5 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/translate/translate.js?ver=20171229')}}"></script>
+<script src="{{asset('admin/js/translate/translate.js?ver=20180713')}}"></script>
 @endsection

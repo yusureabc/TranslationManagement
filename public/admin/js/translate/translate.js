@@ -57,7 +57,8 @@ function ajax_save( language_id, key_id, translated, _token )
 
     var result = [];
     $.ajaxSettings.async = false;
-    $.post( "", data, function( res ) {
+    var url = '/admin/translate/' + language_id + '/start';
+    $.post( url, data, function( res ) {
         result = res;
     }, 'json' );
 

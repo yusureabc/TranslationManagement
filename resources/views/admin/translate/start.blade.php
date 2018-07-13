@@ -63,7 +63,7 @@
                 <span class="{!! $TranslatePresenter->showComments( isset( $translated[$item->key_id]['id'] ) ? $translated[$item->key_id]['id'] : 0 ) !!}" aria-hidden="true"></span>
               </button>
               <button type="button" class="btn btn-default" aria-label="Left Align" title="Flag" onclick="flag( $(this) );">
-                <span name="flag" class="{!! $TranslatePresenter->showFlag( isset($translated[$item->key_id]['flag']) ? $translated[$item->key_id]['flag'] : 0 ) !!}" aria-hidden="true"></span>
+                <span name="flag" class="{!! $TranslatePresenter->showFlag( $translated[$item->key_id]['flag'] ?? 0 ) !!}" aria-hidden="true"></span>
               </button>
             </div>
             <?php } ?>
