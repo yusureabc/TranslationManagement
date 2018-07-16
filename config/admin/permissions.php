@@ -93,6 +93,7 @@ return [
 		'status' => 'language.status',
 		'send' => 'language.send',
 		'show' => 'language.show',
+		'edit' => 'language.edit',
 	],
 
 ];

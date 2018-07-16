@@ -36,9 +36,6 @@ class ProjectService extends BaseService
 
     /**
      * datatables获取数据
-     * @author Sheldon
-     * @date   2017-04-18T15:54:46+0800
-     * @return [type]                   [description]
      */
     public function ajaxIndex()
     {
@@ -218,7 +215,7 @@ class ProjectService extends BaseService
     public function findProjectById( $id )
     {
         $project = $this->project->find( $id );
-        /* TODO 查找 language 数据 */
+        /* 查找 language 数据 */
         if ($project){
             return $project;
         }

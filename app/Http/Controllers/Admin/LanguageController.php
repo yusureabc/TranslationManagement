@@ -58,6 +58,23 @@ class LanguageController extends Controller
     }
 
     /**
+     * 修改译文
+     * @author Sure Yu  http://yusure.cn
+     * @date   2018-07-16
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function edit( $id )
+    {
+        $source = $this->translateService->getTranslateSource( $id );
+        $translated = $this->translateService->getTranslatedContents( $id );
+        $has_comment = $this->translateService->hasComment( $translated );
+
+        return view( 'admin.translate.start', compact( 'id', 'source', 'translated', 'has_comment' ) );
+    }
+
+    /**
      * 切换状态
      */
     public function status( $id, $status )

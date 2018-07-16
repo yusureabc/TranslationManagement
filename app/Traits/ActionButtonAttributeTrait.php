@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Traits;
+
 trait ActionButtonAttributeTrait
 {
+
     /**
      * 查看按钮
      * @author Sheldon
@@ -23,11 +26,9 @@ trait ActionButtonAttributeTrait
         }
         return '';
     }
+
     /**
      * 修改按钮
-     * @author Sheldon
-     * @date   2017-04-31T18:13:50+0800
-     * @return [type]
      */
     public function getEditActionButton()
     {
@@ -39,10 +40,6 @@ trait ActionButtonAttributeTrait
 
     /**
      * 彻底删除按钮
-     * @author Sheldon
-     * @date   2017-04-31T18:14:39+0800
-     * @param  boolean
-     * @return [type]
      */
     public function getDestroyActionButton()
     {
@@ -51,11 +48,9 @@ trait ActionButtonAttributeTrait
         }
         return '';
     }
+
     /**
      * 重置用户密码
-     * @author Sheldon
-     * @date   2017-04-31T18:14:48+0800
-     * @return [type]
      */
     public function getResetActionButton()
     {
@@ -67,10 +62,6 @@ trait ActionButtonAttributeTrait
 
     /**
      * 录入内容按钮
-     * @author Yusure  http://yusure.cn
-     * @date   2017-11-03
-     * @param  [param]
-     * @return [type]     [description]
      */
     public function getInputActionButton()
     {
@@ -141,10 +132,6 @@ trait ActionButtonAttributeTrait
     
     /**
      * 获取按钮
-     * @author Sheldon
-     * @date   2017-04-31T18:14:57+0800
-     * @param  boolean
-     * @return [type]
      */
     public function getActionButtonAttribute($showType = true, $status = 1)
     {
