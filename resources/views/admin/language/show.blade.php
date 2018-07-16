@@ -56,7 +56,7 @@
                 <div class="form-control old-content">{{old( 'content', $item->content )}}</div> 
               </div>
               <div class="col-sm-4">
-                <div class="form-control old-content" name="translated" contenteditable="true" onblur="save_translated( $(this) );">{{ $translated[$item->key_id]['content'] or '' }}</div>
+                <div class="form-control old-content" name="translated" contenteditable="true">{{ $translated[$item->key_id]['content'] or '' }}</div>
               </div>
               <input type="hidden" name="content_id" value="{{ $translated[$item->key_id]['id'] or '' }}">
               <button type="button" class="btn btn-default" aria-label="Left Align" title="Comments" onclick="comments( $(this) );">
