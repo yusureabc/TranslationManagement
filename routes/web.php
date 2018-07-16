@@ -31,21 +31,10 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
 	require(__DIR__ . '/admin/user.php');
 	// 菜单
 	require(__DIR__ . '/admin/menu.php');
-    // 平台
-    require(__DIR__ . '/admin/platform.php');
-
-    // 产品
-    require(__DIR__ . '/admin/product.php');
-
-    // 销售数据
-    require(__DIR__ . '/admin/salesdata.php');
-
     // 翻译项目
     require(__DIR__ . '/admin/project.php');
-
     // 多语言
     require(__DIR__ . '/admin/language.php');
-
     // 开始翻译
     require(__DIR__ . '/admin/translate.php');
 });
@@ -60,5 +49,4 @@ Route::group(['prefix' => 'admin/log','middleware' => ['auth','check.permission:
 	$router->get('/{date}','\Arcanedev\LogViewer\Http\Controllers\LogViewerController@show')->name('log.show');
 	$router->get('/{date}/download','\Arcanedev\LogViewer\Http\Controllers\LogViewerController@download')->name('log.download');
 	$router->get('/{date}/{level}','\Arcanedev\LogViewer\Http\Controllers\LogViewerController@showByLevel')->name('log.filter');
-
 });

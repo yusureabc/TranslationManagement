@@ -39,7 +39,6 @@ return [
 		'login' => 'system.login',
 		'list' => 'system.list',
 		'manage' => 'system.manage',
-		'sales' => 'system.sales',
 	],
 
     'platform' => [

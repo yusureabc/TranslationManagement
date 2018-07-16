@@ -41,13 +41,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        list($permissions,$roles,$platforms, $products) = $this->user->createView();
-        return view('admin.user.create')->with(compact(
-            'permissions',
-            'roles',
-            'platforms',
-            'products'
-        ));
+        list( $permissions, $roles ) = $this->user->createView();
+        return view('admin.user.create')->with( compact( 'permissions', 'roles' ) );
     }
 
     /**
@@ -65,70 +60,43 @@ class UserController extends Controller
 
     /**
      * 查看用户信息
-     * @author Sheldon
-     * @date   2016-11-03T16:42:06+0800
-     * @param  [type]                   $id [description]
-     * @return [type]                       [description]
      */
-    public function show($id)
+    public function show( $id )
     {
-        $user = $this->user->findUserById($id);
-        return view('admin.user.show')->with(compact('user'));
+        $user = $this->user->findUserById( $id );
+        return view( 'admin.user.show' )->with( compact( 'user' ) );
     }
 
     /**
      * 修改用户视图
-     * @author Sheldon
-     * @date   2016-11-03T16:41:48+0800
-     * @param  [type]                   $id [description]
-     * @return [type]                       [description]
      */
-    public function edit($id)
+    public function edit( $id )
     {
-        list($user,$permissions,$roles,$platforms, $products) = $this->user->editView($id);
+        list( $user, $permissions, $roles ) = $this->user->editView($id);
 
-        return view('admin.user.edit')->with(compact(
-            'user',
-            'permissions',
-            'roles',
-            'platforms',
-            'products'
-        ));
+        return view('admin.user.edit')->with( compact( 'user', 'permissions', 'roles' ) );
     }
 
     /**
      * 修改用户
-     * @author Sheldon
-     * @date   2016-11-03T16:10:02+0800
-     * @param  UserRequest              $request [description]
-     * @param  [type]                   $id      [description]
-     * @return [type]                            [description]
      */
-    public function update(UserRequest $request, $id)
+    public function update( UserRequest $request, $id )
     {
-        $this->user->updateUser($request->all(),$id);
-        return redirect('admin/user');
+        $this->user->updateUser( $request->all(), $id );
+        return redirect( 'admin/user' );
     }
 
     /**
      * 删除用户
-     * @author Sheldon
-     * @date   2016-11-03T17:20:49+0800
-     * @param  [type]                   $id [description]
-     * @return [type]                       [description]
      */
-    public function destroy($id)
+    public function destroy( $id )
     {
-        $this->user->destroyUser($id);
+        $this->user->destroyUser( $id );
         return redirect('admin/user');
     }
 
     /**
      * 重置用户密码
-     * @author Sheldon
-     * @date   2016-11-03T17:21:05+0800
-     * @param  [type]                   $id [description]
-     * @return [type]                       [description]
      */
     public function resetPassword($id)
     {

@@ -4,12 +4,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use GeniusTS\Roles\Traits\HasRoleAndPermission;
 use GeniusTS\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
-use App\Traits\HasPlatformAndProductTrait;
 use App\Traits\ActionButtonAttributeTrait;
 
 class User extends Authenticatable implements HasRoleAndPermissionContract
 {
-    use Notifiable,HasRoleAndPermission,HasPlatformAndProductTrait,ActionButtonAttributeTrait;
+    use Notifiable, HasRoleAndPermission, ActionButtonAttributeTrait;
 
     private $action = 'user';
     /**
