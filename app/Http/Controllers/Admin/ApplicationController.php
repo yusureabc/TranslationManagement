@@ -33,6 +33,12 @@ class ApplicationController extends Controller
         return redirect( 'admin/application' );
     }
 
+    public function destroy( $id )
+    {
+        $this->applicationService->destroy( $id );
+        return redirect()->back();
+    }
+
     public function ajaxIndex()
     {
         $responseData = $this->applicationService->ajaxIndex();

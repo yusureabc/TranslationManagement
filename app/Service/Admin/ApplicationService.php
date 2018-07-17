@@ -167,11 +167,11 @@ class ApplicationService extends BaseService
     /**
      * 删除
      */
-    public function destroyProject( $id )
+    public function destroy( $id )
     {
         try {
-            $isDestroy = $this->project->delete( $id );
-            flash_info($isDestroy,trans('admin/alert.project.destroy_success'),trans('admin/alert.project.destroy_error'));
+            $isDestroy = $this->applicationRepository->delete( $id );
+            flash_info($isDestroy,trans('admin/alert.common.destroy_success'),trans('admin/alert.common.destroy_error'));
             return $isDestroy;
         } catch (Exception $e) {
             // 错误信息发送邮件
