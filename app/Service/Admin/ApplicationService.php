@@ -2,37 +2,24 @@
 
 namespace App\Service\Admin;
 
-use App\Repositories\Eloquent\ProjectRepositoryEloquent;
-use App\Repositories\Eloquent\LanguageRepositoryEloquent;
-use App\Repositories\Eloquent\TranslatorRepositoryEloquent;
-use App\Repositories\Eloquent\InviteRepositoryEloquent;
-
+use App\Repositories\Eloquent\ApplicationRepositoryEloquent;
 use App\Service\Admin\BaseService;
 use Exception;
 use DB;
 
 /**
-* Project Service
-*/
-class ProjectService extends BaseService
+ * ApplicationService Service
+ */
+class ApplicationService extends BaseService
 {
 
-    protected $project;
-    protected $languageRepository;
-    protected $translatorRepository;
-    protected $inviteRepository;
+    protected $applicationRepository;
 
     function __construct(
-        ProjectRepositoryEloquent $project, 
-        LanguageRepositoryEloquent $languageRepository,
-        TranslatorRepositoryEloquent $translatorRepository,
-        InviteRepositoryEloquent $inviteRepository
+        ApplicationRepositoryEloquent $applicationRepository
     )
     {
-        $this->project =  $project;
-        $this->languageRepository = $languageRepository;
-        $this->translatorRepository = $translatorRepository;
-        $this->inviteRepository = $inviteRepository;
+        $this->applicationRepository = $applicationRepository;
     }
 
     /**
@@ -54,14 +41,14 @@ class ProjectService extends BaseService
         $order['name'] = request('columns.' .request('order.0.column',0) . '.name');
         $order['dir'] = request('order.0.dir','asc');
 
-        $result = $this->project->getProjectList($start,$length,$search,$order);
+        $result = $this->applicationRepository->getApplicationList($start,$length,$search,$order);
 
-        $projects = [];
+        $apps = [];
 
-        if ($result['projects']) {
-            foreach ($result['projects'] as $v) {
+        if ( $result['apps'] ) {
+            foreach ( $result['apps'] as $v ) {
                 $v->actionButton = $v->getActionButtonAttribute();
-                $projects[] = $v;
+                $apps[] = $v;
             }
         }
 
@@ -69,7 +56,7 @@ class ProjectService extends BaseService
             'draw' => $draw,
             'recordsTotal' => $result['count'],
             'recordsFiltered' => $result['count'],
-            'data' => $projects,
+            'data' => $apps,
         ];
     }
 
@@ -195,6 +182,7 @@ class ProjectService extends BaseService
                 'message' => $isUpdate ? trans('admin/alert.project.edit_success'):trans('admin/alert.project.edit_error'),
             ];
         } catch (Exception $e) {
+            var_dump( $e->getMessage() );die;
             DB::rollBack();
             // 错误信息发送邮件
             $this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);

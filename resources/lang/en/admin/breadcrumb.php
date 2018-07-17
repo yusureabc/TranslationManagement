@@ -49,4 +49,7 @@ return [
         'list'      => '<i class="fa fa-diamond"></i> Translation list',
         'start'     => '<i class="fa fa-play"></i> Start translating',
     ],
+    'application' => [
+        'list'      => '<i class="fa fa-diamond"></i> Apps',
+    ],
 ];

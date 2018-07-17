@@ -47,10 +47,6 @@ class UserController extends Controller
 
     /**
      * 添加用户
-     * @author Sheldon
-     * @date   2016-11-03T15:14:56+0800
-     * @param  UserRequest              $request [description]
-     * @return [type]                            [description]
      */
     public function store(UserRequest $request)
     {
