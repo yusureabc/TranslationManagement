@@ -33,6 +33,18 @@ class ApplicationController extends Controller
         return redirect( 'admin/application' );
     }
 
+    public function edit( $id )
+    {
+        $application = $this->applicationService->findApplicationById( $id );
+        return view( 'admin.application.edit', compact( 'application' ) );
+    }
+
+    public function update( Request $request, $id )
+    {
+        $application = $this->applicationService->updateApplication( $request->all(), $id );
+        return redirect( 'admin/application' );
+    }
+
     public function destroy( $id )
     {
         $this->applicationService->destroy( $id );

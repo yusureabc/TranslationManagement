@@ -3,7 +3,7 @@
 <link href="{{asset('vendors/iCheck/custom.css')}}" rel="stylesheet">
 @endsection
 @section('content')
-@inject( 'ProjectPresenter', 'App\Presenters\Admin\ProjectPresenter' )
+
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
     <h2>{!!trans('admin/application.title')!!}</h2>

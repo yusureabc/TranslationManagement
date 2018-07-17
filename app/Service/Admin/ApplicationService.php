@@ -98,7 +98,7 @@ class ApplicationService extends BaseService
     /**
      * 修改数据
      */
-    public function updateProject( $attributes, $id )
+    public function updateApplication( $attributes, $id )
     {
         // 防止用户恶意修改表单id，如果id不一致直接跳转500
         if ( $attributes['id'] != $id )
@@ -109,58 +109,17 @@ class ApplicationService extends BaseService
             ];
         }
         try {
-            DB::beginTransaction();
-            /* 关联子表操作：存储多语言 */
-            $this->_storeLanguage( $attributes['languages'], $id );
-            $attributes['languages'] = implode( ',', $attributes['languages'] );
-            $attributes['user_id']   = getUser()->id;
-            $attributes['username']  = getUser()->username;
-            $isUpdate = $this->project->update( $attributes, $id );
-            $this->translatorRepository->updateProjectName( $attributes['name'], $id );
-            DB::commit();
+            $result = $this->applicationRepository->update( $attributes, $id );
 
+            flash_info( $result, trans('admin/alert.common.edit_success'), trans('admin/alert.common.edit_error') );
             return [
-                'status' => $isUpdate,
-                'message' => $isUpdate ? trans('admin/alert.project.edit_success'):trans('admin/alert.project.edit_error'),
+                'status' => $result,
+                'message' => $result ? trans('admin/alert.common.edit_success') : trans('admin/alert.common.edit_error'),
             ];
         } catch (Exception $e) {
-            var_dump( $e->getMessage() );die;
-            DB::rollBack();
             // 错误信息发送邮件
             $this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
             return false;
-        }
-    }
-
-    /**
-     * 存储 多语言
-     * @author Yusure  http://yusure.cn
-     * @date   2017-11-08
-     * @param  [param]
-     * @return [type]     [description]
-     */
-    private function _storeLanguage( $languages, $id )
-    {
-        /* 查找旧的 language 用来作比对 */
-        $old_languages = $this->languageRepository->getOldLanguage( $id );
-
-        /* 删除其他未选中的语言 */
-        $this->languageRepository->deleteOtherLanguage( $languages, $id );
-
-        /* foreach 新的 languages 判断是否存在，不存在就写入 */
-        foreach ( $languages as $k => $language )
-        {
-            $result = array_search( $language, $old_languages );
-            if ( false === $result )
-            {
-                /* 写入 languages */
-                $data = [
-                    'project_id' => $id,
-                    'language'   => $language,
-                    'status'     => 1,
-                ];
-                $this->languageRepository->insert( $data );
-            }
         }
     }
 
