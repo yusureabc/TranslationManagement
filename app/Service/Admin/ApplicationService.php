@@ -61,28 +61,17 @@ class ApplicationService extends BaseService
     }
 
     /**
-     * 添加项目
+     * 添加应用
      */
-    public function storeProject($attributes)
+    public function storeApplication( $attributes )
     {
         try {
-            $languages = $attributes['languages'];
-            /* 将 languages 转为字符串 */
-            $attributes['languages'] = implode( ',', $attributes['languages'] );
-            $attributes['user_id']   = getUser()->id;
-            $attributes['username']  = getUser()->username;
-            $result = $this->project->create( $attributes );
-            if ( $result->id )
-            {
-                $languages_data = $this->_buildLanguagesData( $result->id, $languages );
-                $this->languageRepository->insert( $languages_data );
-                /* 自动邀请 */
-                $this->_auto_invite( $languages, $result->id, $attributes['name'] );
-            }
+            $result = $this->applicationRepository->create( $attributes );
+            flash_info( $result, trans('admin/alert.common.create_success'), trans('admin/alert.common.create_error') );
 
             return [
                 'status' => $result,
-                'message' => $result ? trans('admin/alert.project.create_success'):trans('admin/alert.project.create_error'),
+                'message' => $result ? trans('admin/alert.common.create_success'):trans('admin/alert.common.create_error'),
             ];
         } catch (Exception $e) {
             // 错误信息发送邮件
@@ -92,64 +81,17 @@ class ApplicationService extends BaseService
     }
 
     /**
-     * 生成待翻译语言多条数据
-     */
-    private function _buildLanguagesData( $id, $languages )
-    {
-        $languages_data = [];
-
-        foreach ( (array)$languages as $k => $v )
-        {
-            $languages_data[$k]['project_id'] = $id;
-            $languages_data[$k]['language']   = $v;
-            $languages_data[$k]['status']     = 1;
-        }
-
-        return $languages_data;
-    }
-
-    /**
-     * 自动邀请
-     */
-    private function _auto_invite( $languages, $project_id, $project_name )
-    {
-        foreach ( (array)$languages as $language_code )
-        {
-            /* 先用 language_code 去 invite 查找 user_id */
-            $condition = [ 'language_code' => $language_code ];
-            $user_id = $this->inviteRepository->getField( $condition, 'user_id' );
-            if ( ! $user_id ) continue;
-
-            /* 如果有 user_id 用 project_id + language_code 去 `languages` 表 反查 id */
-            $language_id = $this->languageRepository->getLanguageID( $project_id, $language_code );
-
-            /* 多个user_id  写入 translation 表 */
-            $user_id = explode( ',', $user_id );
-            foreach ( $user_id as $k => $id )
-            {
-                $translator_data[] = [
-                    'project_id'    => $project_id,
-                    'project_name'  => $project_name,
-                    'language_id'   => $language_id,
-                    'language_code' => $language_code,
-                    'user_id'       => $id
-                ];
-            }
-            $this->translatorRepository->insert( $translator_data );
-        }
-    }
-
-    /**
      * 根据ID查找数据
      */
-    public function findProjectById( $id )
+    public function findApplicationById( $id )
     {
-        $project = $this->project->find( $id );
+        $application = $this->applicationRepository->find( $id );
         /* 查找 language 数据 */
-        if ($project){
-            return $project;
+        if ( $application )
+        {
+            return $application;
         }
-        // TODO替换正查找不到数据错误页面
+
         abort(404);
     }
 

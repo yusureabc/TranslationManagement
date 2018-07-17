@@ -24,7 +24,13 @@ class ApplicationController extends Controller
 
     public function create()
     {
+        return view( 'admin.application.create' );
+    }
 
+    public function store( Request $request )
+    {
+        $this->applicationService->storeApplication( $request->all() );
+        return redirect( 'admin/application' );
     }
 
     public function ajaxIndex()

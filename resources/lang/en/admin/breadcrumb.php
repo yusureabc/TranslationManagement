@@ -51,5 +51,6 @@ return [
     ],
     'application' => [
         'list'      => '<i class="fa fa-diamond"></i> Apps',
+        'create'    => '<i class="fa fa-plus"></i> Add application',
     ],
 ];

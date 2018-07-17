@@ -50,4 +50,12 @@ return [
         'invite_success'    => '邀请成功',
         'invite_error'      => '邀请失败',
     ],
+    'common' => [
+        'create_success'    => '创建成功',
+        'create_error'      => '创建失败',
+        'edit_success'      => '修改成功',
+        'edit_error'        => '修改失败',
+        'destroy_success'   => '删除成功',
+        'destroy_error'     => '删除失败',
+    ],
 ];

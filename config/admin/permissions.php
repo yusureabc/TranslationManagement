@@ -95,4 +95,12 @@ return [
 		'edit' => 'language.edit',
 	],
 
+	'application' => [
+		'list' => 'application.list',
+		'create' => 'application.create',
+		'show' => 'application.show',
+		'edit' => 'application.edit',
+		'destroy' => 'application.destroy',
+	],
+
 ];
