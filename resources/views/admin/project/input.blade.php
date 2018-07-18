@@ -52,6 +52,7 @@
                 </div>
 
                 <div class="col-sm-1 dropdown">
+                    <input type="hidden" name="tag" value="{{ $item->tag }}">
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <span id="dropdown_show_{{ $item->id }}"> {{ $tags[$item['tag']] }} </span>
                     <span class="caret"></span>

@@ -156,7 +156,7 @@ class ProjectController extends Controller
             else
             {
                 $response = ['status' => 1];
-            }            
+            }
         }
         else
         {
