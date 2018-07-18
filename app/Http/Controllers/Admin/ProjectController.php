@@ -7,17 +7,19 @@ use App\Http\Controllers\Controller;
 use App\Service\Admin\ProjectService;
 use App\Service\Admin\LanguageService;
 use App\Service\Admin\KeyService;
+use App\Service\Admin\ApplicationService;
 use App\Http\Requests\ProjectCreateRequest;
 use App\Http\Requests\ProjectUpdateRequest;
 
-
+/**
+ * 项目 Controller
+ */
 class ProjectController extends Controller
 {
-
     protected $projectService;
     protected $languageService;
     protected $keyService;
-
+    protected $applicationService;
 
     /**
      * 构造方法
@@ -28,12 +30,14 @@ class ProjectController extends Controller
     public function __construct( 
         ProjectService $projectService, 
         LanguageService $languageService, 
-        KeyService $keyService 
+        KeyService $keyService,
+        ApplicationService $applicationService
     )
     {
         $this->projectService  = $projectService;
         $this->languageService = $languageService;
         $this->keyService = $keyService;
+        $this->applicationService = $applicationService;
     }
 
     /**
@@ -66,7 +70,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view( 'admin.project.create' );
+        $apps = $this->applicationService->getApps();
+
+        return view( 'admin.project.create', compact( 'apps' ) );
     }
 
     /**
@@ -87,6 +93,7 @@ class ProjectController extends Controller
     {
         $project = $this->projectService->findProjectById( $id );
         $languages = $this->languageService->showLanguageList( $id );
+
         return view('admin.project.show')->with( compact( 'project', 'languages' ) );
     }
 
@@ -101,7 +108,9 @@ class ProjectController extends Controller
     public function edit( $id )
     {
         $project = $this->projectService->findProjectById( $id );
-        return view( 'admin.project.edit', compact( 'project' ) );
+        $apps = $this->applicationService->getApps();
+
+        return view( 'admin.project.edit', compact( 'project', 'apps' ) );
     }
 
     /**

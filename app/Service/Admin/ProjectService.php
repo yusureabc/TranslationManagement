@@ -167,6 +167,14 @@ class ProjectService extends BaseService
     }
 
     /**
+     * 查找子项目
+     */
+    public function findSubProject( $id )
+    {
+        return $this->project->findWhere( ['app_id' => $id] );
+    }
+
+    /**
      * 修改数据
      */
     public function updateProject( $attributes, $id )

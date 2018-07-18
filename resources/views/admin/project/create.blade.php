@@ -70,6 +70,14 @@
             </div>
 
             <div class="hr-line-dashed"></div>
+            <div class="form-group{{ $errors->has('belongs_application') ? ' has-error' : '' }}">
+              <label class="col-sm-2 control-label">{{trans('admin/project.model.belongs_application')}}</label>
+              <div class="col-sm-10">
+                {!! $ProjectPresenter->showApps( $apps ) !!}
+              </div>
+            </div>
+
+            <div class="hr-line-dashed"></div>
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
                   <a class="btn btn-white" href="{{url()->previous()}}">{!!trans('admin/action.actionButton.cancel')!!}</a>

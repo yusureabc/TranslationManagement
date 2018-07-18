@@ -19,6 +19,7 @@ return [
         'sort'        => '排序',
         'translation_language' => '待翻译语言',
         'invite'      => '邀请翻译者',
+        'belongs_application' => '所属应用',
         'created_at'  => '创建时间',
         'updated_at'  => '修改时间',
     ],

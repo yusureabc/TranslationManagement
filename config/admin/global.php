@@ -50,4 +50,8 @@ return [
     'language' => [
         'show' => true,
     ],
+    /* 查看应用 */
+    'application' => [
+        'show' => true,
+    ],
 ];

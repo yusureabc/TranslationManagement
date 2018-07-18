@@ -41,25 +41,25 @@
         <div class="ibox-content">
           @include('flash::message')
           <div class="table-responsive">
-	          <table class="table table-striped table-bordered table-hover dataTablesAjax" >
-		          <thead>
-			          <tr>
-			            <th>{{trans('admin/role.model.id')}}</th>
-			            <th>{{trans('admin/role.model.name')}}</th>
-			            <th>{{trans('admin/role.model.slug')}}</th>
-			            <th>{{trans('admin/role.model.description')}}</th>
-			            <th>{{trans('admin/role.model.created_at')}}</th>
-			            <th>{{trans('admin/role.model.updated_at')}}</th>
-			            <th>{{trans('admin/action.title')}}</th>
-			          </tr>
-		          </thead>
-		          <tbody>
-		          </tbody>
-	          </table>
+              <table class="table table-striped table-bordered table-hover dataTablesAjax" >
+                  <thead>
+                      <tr>
+                        <th>{{trans('admin/role.model.id')}}</th>
+                        <th>{{trans('admin/role.model.name')}}</th>
+                        <th>{{trans('admin/role.model.slug')}}</th>
+                        <th>{{trans('admin/role.model.description')}}</th>
+                        <th>{{trans('admin/role.model.created_at')}}</th>
+                        <th>{{trans('admin/role.model.updated_at')}}</th>
+                        <th>{{trans('admin/action.title')}}</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
           </div>
         </div>
       </div>
-  	</div>
+    </div>
   </div>
 </div>
 <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">

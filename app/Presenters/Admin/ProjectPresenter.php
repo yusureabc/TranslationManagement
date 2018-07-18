@@ -54,4 +54,20 @@ class ProjectPresenter
         return $html;
     }
 
+    public function showApps( $apps, $app_id = 0 )
+    {
+        $html = '<div class="i-checks">';
+        foreach ( $apps as $app )
+        {
+            $checked = $app_id == $app->id ? 'checked' : '';
+
+            $html .= "<label class='radio-inline'>";
+            $html .=   "<input type=\"radio\" name=\"app_id\" value=\"{$app->id}\" {$checked}>" . $app->name;
+            $html .= "</label>";
+        }
+        $html .= '</div>';
+
+        return $html;
+    }
+
 }

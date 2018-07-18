@@ -5,6 +5,7 @@ return [
     'create'    => 'Add application',
     'edit'      => '修改应用',
     'info'      => '应用信息',
+    'sub_project' => '子项目',
     'model'     => [
         'id'          => 'ID',
         'name'        => '应用名称',

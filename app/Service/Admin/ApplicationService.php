@@ -47,7 +47,7 @@ class ApplicationService extends BaseService
 
         if ( $result['apps'] ) {
             foreach ( $result['apps'] as $v ) {
-                $v->actionButton = $v->getActionButtonAttribute();
+                $v->actionButton = $v->getActionButtonAttribute( false );
                 $apps[] = $v;
             }
         }
@@ -78,6 +78,18 @@ class ApplicationService extends BaseService
             $this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
             return false;
         }
+    }
+
+    /**
+     * 获取所有应用
+     * @author Sure Yu  http://yusure.cn
+     * @date   2018-07-17
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    public function getApps()
+    {
+        return $this->applicationRepository->get();
     }
 
     /**

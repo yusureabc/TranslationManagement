@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Admin\ApplicationService;
+use App\Service\Admin\ProjectService;
 
 /**
  * 应用 Controller
@@ -12,14 +13,34 @@ use App\Service\Admin\ApplicationService;
 class ApplicationController extends Controller
 {
 
-    public function __construct( ApplicationService $applicationService )
+    public function __construct(
+        ApplicationService $applicationService,
+        ProjectService $projectService
+    )
     {
         $this->applicationService = $applicationService;
+        $this->projectService = $projectService;
     }
 
     public function index()
     {
         return view( 'admin.application.index' );
+    }
+
+    /**
+     * 查看应用
+     * @author Sure Yu  http://yusure.cn
+     * @date   2018-07-17
+     * @param  [param]
+     * @param  [type]     $id [description]
+     * @return [type]         [description]
+     */
+    public function show( $id )
+    {
+        $application = $this->applicationService->findApplicationById( $id );
+        $sub_project = $this->projectService->findSubProject( $id );
+
+        return view( 'admin.application.show' )->with( compact( 'application', 'sub_project' ) );
     }
 
     public function create()

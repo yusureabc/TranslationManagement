@@ -7,14 +7,12 @@ trait ActionButtonAttributeTrait
 
     /**
      * 查看按钮
-     * @author Sheldon
-     * @date   2017-04-31T18:14:09+0800
-     * @param  boolean      $type [默认为跳转页面查看信息,false时<a>标签带上modal样式]
+     * @param  boolean $type [默认为跳转页面查看信息,false时<a>标签带上modal样式]
      * @return [type]
      */
     public function getShowActionButton($type = true)
     {
-        //开启查看按钮
+        /* 查看按钮开关，需要修改 config/admin/global.php */
         if (config('admin.global.'.$this->action.'.show')) {
             if (auth()->user()->can(config('admin.permissions.'.$this->action.'.show'))) {
                 if ($type) {
