@@ -192,8 +192,6 @@ class ProjectService extends BaseService
             /* 关联子表操作：存储多语言 */
             $this->_storeLanguage( $attributes['languages'], $id );
             $attributes['languages'] = implode( ',', $attributes['languages'] );
-            $attributes['user_id']   = getUser()->id;
-            $attributes['username']  = getUser()->username;
             $isUpdate = $this->project->update( $attributes, $id );
             $this->translatorRepository->updateProjectName( $attributes['name'], $id );
             DB::commit();
