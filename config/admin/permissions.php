@@ -101,6 +101,7 @@ return [
 		'show' => 'application.show',
 		'edit' => 'application.edit',
 		'destroy' => 'application.destroy',
+		'download' => 'application.download',
 	],
 
 ];

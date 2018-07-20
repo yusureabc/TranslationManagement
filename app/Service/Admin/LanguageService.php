@@ -173,10 +173,7 @@ class LanguageService extends BaseService
         }
     }
 
-    /**
-     * 获取翻译结果
-     */
-    public function getTranslateResult( $id, $method )
+    public function getTranslateData( $id, $method )
     {
         $project_id = $this->languageRepository->findProjectId( $id );
 
@@ -190,24 +187,99 @@ class LanguageService extends BaseService
         {
             $result = $this->keyRepository->getTranslatedList( $project_id, $id, $method );
         }
+
+        return $result;
+    }
+
+    /**
+     * 获取翻译结果
+     */
+    public function getTranslateResult( $id, $type )
+    {
+        $result = $this->getTranslateData( $id, $type );
         /* 记录下载时间 */
         $this->languageRepository->downloadTranslate( $id );
         /* 根据要输出的格式用不同的方法处理 */
-        switch ( $method )
+        switch ( $type )
         {
             case 'xml':
-                return $this->_output_xml_result( $result );
+                return $this->_outputXml( $result );
             break;
 
             case 'iOS_strings':
-                return $this->_output_iOS_strings_result( $result );
+                return $this->_outputString( $result );
             break;
 
             case 'iOS_js':
-                return $this->_output_iOS_js_result( $result );
+                return $this->_outputJs( $result );
             break;
         }
-        
+    }
+
+    public function formatTranslation( $result, $type )
+    {
+        switch ( $type )
+        {
+            case 'xml':
+                return $this->_outputXmlForApp( $result );
+            break;
+
+            case 'iOS_strings':
+                return $this->_outputStringForApp( $result );
+            break;
+
+            case 'iOS_js':
+                return $this->_outputJsForApp( $result );
+            break;
+        }
+    }
+
+    private function _outputXmlForApp( $result )
+    {
+        $output = '<resources>' . PHP_EOL;
+        foreach ( $result as $k => $item )
+        {
+            $output .= "    <string name=\"{$item['key']}\">" . $item['content'] . "</string>" . PHP_EOL;
+        }
+        $output .= '</resources>';
+
+        return $output;
+    }
+
+    /**
+     * 输出 iOS 的语言文件
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-22
+     * @param  [param]
+     * @param  [type]     $result [description]
+     * @return [type]             [description]
+     */
+    private function _outputStringForApp( $result )
+    {
+        $output = '';
+        foreach ( $result as $k => $item )
+        {
+            $output .= '"' . $item['key'] . '" = "' . $item['content'] . '";' . PHP_EOL;
+        }
+        return $output;
+    }
+
+    /**
+     * 输出 iOS 插件 js 的语言文件
+     * @author Yusure  http://yusure.cn
+     * @date   2017-11-22
+     * @param  [param]
+     * @param  [type]     $result [description]
+     * @return [type]             [description]
+     */
+    private function _outputJsForApp( $result )
+    {
+        $output = '';
+        foreach ( $result as $k => $item )
+        {
+            $output .= $item['key'] . ': "' . $item['content'] . '",' . PHP_EOL;
+        }
+        return $output;
     }
 
     /**
@@ -217,7 +289,7 @@ class LanguageService extends BaseService
      * @param  [param]
      * @return [type]     [description]
      */
-    private function _output_xml_result( $result )
+    private function _outputXml( $result )
     {
 $string = <<<XML
 <?xml version='1.0' encoding='utf-8'?>
@@ -227,11 +299,7 @@ XML;
         $xml = simplexml_load_string($string);
         foreach ( $result as $k => $item )
         {
-            $content = $item->content;
-            if ( empty( $content ) )
-            {
-                $content = ' ';
-            }
+            $content = $item->content ?? ' ';
             $string = $xml->addChild( 'string', $content );
             $string->addAttribute( 'name', $item->key );
         }
@@ -247,7 +315,7 @@ XML;
      * @param  [type]     $result [description]
      * @return [type]             [description]
      */
-    private function _output_iOS_strings_result( $result )
+    private function _outputString( $result )
     {
         $output = '';
         foreach ( $result as $k => $item )
@@ -265,7 +333,7 @@ XML;
      * @param  [type]     $result [description]
      * @return [type]             [description]
      */
-    private function _output_iOS_js_result( $result )
+    private function _outputJs( $result )
     {
         $output = '';
         foreach ( $result as $k => $item )
