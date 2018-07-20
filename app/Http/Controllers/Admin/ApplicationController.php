@@ -89,7 +89,14 @@ class ApplicationController extends Controller
     public function downloadFile( $id, $method )
     {
         $zip_filename = $this->applicationService->downloadFile( $id, $method );
-        return response()->download( $zip_filename );
+        if ( $zip_filename )
+        {
+            return response()->download( $zip_filename );
+        }
+        else
+        {
+            return 'No data';
+        }
     }
 
     public function ajaxIndex()
