@@ -10,12 +10,12 @@
 
 * 注意 translator 需要自己找人翻译，本系统只是维护译文资源，并不会自动翻译。
 
-** 公司 App 下载方式：软件商店搜索  `Yeelight` **
+  **公司 App 下载方式：软件商店搜索  `Yeelight`**
 
 #### 软件架构
-PHP 7.1
-框架:　Laravel 5.3
-后台系统:　[iDashboard](https://github.com/lanceWan/iDashboard "iDashboard")
+PHP 7.1  
+框架:　Laravel 5.3  
+后台系统:　[iDashboard](https://github.com/lanceWan/iDashboard "iDashboard")  
 
 #### 安装教程
 
@@ -57,10 +57,10 @@ return [
 `config/translator.php`
 
 ##### 如何导出译文：
-当译文都 ready 的时候，需要导出译文，导出译文有两种方式：第一种基于语言去导出，第二种针对整个应用（可以合并多个 Project）可以导出压缩包。
-目前可以导出三种格式 Android xml、iOS strings、RN js。
+  当译文都 ready 的时候，需要导出译文，导出译文有两种方式：第一种基于语言去导出，第二种针对整个应用（可以合并多个 Project）可以导出压缩包。  
+目前可以导出三种格式 Android xml、iOS strings、RN js。  
 
-　　本项目在公司内部运行半年有余，经过很多细节优化，为 Android、iOS 工程师提供了便利，现在将其开源出来，为开源事业添砖加瓦！
-　　本项目为开源项目，允许把它用于任何地方，不受任何约束，欢迎 star、 fork 项目。
+本项目在公司内部运行半年有余，经过很多细节优化，为 Android、iOS 工程师提供了便利，现在将其开源出来，为开源事业添砖加瓦！  
+本项目为开源项目，允许把它用于任何地方，不受任何约束，欢迎 star、 fork 项目。
 * GitHub 托管地址：https://github.com/yusureabc/TranslationManagement
 * Gitee  托管地址：https://gitee.com/yusure/TranslationManagement
