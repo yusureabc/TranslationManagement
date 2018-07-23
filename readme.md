@@ -14,6 +14,7 @@
 
 #### 软件架构
 PHP 7.1  
+Mysql 5.6+  
 框架:　Laravel 5.3  
 后台系统:　[iDashboard](https://github.com/lanceWan/iDashboard "iDashboard")  
 
