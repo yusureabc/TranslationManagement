@@ -32,8 +32,8 @@ Mysql 5.6+
 
 
 #### 演示地址
-http://translate.demo.yusure.cn
-`管理员账号密码：   admin    123456  `
+http://translate.demo.yusure.cn  
+`管理员账号密码：   admin    123456  `  
 `Translator账号密码：    translator    123456`
 
 
