@@ -13,7 +13,7 @@
   **公司 App 下载方式：软件商店搜索  `Yeelight`**
 
 #### 软件架构
-PHP 7.1  
+PHP 7.1+  
 Mysql 5.6+  
 框架:　Laravel 5.3  
 后台系统:　[iDashboard](https://github.com/lanceWan/iDashboard "iDashboard")  
@@ -26,6 +26,16 @@ Mysql 5.6+
 4. `php artisan key:generate`  生成 APP_KEY
 5. database/sql  找到 SQL 文件导入数据库
 6. 配置 Apache / Nginx 站点，浏览访问
+
+如果 storage 不可写，请赋权限:
+`chmod -R 777 storage`
+
+
+#### 演示地址
+http://translate.demo.yusure.cn
+`管理员账号密码：   admin    123456  `
+`Translator账号密码：    translator    123456`
+
 
 #### 使用说明
 ##### 如何录入源语言（中文）
@@ -60,6 +70,23 @@ return [
 ##### 如何导出译文：
   当译文都 ready 的时候，需要导出译文，导出译文有两种方式：第一种基于语言去导出，第二种针对整个应用（可以合并多个 Project）可以导出压缩包。  
 目前可以导出三种格式 Android xml、iOS strings、RN js。  
+
+##### translator 视角
+1. 支持对译文资源进行评论
+2. 支持标记有问题的译文资源，方便后续定位。（注意必须要处理掉所有标记才能完成翻译）
+![](http://yusure.cn/usr/uploads/2018/07/1236887464.png)
+
+#### 项目截图
+![](http://yusure.cn/usr/uploads/2018/07/421764464.png)  
+
+![](http://yusure.cn/usr/uploads/2018/07/2788560700.png)
+
+![](http://yusure.cn/usr/uploads/2018/07/617936288.png)
+
+![](http://yusure.cn/usr/uploads/2018/07/239452925.png)
+
+![](http://yusure.cn/usr/uploads/2018/07/467023823.png)  
+
 
 本项目在公司内部运行半年有余，经过很多细节优化，为 Android、iOS 工程师提供了便利，现在将其开源出来，为开源事业添砖加瓦！  
 本项目为开源项目，允许把它用于任何地方，不受任何约束，欢迎 star、 fork 项目。
