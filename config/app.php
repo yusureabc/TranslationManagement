@@ -189,7 +189,6 @@ return [
          *Develop Plugin
          */
         Barryvdh\Debugbar\ServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
