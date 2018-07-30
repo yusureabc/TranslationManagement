@@ -188,6 +188,11 @@ class LanguageService extends BaseService
             $result = $this->keyRepository->getTranslatedList( $project_id, $id, $method );
         }
 
+        /* 过滤 \n \r 回车换行 */
+        $result = $result->each( function ( $item, $key ) {
+            $item->content = str_replace( ["\r\n", "\r", "\n"], '', $item->content );
+        });
+
         return $result;
     }
 
@@ -320,6 +325,8 @@ XML;
         $output = '';
         foreach ( $result as $k => $item )
         {
+            // $item->content = str_replace( array("\r\n", "\r", "\n"), '', $item->content );
+            // $str = str_replace(array("/r/n", "/r", "/n"), "", $str);  
             $output .= '"' . $item->key . '" = "' . $item->content . '";<br>';
         }
         return $output;
