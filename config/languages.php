@@ -27,4 +27,6 @@ return [
     'pl'    => 'Polish',
     /* 泰语 */
     'th'    => 'Thai',
+    /* 意大利语 */
+    'it'    => 'Italian',
 ];
