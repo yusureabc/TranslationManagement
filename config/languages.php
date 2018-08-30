@@ -31,4 +31,6 @@ return [
     'it'    => 'Italian',
     /* 捷克语 */
     'cs'    => 'Czech',
+    /* 日语 */
+    'ja'    => 'Japanese',
 ];
