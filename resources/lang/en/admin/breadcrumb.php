@@ -38,6 +38,7 @@ return [
         'info'      => '<i class="fa fa-pencil"></i> 项目信息',
         'input'     => '<i class="fa fa-pencil"></i> 录入信息',
         'invite'    => '<i class="fa fa-globe"></i> 邀请翻译',
+        'import'    => '<i class="fa fa-upload"></i> Import',
     ],
     'language' => [
         'list'      => '<i class="fa fa-diamond"></i> 语言列表',

@@ -112,7 +112,7 @@
                   <button type="button" class="btn btn-primary" aria-label="Left Align">
                     <span id="append_line" class="glyphicon glyphicon-plus" aria-hidden="true"> <b>追加10行</b> </span>
                   </button>
-                  <!-- <button class="btn btn-primary" type="submit">{!!trans('admin/action.actionButton.submit')!!}</button> -->
+                  <a class="btn btn-warning" href="{{ route( 'import.excel', ['id' => $id] ) }}"> {!! trans( 'admin/action.actionButton.import' ) !!} </a>
               </div>
             </div>
           </form>

@@ -10,6 +10,8 @@ use App\Service\Admin\KeyService;
 use App\Service\Admin\ApplicationService;
 use App\Http\Requests\ProjectCreateRequest;
 use App\Http\Requests\ProjectUpdateRequest;
+use Storage;
+use Excel;
 
 /**
  * 项目 Controller
@@ -289,6 +291,36 @@ class ProjectController extends Controller
         var_dump( $source_data );die;
 
         // DB::table( 'keys_copy' )->insert( $source_data );
+    }
+
+    /**
+     * Excel 导入 key + 源语言
+     */
+    public function importExcel( Request $request, $id )
+    {
+        if ( $request->isMethod( 'post' ) )
+        {
+            /* 上传 Excel */
+            $excel = $request->file( 'excel' );
+            $filePath = $this->projectService->storeExcel( $excel );            
+
+            /* 解析数据 */
+            Excel::load( $filePath, function( $reader ) use ( $id ) {
+                $data = $reader->all()->toArray();
+                $data = reset( $data );
+                /* 写入数据库 */
+                foreach ( $data as $item )
+                {
+                    $this->keyService->storeKey( $id, $item );                    
+                }
+            });
+
+            return redirect( route( 'key.input', ['id' => $id] ) );
+        }
+        else
+        {
+            return view( 'admin.project.import_excel', compact( 'id' ) );
+        }
     }
 
 }

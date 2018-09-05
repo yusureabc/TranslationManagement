@@ -50,7 +50,7 @@ class KeyService extends BaseService
                     'project_id' => $id,
                     'key'        => $data['key'],
                     'source'     => $data['source'],
-                    'tag'        => $data['tag'],
+                    'tag'        => $data['tag'] ?? 1,
                 ];
                 $res = $this->keyRepository->create( $data );
             }

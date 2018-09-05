@@ -6,6 +6,7 @@ return [
     'edit'      => '修改项目',
     'info'      => '项目信息',
     'input'     => '录入信息',
+    'import_excel'    => 'Import Excel',
     'source'    => '源内容',
     'invite'    => '邀请翻译',
     'translated' => 'Translation',

@@ -17,7 +17,8 @@ return [
         'save'      => '<i class="fa fa-floppy-o"></i> Save',
         'done'      => '<i class="fa fa-check"></i> Done',
         'start'     => 'start',
-        'send'      => 'Send mail'
+        'send'      => 'Send mail',
+        'import'    => 'Import Excel',
     ],
     'lock' => '<font color=red>Lock</font>',
     'open' => '<font color=green>Open</font>',

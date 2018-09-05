@@ -282,4 +282,12 @@ class ProjectService extends BaseService
             return false;
         }
     }
+
+    public function storeExcel( $excel )
+    {
+        $path = $excel->store( 'excel' );
+        $path = storage_path( 'app/public/' . $path );
+        
+        return $path;
+    }
 }
