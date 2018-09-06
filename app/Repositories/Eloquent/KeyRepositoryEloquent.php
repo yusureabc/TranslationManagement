@@ -155,7 +155,7 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
             break;
         }
         return $this->model->where( 'project_id', $project_id )->whereIn( 'tag', $tag )
-        ->orderBy( 'sort', 'asc' )->orderBy( 'id', 'asc' )->select( 'key', 'source as content' )->get();
+        ->orderBy( 'sort', 'asc' )->orderBy( 'id', 'asc' )->select( 'project_id', 'key', 'source as content' )->get();
     }
 
     /**

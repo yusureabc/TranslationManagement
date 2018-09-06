@@ -18,4 +18,9 @@ class Project extends Model implements Transformable
     private $action = 'project';
 
     protected $guarded  = ['id'];
+
+    public static function getName( $id )
+    {
+        return self::where( ['id' => $id] )->value( 'name' );
+    }
 }

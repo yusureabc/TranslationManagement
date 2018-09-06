@@ -8,6 +8,7 @@ use App\Repositories\Eloquent\LanguageRepositoryEloquent;
 use App\Repositories\Eloquent\UserRepositoryEloquent;
 use App\Repositories\Eloquent\TranslatorRepositoryEloquent;
 use App\Repositories\Eloquent\KeyRepositoryEloquent;
+use App\Models\Project;
 
 use App\Service\Admin\BaseService;
 use Exception;
@@ -242,9 +243,16 @@ class LanguageService extends BaseService
     private function _outputXmlForApp( $result )
     {
         $output = '<resources>' . PHP_EOL;
-        foreach ( $result as $k => $item )
+        foreach ( $result as $project_id => $contents )
         {
-            $output .= "    <string name=\"{$item['key']}\">" . $item['content'] . "</string>" . PHP_EOL;
+            /* 通过 project_id 查找 project name */
+            $project_name = Project::getName( $project_id );
+            $output .= '    <!-- ' . $project_name . ' -->' . PHP_EOL;
+            foreach ( $contents as $k => $item )
+            {
+                $output .= "    <string name=\"{$item['key']}\">" . $item['content'] . "</string>" . PHP_EOL;
+            }
+            $output .= PHP_EOL;
         }
         $output .= '</resources>';
 
@@ -262,10 +270,18 @@ class LanguageService extends BaseService
     private function _outputStringForApp( $result )
     {
         $output = '';
-        foreach ( $result as $k => $item )
+        foreach ( $result as $project_id => $contents )
         {
-            $output .= '"' . $item['key'] . '" = "' . $item['content'] . '";' . PHP_EOL;
+            /* 通过 project_id 查找 project name */
+            $project_name = Project::getName( $project_id );
+            $output .= '// ' . $project_name . PHP_EOL;
+            foreach ( $contents as $k => $item )
+            {
+                $output .= '"' . $item['key'] . '" = "' . $item['content'] . '";' . PHP_EOL;
+            }
+            $output .= PHP_EOL;
         }
+        
         return $output;
     }
 
@@ -280,9 +296,12 @@ class LanguageService extends BaseService
     private function _outputJsForApp( $result )
     {
         $output = '';
-        foreach ( $result as $k => $item )
+        foreach ( $result as $project_id => $contents )
         {
-            $output .= $item['key'] . ': "' . $item['content'] . '",' . PHP_EOL;
+            foreach ( $contents as $k => $item )
+            {
+                $output .= $item['key'] . ': "' . $item['content'] . '",' . PHP_EOL;
+            }
         }
         return $output;
     }

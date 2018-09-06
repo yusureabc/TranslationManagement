@@ -214,14 +214,30 @@ class ApplicationService extends BaseService
                 if ( $contents->isNotEmpty() )
                 {
                     $contents = $contents->toArray();
-                    $result[ $code ] = isset( $result[ $code ] ) ? array_merge( $result[ $code ], $contents ) : $contents;
+
+                    /* 转成 project_id 为 key 的二位数组 */
+                    $trans_res = $this->_transformContents( $contents );
+                    $result[ $code ] = isset( $result[ $code ] ) ? $result[ $code ] + $trans_res : $trans_res;
                 }
             }
         }
-        /* 生成压缩文件 */
         $zip_filename = $this->_generateCompressedFile( $id, $type, $result );        
 
         return $zip_filename;
+    }
+
+    /**
+     * 转成 project_id 为 key 的二位数组
+     */
+    private function _transformContents( $contents )
+    {
+        $temp = [];
+        foreach ( $contents as $content )
+        {
+            $temp[ $content['project_id'] ][] = $content;
+        }
+
+        return $temp;
     }
 
     /**
