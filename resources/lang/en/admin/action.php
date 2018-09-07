@@ -19,6 +19,7 @@ return [
         'start'     => 'start',
         'send'      => 'Send mail',
         'import'    => 'Import Excel',
+        'export_js' => 'Export js',
     ],
     'lock' => '<font color=red>Lock</font>',
     'open' => '<font color=green>Open</font>',

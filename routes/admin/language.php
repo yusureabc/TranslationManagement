@@ -11,5 +11,7 @@ $router->group( ['prefix' => 'language'], function ($router)
     /* 下载翻译 */
     $router->get( '{id}/download', 'LanguageController@download' )->name( 'language.download' );
     $router->get( '{id}/download/{method}', 'LanguageController@downloadOutput' )->name( 'language.output' );
+    /* 导出 js 代码 For 柱哥 */
+    $router->get( 'export_js/{id}', 'LanguageController@exportJs' )->name( 'language.export_js' );
 });
 $router->resource( 'language', 'LanguageController' );

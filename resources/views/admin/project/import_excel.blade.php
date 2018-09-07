@@ -40,6 +40,14 @@
         </div>
         <div class="ibox-content">
 
+            @if ( $errors->has('no_file') )
+            <div class="alert alert-danger">
+                <ul style="color:red;">
+                    <li> {{ $errors->first('no_file') }} </li>
+                </ul>
+            </div>
+            @endif
+
           <form method="post" action="{{ url()->full() }}" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="custom-file">
@@ -48,6 +56,14 @@
             </div> 
             <input type="submit" name="提交">
           </form>
+
+          <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-1">
+                    <a href="{{ asset('admin/file/import_demo.xls') }}" class="btn btn-primary">
+                        <i class="fa fa-download"></i> Download Demo Excel
+                    </a>
+              </div>
+            </div>
         </div>
     </div>
     </div>

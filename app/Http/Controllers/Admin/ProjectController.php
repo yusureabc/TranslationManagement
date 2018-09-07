@@ -302,6 +302,11 @@ class ProjectController extends Controller
         {
             /* 上传 Excel */
             $excel = $request->file( 'excel' );
+            if ( ! $excel )
+            {
+                return back()->withErrors( ['no_file' => 'Please choose excel file'] );
+                /* Please choose excel file */
+            }
             $filePath = $this->projectService->storeExcel( $excel );            
 
             /* 解析数据 */

@@ -71,7 +71,7 @@ class LanguageController extends Controller
         $translated = $this->translateService->getTranslatedContents( $id );
         $has_comment = $this->translateService->hasComment( $translated );
 
-        return view( 'admin.translate.start', compact( 'id', 'source', 'translated', 'has_comment' ) );
+        return view( 'admin.language.edit', compact( 'id', 'source', 'translated', 'has_comment' ) );
     }
 
     /**
@@ -197,6 +197,42 @@ class LanguageController extends Controller
             break;
         }
         die( $result );
+    }
+
+    /**
+     * 导出 JS 文本
+     * @author Sure Yu  http://yusure.cn
+     * @date   2018-09-07
+     * @param  [param]
+     * @param  Request    $request [description]
+     * @param  [type]     $id      [description]
+     * @return [type]              [description]
+     */
+    public function exportJs( Request $request, $id )
+    {
+        $translation = $this->languageService->getTranslateData( $id, 'common' );
+
+        $titles = '';
+        $contents = '';
+        $js_code = '';
+        foreach ( $translation as $k => $content )
+        {
+            if ( ($k % 2) == 0 )
+            {
+                /* Question */
+                $titles .= " '" . $content->content . "', ";
+            }
+            else
+            {
+                /* Answer */
+                $contents .= " '" . $content->content . "', ";
+            }
+        }
+
+        $js_code .= 'var titles = new Array(' . $titles . ')' . '<br>';
+        $js_code .= 'var contents = new Array(' . $contents . ')';
+
+        return $js_code;
     }
 
 }
