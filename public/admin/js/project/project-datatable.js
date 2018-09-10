@@ -7,8 +7,8 @@ var TableDatatablesAjax = function() {
         "searching" : true,
         "searchDelay": 800,
         "search": {
-        "regex": true
-    },
+            "regex": true
+        },
     "aLengthMenu": [[100, 25, 50], [100, 25, 50]],
       "ajax": {
         'url' : '/admin/project/ajaxIndex',
@@ -35,6 +35,11 @@ var TableDatatablesAjax = function() {
         {
             "data": "id",
             "name" : "id",
+        },
+        {
+            "data": "app_name",
+            "name" : "app_name",
+            "orderable" : false,
         },
         {
             "data": "name",

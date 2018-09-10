@@ -37,13 +37,18 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     public function getProjectList($start,$length,$search,$order)
     {
         $project = $this->model;
-        if ($search['value']) {
-            if($search['regex'] == 'true'){
-                $project = $project->where('name', 'like', "%{$search['value']}%")
-                    ->orWhere('description','like', "%{$search['value']}%");
-            }else{
-                $project = $project->where('name', $search['value'])
-                    ->orWhere('description', $search['value']);
+        if ( $search['value'] )
+        {
+            if ( $search['regex'] == 'true' )
+            {
+                $project = $project->where( 'name', 'like', "%{$search['value']}%" )
+                    // ->orWhere( 'app_id', $search['value'] )
+                    ->orWhere( 'description', 'like', "%{$search['value']}%" );
+            }
+            else
+            {
+                $project = $project->where( 'name', $search['value'] )
+                    ->orWhere( 'description', $search['value'] );
             }
         }
 

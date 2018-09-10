@@ -51,6 +51,7 @@
                   <thead>
                       <tr>
                         <th>{{trans('admin/project.model.id')}}</th>
+                        <th> {{trans('admin/project.model.app_name')}} </th>
                         <th>{{trans('admin/project.model.name')}}</th>
                         <th>{{trans('admin/project.model.description')}}</th>
                         <th>{{trans('admin/project.model.founder')}}</th>

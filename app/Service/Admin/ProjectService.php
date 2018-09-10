@@ -54,12 +54,16 @@ class ProjectService extends BaseService
         $order['name'] = request('columns.' .request('order.0.column',0) . '.name');
         $order['dir'] = request('order.0.dir','asc');
 
-        $result = $this->project->getProjectList($start,$length,$search,$order);
+        $result = $this->project->getProjectList( $start, $length, $search, $order );
 
         $projects = [];
 
-        if ($result['projects']) {
-            foreach ($result['projects'] as $v) {
+        if ( $result['projects'] )
+        {
+            foreach ( $result['projects'] as $v )
+            {
+                /* App name display */
+                $v->app_name = $v->app->name ?? '';
                 $v->actionButton = $v->getActionButtonAttribute();
                 $projects[] = $v;
             }

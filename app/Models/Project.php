@@ -23,4 +23,12 @@ class Project extends Model implements Transformable
     {
         return self::where( ['id' => $id] )->value( 'name' );
     }
+
+    /**
+     * 连表 apps
+     */
+    public function app()
+    {
+        return $this->belongsTo( 'App\Models\Application', 'app_id', 'id' );
+    }
 }
