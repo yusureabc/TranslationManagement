@@ -1,6 +1,35 @@
 @extends('layouts.admin')
 @section('css')
 <link href="{{asset('vendors/iCheck/custom.css')}}" rel="stylesheet">
+<style>
+    /* 上传按钮样式 */
+   .custom-file {
+       position: relative;
+       display: inline-block;
+       background: #D0EEFF;
+       border: 1px solid #99D3F5;
+       border-radius: 4px;
+       padding: 4px 12px;
+       overflow: hidden;
+       color: #1E88C7;
+       text-decoration: none;
+       text-indent: 0;
+       line-height: 20px;
+   }
+   .custom-file input {
+       position: absolute;
+       font-size: 100px;
+       right: 0;
+       top: 0;
+       opacity: 0;
+   }
+   .custom-file:hover {
+       background: #AADFFD;
+       border-color: #78C3F3;
+       color: #004974;
+       text-decoration: none;
+   }
+</style>
 @endsection
 @section('content')
 
@@ -53,17 +82,16 @@
             <div class="custom-file">
                 <input id="excel" type="file" name="excel" class="custom-file-input">
                 <label for="excel" class="custom-file-label">Choose file...</label>
-            </div> 
-            <input type="submit" name="提交">
-          </form>
-
-          <div class="form-group">
-              <div class="col-sm-4 col-sm-offset-1">
-                    <a href="{{ asset('admin/file/import_demo.xls') }}" class="btn btn-primary">
-                        <i class="fa fa-download"></i> Download Demo Excel
-                    </a>
-              </div>
             </div>
+            <br>
+            <input type="submit" class="btn btn-primary" value="Submit">
+          </form>
+            
+            <br><br>
+            <a href="{{ asset('admin/file/import_demo.xls') }}" class="btn btn-primary">
+                <i class="fa fa-download"></i> Download Demo Excel
+            </a>
+
         </div>
     </div>
     </div>
