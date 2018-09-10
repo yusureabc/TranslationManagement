@@ -73,7 +73,7 @@
 @section('js')
 <script src="{{asset('vendors/dataTables/datatables.min.js')}}"></script>
 <script src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/project/project-datatable.js?ver=20180717')}}"></script>
+<script src="{{asset('admin/js/project/project-datatable.js?ver=20180910')}}"></script>
 <script type="text/javascript">
   $(document).on('click','.destroy_item',function() {
     var _item = $(this);

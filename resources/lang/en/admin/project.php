@@ -13,6 +13,7 @@ return [
     'model'     => [
         'id'          => 'ID',
         'name'        => '项目名称',
+        'app_name'        => '应用名称',
         'slug'        => '项目标识',
         'founder'     => '创建者',
         'url'         => '项目网址',
