@@ -37,10 +37,9 @@ class ApplicationController extends Controller
      */
     public function show( $id )
     {
-        $application = $this->applicationService->findApplicationById( $id );
-        $sub_project = $this->projectService->findSubProject( $id );
-
-        return view( 'admin.application.show' )->with( compact( 'application', 'sub_project' ) );
+        /* Redirect to project list page */
+        $url = route( 'project.index' ) . '?app_id=' . $id;
+        return redirect( $url );
     }
 
     public function create()

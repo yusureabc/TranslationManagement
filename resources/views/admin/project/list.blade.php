@@ -30,6 +30,7 @@
   @endpermission
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
+    <input type="hidden" id="app_id" value="{{ $app_id }}">
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
@@ -73,7 +74,7 @@
 @section('js')
 <script src="{{asset('vendors/dataTables/datatables.min.js')}}"></script>
 <script src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/project/project-datatable.js?ver=20180910')}}"></script>
+<script src="{{asset('admin/js/project/project-datatable.js?ver=20180911')}}"></script>
 <script type="text/javascript">
   $(document).on('click','.destroy_item',function() {
     var _item = $(this);

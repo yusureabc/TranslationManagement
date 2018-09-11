@@ -42,7 +42,6 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
             if ( $search['regex'] == 'true' )
             {
                 $project = $project->where( 'name', 'like', "%{$search['value']}%" )
-                    // ->orWhere( 'app_id', $search['value'] )
                     ->orWhere( 'description', 'like', "%{$search['value']}%" );
             }
             else
@@ -50,6 +49,11 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
                 $project = $project->where( 'name', $search['value'] )
                     ->orWhere( 'description', $search['value'] );
             }
+        }
+
+        if ( isset( $search['app_id'] ) )
+        {
+            $project = $project->where( 'app_id', $search['app_id'] );
         }
 
         $count = $project->count();

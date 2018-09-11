@@ -54,6 +54,12 @@ class ProjectService extends BaseService
         $order['name'] = request('columns.' .request('order.0.column',0) . '.name');
         $order['dir'] = request('order.0.dir','asc');
 
+        $app_id = request( 'app_id', 0 );
+        if ( $app_id = request( 'app_id', 0 ) )
+        {
+            $search['app_id'] = $app_id;
+        }
+
         $result = $this->project->getProjectList( $start, $length, $search, $order );
 
         $projects = [];

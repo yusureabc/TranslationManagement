@@ -56,7 +56,7 @@ class ApplicationService extends BaseService
 
         if ( $result['apps'] ) {
             foreach ( $result['apps'] as $v ) {
-                $v->actionButton = $v->getActionButtonAttribute( false );
+                $v->actionButton = $v->getActionButtonAttribute();
                 $apps[] = $v;
             }
         }

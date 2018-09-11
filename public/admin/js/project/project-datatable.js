@@ -12,6 +12,9 @@ var TableDatatablesAjax = function() {
     "aLengthMenu": [[100, 25, 50], [100, 25, 50]],
       "ajax": {
         'url' : '/admin/project/ajaxIndex',
+        'data': function ( data ) {
+            data.app_id = $( '#app_id' ).val();
+        },
       },
       "pagingType": "full_numbers",
       "orderCellsTop": true,

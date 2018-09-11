@@ -49,9 +49,10 @@ class ProjectController extends Controller
      * @param  [param]
      * @return [type]     [description]
      */
-    public function index()
+    public function index( Request $request )
     {
-        return view( 'admin.project.list' );
+        $app_id = $request->input( 'app_id' );
+        return view( 'admin.project.list', compact( 'app_id' ) );
     }
 
     /**
