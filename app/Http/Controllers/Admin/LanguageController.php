@@ -220,12 +220,12 @@ class LanguageController extends Controller
             if ( ($k % 2) == 0 )
             {
                 /* Question */
-                $titles .= ' "' . $content->content . '", ';
+                $titles .= ' "' . addslashes( $content->content ) . '", ';
             }
             else
             {
                 /* Answer */
-                $contents .= ' "' . $content->content . '", ';
+                $contents .= ' "' . addslashes( $content->content ) . '", ';
             }
         }
 
