@@ -33,4 +33,6 @@ return [
     'cs'    => 'Czech',
     /* 日语 */
     'ja'    => 'Japanese',
+    /* 葡萄牙语(巴西) */
+    'pt-BR' => 'Portuguese (Brazil)',
 ];
