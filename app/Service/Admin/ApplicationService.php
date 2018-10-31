@@ -221,6 +221,13 @@ class ApplicationService extends BaseService
                 }
             }
         }
+
+        foreach ( $result as $code => $item )
+        {
+            $result[$code] = $item + $result['en'];
+            ksort( $result[$code] );
+        }
+
         $zip_filename = $this->_generateCompressedFile( $id, $type, $result );        
 
         return $zip_filename;
