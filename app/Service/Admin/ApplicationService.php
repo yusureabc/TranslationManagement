@@ -222,15 +222,51 @@ class ApplicationService extends BaseService
             }
         }
 
-        foreach ( $result as $code => $item )
+        if ( $type == 'iOS_strings' )
         {
-            $result[$code] = $item + $result['en'];
-            ksort( $result[$code] );
+            /* 将没翻译的小语种用英文填充 */
+            $result = $this->_fillTranslation( $result );            
         }
 
         $zip_filename = $this->_generateCompressedFile( $id, $type, $result );        
 
         return $zip_filename;
+    }
+
+    /**
+     * 填充译文，有些小语种没有翻译完整用英文填充
+     * @author Sure Yu  http://yusure.cn
+     * @date   2018-11-01
+     * @param  [param]
+     * @return [type]     [description]
+     */
+    private function _fillTranslation( $result )
+    {
+        /**
+         * $result  en => project_id => 译文
+         * 循环英文，判断小语种存在就合并到英文，用最后的结果替换原来的小语种译文
+         */
+        foreach ( $result as $code => $item )
+        {
+            $temp_result = $result['en'];
+            if ( $code == 'en' )  continue;
+            foreach ( $temp_result as $p_id => $resourse )
+            {
+                /* 循环译文集 */
+                foreach ( $resourse as $res_k => $translation )
+                {
+                    $content_exist = empty( $item[$p_id][$res_k]['content'] ) ? false : true;
+                    if ( $content_exist )
+                    {
+                        $temp_result[$p_id][$res_k] = $item[$p_id][$res_k];
+                    }
+                }
+            }
+
+            $result[$code] = $temp_result;
+        }
+
+        return $result;
     }
 
     /**
@@ -241,7 +277,7 @@ class ApplicationService extends BaseService
         $temp = [];
         foreach ( $contents as $content )
         {
-            $temp[ $content['project_id'] ][] = $content;
+            $temp[ $content['project_id'] ][ $content['key'] ] = $content;
         }
 
         return $temp;
