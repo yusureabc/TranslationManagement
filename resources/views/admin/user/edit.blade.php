@@ -70,6 +70,18 @@
               </div>
             </div>
             <div class="hr-line-dashed"></div>
+
+            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+              <label class="col-sm-2 control-label">{{trans('admin/user.model.password')}}</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="password" value="{{old('password')}}" placeholder="{{trans('admin/user.model.password')}}">
+                @if ($errors->has('password'))
+                <span class="help-block m-b-none text-danger">{{ $errors->first('password') }}</span>
+                @endif
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
             <div class="form-group">
               <label class="col-sm-2 control-label">{{trans('admin/user.role')}}</label>
               <div class="col-sm-10">
