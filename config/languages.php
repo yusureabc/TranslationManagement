@@ -37,4 +37,6 @@ return [
     'pt-BR' => 'Portuguese (Brazil)',
     /* 越南语 */
     'vi' => 'Vietnamese',
+    /* 土耳其语 */
+    'tr' => 'Turkish',
 ];
