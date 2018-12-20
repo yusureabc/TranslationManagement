@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreKeyRequest;
 use App\Http\Controllers\Controller;
 use App\Service\Admin\ProjectService;
 use App\Service\Admin\LanguageService;
@@ -179,10 +180,11 @@ class ProjectController extends Controller
     /**
      * 排序 key
      */
-    public function sortKey( Request $request )
+    public function sortKey( StoreKeyRequest $request )
     {
         $key_id = $request->input( 'key_id' );
         $sort = $request->input( 'sort' );
+
         return $this->keyService->updateSort( $key_id, $sort );
     }
 
@@ -243,55 +245,16 @@ class ProjectController extends Controller
      */
     public function importiOS( $id )
     {
-        $file_path = "./en_ios.strings";
-        $file_arr = file( $file_path );
-
-        $source_data = $keys = [];
-        foreach ( $file_arr as $k => $item )
+        $url = config( 'import.key_url' );
+        $result = $this->keyService->importSourceOniOS( $id, $url );
+        if ( $result )
         {
-            $item_arr = explode( '=', $item );
-
-            $key = trim( $item_arr[0] );
-            $key = trim( $key, '"' );
-            if ( in_array( $key, $keys ) )
-            {
-                continue;
-            }
-            else
-            {
-                $keys[] = $key;
-            }
-
-            $value = trim( $item_arr[1] );
-            $value = trim( $value, ';' );
-            $value = trim( $value, '"' );
-
-            $source_data[] = [
-                'project_id' => 20,
-                'key' => $key,
-                'source' => $value
-            ];
-
-            /* 查看 key_id */
-            $condition = [
-                'project_id' => 20,
-                'key' => $key,
-            ];
-
-            $key_id = DB::table( 'keys' )->where( $condition )->value( 'id' );
-            $data = [
-                'project_id' => 20,
-                'language_id' => 124,
-                'key_id' => $key_id,
-                'content' => $value
-            ];
-            // var_dump( $data );die;
-            Content::create( $data );
+            return 'import successful';
         }
-
-        var_dump( $source_data );die;
-
-        // DB::table( 'keys_copy' )->insert( $source_data );
+        else
+        {
+            return 'import error';
+        }
     }
 
     /**

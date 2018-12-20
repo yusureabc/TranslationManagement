@@ -61,6 +61,11 @@ function sort()
 function sort_change( key_id, index )
 {
     var _token = $( "input[name='_token']" ).val();
+    if ( key_id == '' || index == '' )
+    {
+        return;
+    }
+
     var data = {
         key_id: key_id,
         sort: index,

@@ -159,5 +159,5 @@ var item_html = "<div class=\"form-group source-item\">\n" +
 <script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/ddsort/ddsort.js')}}"></script>
-<script src="{{asset('admin/js/project/project.js?ver=2018071301')}}"></script>
+<script src="{{asset('admin/js/project/project.js?ver=2018122001')}}"></script>
 @endsection

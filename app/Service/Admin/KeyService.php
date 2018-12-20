@@ -48,7 +48,7 @@ class KeyService extends BaseService
             {
                 $data = [
                     'project_id' => $id,
-                    'key'        => $data['key'],
+                    'key'        => trim( $data['key'] ),
                     'source'     => $data['source'],
                     'tag'        => $data['tag'] ?? 1,
                 ];
@@ -117,4 +117,53 @@ class KeyService extends BaseService
         return $this->keyRepository->batchInsertKey( $sources );
     }
     
+    public function importSourceOniOS( $id, $url )
+    {
+        $file_arr = file( $url );
+        $source_data = $keys = [];
+        foreach ( $file_arr as $k => $item )
+        {
+            $item_arr = explode( '=', $item );
+
+            $key = trim( $item_arr[0] );
+            $key = trim( $key, '"' );
+            if ( in_array( $key, $keys ) )
+            {
+                continue;
+            }
+            else
+            {
+                $keys[] = $key;
+            }
+
+            $value = trim( $item_arr[1] );
+            $value = trim( $value, ';' );
+            $value = trim( $value, '"' );
+
+            $res[$key] = $value;
+
+            // $source_data[] = [
+            //     'project_id' => $id,
+            //     'key' => $key,
+            //     'source' => $value
+            // ];
+        }
+
+        $exist = $this->keyRepository->keyExist( $id, $keys );
+        /* 如果有重复数据就从结果里面去除 */
+        if ( $exist )
+        {
+            foreach ( $exist as $k => $item )
+            {
+                unset( $res[$item->key] );
+            }
+        }
+
+        $sources = [];
+        foreach ( $res as $key => $source )
+        {
+            $sources[] = ['project_id' => $id, 'key' => $key, 'source' => $source];
+        }
+        return $this->keyRepository->batchInsertKey( $sources );
+    }
 }

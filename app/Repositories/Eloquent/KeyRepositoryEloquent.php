@@ -38,7 +38,7 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     public function updateKey( $project_id, $data )
     {
         $condition = ['id' => $data['key_id'], 'project_id' => $project_id ];
-        $update = ['key' => $data['key'], 'source' => $data['source'], 'tag' => $data['tag']];
+        $update = ['key' => trim( $data['key'] ), 'source' => $data['source'], 'tag' => $data['tag']];
         return $this->model->where( $condition )->update( $update );
     }
 
