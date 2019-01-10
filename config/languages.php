@@ -39,4 +39,6 @@ return [
     'vi' => 'Vietnamese',
     /* 土耳其语 */
     'tr' => 'Turkish',
+    /* 希伯来语 */
+    'he' => 'Hebrew',
 ];
