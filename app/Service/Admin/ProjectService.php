@@ -189,6 +189,11 @@ class ProjectService extends BaseService
      */
     public function updateProject( $attributes, $id )
     {
+        if ( isset( $attributes['callback'] ) )
+        {
+            unset( $attributes['callback'] );
+        }
+
         // 防止用户恶意修改表单id，如果id不一致直接跳转500
         if ( $attributes['id'] != $id )
         {
