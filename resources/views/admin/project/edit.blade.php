@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="ibox-content">
-          <form method="post" action="{{url('admin/project', [$project->id])}}" class="form-horizontal" enctype="multipart/form-data">
+          <form method="post" action="{{url('admin/project', [$project->id])}}?callback={{urlencode( url()->previous() )}}" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
             {{method_field('PUT')}}
             <input type="hidden" name="id" value="{{$project->id}}">

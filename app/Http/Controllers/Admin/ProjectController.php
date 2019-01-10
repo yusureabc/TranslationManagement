@@ -127,7 +127,8 @@ class ProjectController extends Controller
     public function update( ProjectUpdateRequest $request, $id )
     {
         $project = $this->projectService->updateProject( $request->all(), $id );
-        return redirect( 'admin/project' );
+
+        return redirect( $request->input( 'callback' ) );
     }
 
     /**
