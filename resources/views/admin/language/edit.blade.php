@@ -83,6 +83,7 @@
                     <a class="btn btn-warning" href="">{!!trans('admin/action.actionButton.save')!!}</a>
                     <button type="submit" onclick="return check_translated();" class="btn btn-primary">{!!trans('admin/action.actionButton.done')!!}</button>
                     <a class="btn btn-warning" target="_blank" href="{{ route( 'language.export_js', ['id' => $id] ) }}">{!!trans('admin/action.actionButton.export_js')!!}</a>
+                    <a class="btn btn-success" target="_blank" href="{{ route( 'language.export_excel', ['id' => $id] ) }}">{!!trans('admin/action.actionButton.export_excel')!!}</a>
               </div>
             </div>
           </form>

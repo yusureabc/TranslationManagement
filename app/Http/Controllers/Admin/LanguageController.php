@@ -7,10 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Service\Admin\LanguageService;
 use App\Service\Admin\UserService;
 use App\Service\Admin\TranslateService;
-
-
 use App\Http\Requests\LanguageCreateRequest; 
 use App\Http\Requests\LanguageUpdateRequest;
+use Excel;
 
 
 class LanguageController extends Controller
@@ -233,6 +232,34 @@ class LanguageController extends Controller
         $js_code .= 'var contents = new Array(' . $contents . ')';
 
         return $js_code;
+    }
+
+    /**
+     * 导出 Excel file
+     * @author Scott Yu  <yusureyes@gmail.com>  http://yusure.cn
+     * @date   2019-02-18
+     * @return [type]     [description]
+     */
+    public function exportExcel( Request $request, $id )
+    {
+        $source = $this->translateService->getTranslateSource( $id );
+        $translated = $this->translateService->getTranslatedContents( $id );
+        if ( $source->isEmpty() )  return 'is empty';
+
+        $exportData = [];
+        foreach ( $source as $k => $item )
+        {
+            $exportData[$k] = [
+                'source'     => $item->content,
+                'translated' => $translated[$item->key_id]['content'] ?? '',
+            ];
+        }
+
+        Excel::create( 'translated', function( $excel ) use ( $exportData ) {
+            $excel->sheet( 'translated', function( $sheet ) use ( $exportData ) {
+                $sheet->fromArray( $exportData );
+            });
+        })->export( 'xls' );
     }
 
 }
