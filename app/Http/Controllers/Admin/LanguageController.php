@@ -244,7 +244,7 @@ class LanguageController extends Controller
     {
         $source = $this->translateService->getTranslateSource( $id );
         $translated = $this->translateService->getTranslatedContents( $id );
-        if ( $source->isEmpty() )  return 'is empty';
+        if ( $source->isEmpty() )  return 'Source is empty';
 
         $exportData = [];
         $lengthType = config( 'common.length_type' );
@@ -262,6 +262,7 @@ class LanguageController extends Controller
                 'translated' => $translatedContent,
             ];
         }
+        if ( empty( $exportData ) )  return 'Not found untranslated resources';
 
         Excel::create( 'translated', function( $excel ) use ( $exportData ) {
             $excel->sheet( 'translated', function( $sheet ) use ( $exportData ) {
