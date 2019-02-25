@@ -13,6 +13,6 @@ $router->group( ['prefix' => 'language'], function ($router)
     $router->get( '{id}/download/{method}', 'LanguageController@downloadOutput' )->name( 'language.output' );
     /* 导出 js 代码 For 柱哥 */
     $router->get( 'export_js/{id}', 'LanguageController@exportJs' )->name( 'language.export_js' );
-    $router->get( 'export_excel/{id}', 'LanguageController@exportExcel' )->name( 'language.export_excel' );
+    $router->get( 'export_excel/{id}/{translatedStatus}', 'LanguageController@exportExcel' )->name( 'language.export_excel' );
 });
 $router->resource( 'language', 'LanguageController' );

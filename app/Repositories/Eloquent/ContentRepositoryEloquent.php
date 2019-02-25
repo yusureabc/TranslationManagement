@@ -65,7 +65,7 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
                 ->where( 'contents.language_id', $id )
                 ->orderBy( 'keys.sort', 'asc' )
                 ->orderBy( 'keys.id', 'asc' )
-                ->select( 'contents.key_id', 'contents.content', 'keys.key' )
+                ->select( 'contents.key_id', 'contents.content', 'keys.key', 'keys.length' )
                 ->get();
     }
 

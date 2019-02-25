@@ -240,18 +240,26 @@ class LanguageController extends Controller
      * @date   2019-02-18
      * @return [type]     [description]
      */
-    public function exportExcel( Request $request, $id )
+    public function exportExcel( Request $request, $id, $translatedStatus = 1 )
     {
         $source = $this->translateService->getTranslateSource( $id );
         $translated = $this->translateService->getTranslatedContents( $id );
         if ( $source->isEmpty() )  return 'is empty';
 
         $exportData = [];
+        $lengthType = config( 'common.length_type' );
+
         foreach ( $source as $k => $item )
         {
+            $translatedContent = $translated[$item->key_id]['content'] ?? '';
+            /* 过滤已经翻译完成的资源 */
+            if ( $translatedContent && $translatedStatus == 0 )  continue;
+
             $exportData[$k] = [
+                'key'        => $item['key'],
+                'length'     => $lengthType[ $item['length'] ],
                 'source'     => $item->content,
-                'translated' => $translated[$item->key_id]['content'] ?? '',
+                'translated' => $translatedContent,
             ];
         }
 

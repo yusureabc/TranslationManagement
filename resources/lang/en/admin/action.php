@@ -20,7 +20,7 @@ return [
         'send'      => 'Send Mail',
         'import'    => 'Import Excel',
         'export_js' => 'Export JS Code',
-        'export_excel' => 'Export Excel file',
+        'export_excel' => 'Export Excel',
     ],
     'lock' => '<font color=red>Lock</font>',
     'open' => '<font color=green>Open</font>',

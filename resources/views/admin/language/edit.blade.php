@@ -78,12 +78,13 @@
 
             <div class="hr-line-dashed"></div>
             <div class="form-group">
-              <div class="col-sm-4 col-sm-offset-2">
+              <div class="col-sm-8 col-sm-offset-2">
                     <a class="btn btn-white" href="{{url( 'admin/translate' )}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
                     <a class="btn btn-warning" href="">{!!trans('admin/action.actionButton.save')!!}</a>
                     <button type="submit" onclick="return check_translated();" class="btn btn-primary">{!!trans('admin/action.actionButton.done')!!}</button>
                     <a class="btn btn-warning" target="_blank" href="{{ route( 'language.export_js', ['id' => $id] ) }}">{!!trans('admin/action.actionButton.export_js')!!}</a>
-                    <a class="btn btn-success" target="_blank" href="{{ route( 'language.export_excel', ['id' => $id] ) }}">{!!trans('admin/action.actionButton.export_excel')!!}</a>
+                    <a class="btn btn-success" target="_blank" href="{{ route( 'language.export_excel', ['id' => $id, 'translatedStatus' => 1] ) }}">{!!trans('admin/action.actionButton.export_excel')!!}</a>
+                    <a class="btn btn-warning" target="_blank" href="{{ route( 'language.export_excel', ['id' => $id, 'translatedStatus' => 0] ) }}">{!!trans('admin/action.actionButton.export_excel')!!} ( Untranslated )</a>
               </div>
             </div>
           </form>
