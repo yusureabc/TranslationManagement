@@ -106,6 +106,30 @@ function tag_change( key_id, tag, tag_name )
 }
 
 /**
+ * 修改 lengthType
+ */
+function length_change( key_id, length, length_name )
+{
+    /* 替换页面 */
+    $( '#length_show_' + key_id ).html( length_name );
+
+    var _token = $( "input[name='_token']" ).val();
+    var data = {
+        key_id: key_id,
+        length: length,
+        _token: _token
+    }
+
+    var result = [];
+    $.ajaxSettings.async = false;
+    $.post( "/admin/project/length_change", data, function( res ) {
+        result = res;
+    }, 'json' );
+
+    return result;
+}
+
+/**
  * 新增 key 时 tag 选择
  */
 function tag_change_empty( tag, this_item )
@@ -113,6 +137,15 @@ function tag_change_empty( tag, this_item )
     var tag_name = this_item.html();
     this_item.parents( '.source-item' ).find( "span[name='dropdown_show']" ).html( tag_name );
     this_item.parents( '.source-item' ).find( "input[name='tag']" ).val( tag );
+
+    save_key( this_item );
+}
+
+function length_change_empty( tag, this_item )
+{
+    var tag_name = this_item.html();
+    this_item.parents( '.source-item' ).find( "span[name='length_show']" ).html( tag_name );
+    this_item.parents( '.source-item' ).find( "input[name='length']" ).val( tag );
 
     save_key( this_item );
 }
@@ -128,6 +161,7 @@ function save_key( save )
     var source_selector = item.find( "input[name='source']" );
     var key_id_selector = item.find( "label[name='key_id']" );
     var tag_selector = item.find( "input[name='tag']" );
+    var length_selector = item.find( "input[name='length']" );
     
     var _token = $( "input[name='_token']" ).val();
 
@@ -135,13 +169,14 @@ function save_key( save )
     var source = source_selector.val();
     var key_id = key_id_selector.html();
     var tag = tag_selector.val();
+    var length = length_selector.val();
     /* 验证数据 */
     if ( ! validator( key, key_selector, source, source_selector ) )
     {
         return;
     }
 
-    var data = ajax_save( project_id, key_id, key, source, tag, _token );
+    var data = ajax_save( project_id, key_id, key, source, tag, length, _token );
 
     if ( data.status == 1 )
     {
@@ -171,14 +206,15 @@ function save_key( save )
 /**
  * 保存 key + 源语言
  */
-function ajax_save( project_id, key_id, key, source, tag, _token )
+function ajax_save( project_id, key_id, key, source, tag, length, _token )
 {
     var data = {
         project_id: project_id,
         key_id: key_id,
         key: key,
         source: source,
-        tag, tag,
+        tag: tag,
+        length: length,
         _token: _token,
     }
 

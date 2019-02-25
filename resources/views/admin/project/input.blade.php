@@ -39,6 +39,9 @@
           <form method="post" action="{{url('admin/project')}}" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
             <input type="hidden" id="project_id" value="{{ $id }}">
+            <!-- 占位标签 -->
+            <div class="form-group source-item"></div>
+            
             <?php if ( $keys->isNotEmpty() ) { ?>
             <?php foreach ( $keys as $k => $item ) { ?>
             <div class="form-group source-item">
@@ -64,34 +67,15 @@
                   </ul>
                 </div>
 
-                <button type="button" class="btn btn-default" aria-label="Left Align" title="下方插入" onclick="below_insert( $(this) );">
-                  <span class="fa fa-plus" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default" aria-label="Left Align" title="删除" onclick="remove_key( $(this) );">
-                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                </button>
-            </div>
-            <?php } ?>
-            <?php } else { ?>
-            <div class="form-group source-item">
-                <input type="hidden" name="sort" value="0" onchange="sort_change( this.value );">
-                <label name="key_id" class="col-sm-2 control-label"></label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" name="key" value="" onchange="save_key( $(this) );" placeholder="key">
-                </div>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" name="source" value="" onchange="save_key( $(this) );" placeholder="源语言">
-                </div>
-
                 <div class="col-sm-1 dropdown">
-                    <input type="hidden" name="tag" value="1">
+                    <input type="hidden" name="tag" value="{{ $item->tag }}">
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span name="dropdown_show"> Common </span>
+                    <span id="length_show_{{ $item->id }}"> {{ $lengthType[$item['length']] }} </span>
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="">
-                    <?php foreach ( $tags as $k => $tag ) { ?>
-                    <li> <a onclick="tag_change_empty( {{ $k }}, $(this) )"> {{ $tag }} </a> </li>
+                    <?php foreach ( $lengthType as $k => $lengthName ) { ?>
+                    <li> <a onclick="length_change( {{ $item->id }}, {{ $k }}, $(this).html() )"> {{ $lengthName }} </a> </li>
                     <?php } ?>
                   </ul>
                 </div>
@@ -103,7 +87,7 @@
                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
             </div>
-            <?php } ?>
+            <?php } } ?>
 
             <div class="hr-line-dashed"></div>
             <div class="form-group">
@@ -148,6 +132,19 @@ var item_html = "<div class=\"form-group source-item\">\n" +
     "                  </ul>\n" +
     "                </div>\n" +
     "\n" +
+    "                <div class=\"col-sm-1 dropdown\">\n" +
+    "                    <input type=\"hidden\" name=\"length\" value=\"0\">\n" +
+    "                  <button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\n" +
+    "                    <span name=\"length_show\"> NoLimit </span>\n" +
+    "                    <span class=\"caret\"></span>\n" +
+    "                  </button>\n" +
+    "                  <ul class=\"dropdown-menu\" aria-labelledby=\"\">\n" +
+    "                    <?php foreach ( $lengthType as $k => $lengthName ) { ?>\n" +
+    "                    <li> <a onclick=\"length_change_empty( {{ $k }}, $(this) )\"> {{ $lengthName }} </a> </li>\n" +
+    "                    <?php } ?>\n" +
+    "                  </ul>\n" +
+    "                </div>\n" +
+    "\n" +
     "                <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" title=\"下方插入\" onclick=\"below_insert( $(this) );\">\n" +
     "                  <span class=\"fa fa-plus\" aria-hidden=\"true\"></span>\n" +
     "                </button>\n" +
@@ -159,5 +156,5 @@ var item_html = "<div class=\"form-group source-item\">\n" +
 <script type="text/javascript" src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/ddsort/ddsort.js')}}"></script>
-<script src="{{asset('admin/js/project/project.js?ver=2018122001')}}"></script>
+<script src="{{asset('admin/js/project/project.js?ver=20190225')}}"></script>
 @endsection

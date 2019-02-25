@@ -142,8 +142,14 @@ class ProjectController extends Controller
     {
         $keys = $this->keyService->getKeyList( $id );
         $tags = config( 'tag' );
+        $lengthType = [
+            0 => 'NoLimit',
+            1 => 'Short',
+            2 => 'Medium',
+            3 => 'Long'
+        ];
 
-        return view( 'admin.project.input', compact( 'keys', 'id', 'tags' ) );
+        return view( 'admin.project.input', compact( 'keys', 'id', 'tags', 'lengthType' ) );
     }
 
     /**
@@ -198,6 +204,21 @@ class ProjectController extends Controller
         $tag = $request->input( 'tag' );
 
         return $this->keyService->updateTag( $key_id, $tag );
+    }
+
+    /**
+     * LengthType 修改
+     * @author Scott Yu  <yusureyes@gmail.com>  http://yusure.cn
+     * @date   2019-02-25
+     * @param  Request    $request [description]
+     * @return [type]              [description]
+     */
+    public function lengthChange( Request $request )
+    {
+        $key_id = $request->input( 'key_id' );
+        $length = $request->input( 'length' );
+
+        return $this->keyService->updateLength( $key_id, $length );
     }
 
     /**

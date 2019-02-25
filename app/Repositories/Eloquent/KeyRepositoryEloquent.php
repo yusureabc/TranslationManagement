@@ -53,6 +53,17 @@ class KeyRepositoryEloquent extends BaseRepository implements KeyRepository
     }
 
     /**
+     * 更新 LengthType
+     */
+    public function updateLength( $key_id, $length )
+    {
+        $condition = ['id' => $key_id];
+        $update = ['length' => $length];
+
+        return $this->model->where( $condition )->update( $update );
+    }
+
+    /**
      * 删除翻译 key
      */
     public function deleteKey( $project_id, $key_id )

@@ -9,6 +9,7 @@ $router->group( ['prefix' => 'project'], function ($router)
     $router->any( '{id}/import', 'ProjectController@importiOS' )->name( 'project.import' );
     $router->post( 'key/sort', 'ProjectController@sortKey' );
     $router->post( 'tag_change', 'ProjectController@tagChange' );
+    $router->post( 'length_change', 'ProjectController@lengthChange' );
     $router->any( 'import_excel/{id}', 'ProjectController@importExcel' )->name( 'import.excel' );
 });
 $router->resource( 'project', 'ProjectController' );

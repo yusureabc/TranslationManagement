@@ -51,6 +51,7 @@ class KeyService extends BaseService
                     'key'        => trim( $data['key'] ),
                     'source'     => $data['source'],
                     'tag'        => $data['tag'] ?? 1,
+                    'length'     => $data['length'] ?? 0,
                 ];
                 $res = $this->keyRepository->create( $data );
             }
@@ -85,6 +86,14 @@ class KeyService extends BaseService
     public function updateTag( $key_id, $tag )
     {
         return $this->keyRepository->updateTag( $key_id, $tag );
+    }
+
+    /**
+     * 修改 Length
+     */
+    public function updateLength( $key_id, $length )
+    {
+        return $this->keyRepository->updateLength( $key_id, $length );
     }
 
     /**
