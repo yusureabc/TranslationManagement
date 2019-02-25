@@ -7,6 +7,7 @@ $router->group( ['prefix' => 'language'], function ($router)
     $router->get( '{id}/invite', 'LanguageController@invite' )->name( 'language.invite' );
     $router->post( '{id}/invite', 'LanguageController@storeInviteUser' );
     $router->get( '{id}/send', 'LanguageController@sendEmail' );
+    $router->get( 'count_completion_status/{project_id}', 'LanguageController@countCompletionStatus' )->name( 'language.completion' );
 
     /* 下载翻译 */
     $router->get( '{id}/download', 'LanguageController@download' )->name( 'language.download' );

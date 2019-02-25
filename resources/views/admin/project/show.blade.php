@@ -57,6 +57,7 @@
                         <th>{{trans('admin/language.model.submit_at')}}</th>
                         <th>{{trans('admin/language.model.download_at')}}</th>
                         <th>{{trans('admin/language.model.status')}}</th>
+                        <th>{{trans('admin/language.model.completion_status')}}</th>                    
                         <th>{{trans('admin/action.title')}}</th>
                       </tr>
                   </thead>
@@ -66,6 +67,7 @@
               <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-2">
                     <a class="btn btn-white" href="{{url( 'admin/project' )}}">{!!trans('admin/action.actionButton.cancel')!!}</a>
+                    <button class="btn btn-primary" id="scan_completion_status">{!!trans('admin/action.actionButton.scan_completion_status')!!}</button>
                 </div>
               </div>
           </div>
@@ -78,7 +80,7 @@
 @section('js')
 <script src="{{asset('vendors/dataTables/datatables.min.js')}}"></script>
 <script src="{{asset('vendors/layer/layer.js')}}"></script>
-<script src="{{asset('admin/js/language/language-datatable.js')}}"></script>
+<script src="{{asset('admin/js/language/language-datatable.js?ver=20190225')}}"></script>
 <script type="text/javascript">
   $(document).on('click','.destroy_item',function() {
     var _item = $(this);
@@ -125,5 +127,28 @@ $(document).on( 'click', '.sendmail_item', function() {
         }
     } );
 })
+
+$(document).on( 'click', '#scan_completion_status', function() {
+    var project_id = $( '#project_id' ).val();
+    var url = "{{ route( 'language.completion', ['project_id' => 'project_id'] ) }}";
+    url = url.replace( 'project_id', project_id );
+
+    var index = layer.load(1, {
+      shade: [0.1,'#fff'] //0.1透明度的白色背景
+    });
+    $.get( url, function( msg ) {
+        layer.closeAll( 'loading' );
+        if ( msg.status == 1 )
+        {
+            layer.msg( 'Done' );
+            location.reload();
+        }
+        else
+        {
+            layer.msg( 'Faild' );
+        }
+    } );
+})
+
 </script>
 @endsection

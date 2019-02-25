@@ -362,4 +362,26 @@ class TranslateService extends BaseService
         return $all_translated;
     }
 
+    /**
+     * 判断翻译是否完成
+     * @author Scott Yu  <yusureyes@gmail.com>  http://yusure.cn
+     * @date   2019-02-25
+     * @param  [type]     $source     [description]
+     * @param  [type]     $translated [description]
+     * @return [type]                 [description]
+     */
+    public function judgeTranslatedFinished( $source, $translated )
+    {
+        if ( $source->isNotEmpty() )
+        {
+            foreach ( $source as $k => $item )
+            {
+                $translatedContent = $translated[$item->key_id]['content'] ?? '';
+                if ( ! $translatedContent )  return false;
+            }
+        }
+
+        return true;
+    }
+
 }

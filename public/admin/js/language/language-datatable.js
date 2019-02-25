@@ -63,6 +63,10 @@ var TableDatatablesAjax = function() {
             "data": "status",
             "name": "status",
         },
+        { 
+            "data": "completion_status",
+            "name": "completion_status",
+        },
         {
           "data": "actionButton",
           "name": "actionButton",

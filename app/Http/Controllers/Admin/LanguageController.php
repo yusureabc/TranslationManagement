@@ -271,4 +271,29 @@ class LanguageController extends Controller
         })->export( 'xls' );
     }
 
+    /**
+     * 统计各语言翻译完成状态
+     * @author Scott Yu  <yusureyes@gmail.com>  http://yusure.cn
+     * @date   2019-02-25
+     * @param  Request    $request    [description]
+     * @param  [type]     $project_id [description]
+     * @return [type]                 [description]
+     */
+    public function countCompletionStatus( Request $request, $project_id )
+    {
+        $languageList = $this->languageService->showLanguageList( $project_id );
+        foreach ( $languageList as $k => $item )
+        {
+            $source = $this->translateService->getTranslateSource( $item->id );
+            $translated = $this->translateService->getTranslatedContents( $item->id );
+            $finished = $this->translateService->judgeTranslatedFinished( $source, $translated );
+
+            /* Update completion status */
+            $item->completion_status = $finished ? 1 : 0;
+            $item->save();
+        }
+
+        return ['status' => 1];
+    }
+
 }

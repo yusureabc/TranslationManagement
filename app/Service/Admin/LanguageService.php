@@ -71,6 +71,7 @@ class LanguageService extends BaseService
                 $v->name = trans( 'languages.'.$v->language );
                 $status = $v->status;
                 $v->status = $v->status == 0 ? trans( 'admin/action.lock' ) : trans( 'admin/action.open' );
+                $v->completion_status = $v->completion_status == 0 ? trans( 'admin/action.unfinished' ) : trans( 'admin/action.finished' );
                 $v->actionButton = $v->getActionButtonAttribute( true, $status );
                 $languages[] = $v;
             }
