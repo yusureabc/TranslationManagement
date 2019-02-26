@@ -12,6 +12,7 @@ use App\Service\Admin\BaseService;
 use Exception;
 use DB;
 use App\Models\Comment;
+use App\Models\Content;
 
 /**
 * Translate Service
@@ -310,30 +311,28 @@ class TranslateService extends BaseService
     /**
      * 导入译文
      */
-    public function importTranslated( $id, $url )
+    public function importTranslated( $id, $data )
     {
         $project_id = $this->languageRepository->findProjectId( $id );
-        $xml_res = xmlToArray( $url );
+        $translated = replace_array_key( $data, 'key' );
 
-        $keys = array_keys( $xml_res );
+        $keys = array_keys( $translated );
         $exist = $this->keyRepository->keyExist( $project_id, $keys )->toArray();
-        $all_translated = [];
         foreach ( $exist as $item )
         {
-            $all_translated[] = [
+            $condition = [
                 'project_id'  => $project_id,
                 'language_id' => $id,
                 'key_id'      => $item['id'],
-                'content'     => $xml_res[ $item['key'] ]
             ];
+            $content = $this->contentRepository->getField( $condition, 'content' );
+            if ( ! $content )
+            {
+                Content::updateOrCreate( $condition, ['content' => $translated[ $item['key'] ]['translated']] );
+            }
         }
 
-        $key_ids = array_column( $all_translated, 'key_id' );
-        $exist_content = $this->contentRepository->contentExist( $id, $key_ids );
-        /* 处理重复译文 */
-        $all_translated = $this->_handle_exist_content( $all_translated, $exist_content, $key_ids );
-
-        return $this->contentRepository->batchInsertContent( $all_translated );
+        return true;
     }
 
     /**

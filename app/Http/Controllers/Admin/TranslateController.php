@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Service\Admin\TranslateService;
+use App\Service\Admin\ProjectService;
+use Excel;
 
 use App\Http\Requests\TranslateCreateRequest;
 use App\Http\Requests\TranslateUpdateRequest;
@@ -25,9 +27,10 @@ class TranslateController extends Controller
      * @date   2017-11-03
      * @param  [param]
      */
-    public function __construct( TranslateService $translateService )
+    public function __construct( TranslateService $translateService, ProjectService $projectService )
     {
         $this->translateService = $translateService;
+        $this->projectService = $projectService;
     }
 
     /**
@@ -147,6 +150,44 @@ class TranslateController extends Controller
         else
         {
             return 'import error';
+        }
+    }
+
+    /**
+     * Excel 导入翻译完成的译文
+     * @author Scott Yu  <yusureyes@gmail.com>  http://yusure.cn
+     * @date   2019-02-25
+     * @param  Request    $request [description]
+     * @param  [type]     $id      [description]
+     * @return [type]              [description]
+     */
+    public function importExcel( Request $request, $id )
+    {
+        if ( $request->isMethod( 'post' ) )
+        {
+            /* 上传 Excel */
+            $excel = $request->file( 'excel' );
+            if ( ! $excel )
+            {
+                return back()->withErrors( ['no_file' => 'Please choose excel file'] );
+            }
+            $filePath = $this->projectService->storeExcel( $excel );            
+
+            /* 解析数据 */
+            Excel::load( $filePath, function( $reader ) use ( $id ) {
+                $data = $reader->all()->toArray();
+                foreach ( $data as $k => $item )
+                {
+                    if ( ! $item['key'] )  unset( $data[$k] );
+                }
+                $this->translateService->importTranslated( $id, $data );
+            });
+
+            return redirect( route( 'language.edit', ['id' => $id] ) );
+        }
+        else
+        {
+            return view( 'admin.translate.import_excel', compact( 'id' ) );
         }
     }
 
