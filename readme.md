@@ -38,6 +38,9 @@ http://translate.demo.yusure.cn
 
 
 #### 使用说明
+
+[使用手册地址](https://www.kancloud.cn/yusure/translation_management)
+
 ##### 如何录入源语言（中文）
 1. 创建应用（可以后期创建）：可以将多个 Project 分配到一个应用下，因为项目迭代会出现多个 Project，为方便管理，增加应用管理。
 2. 创建项目：点击 Project List，勾选需要翻译的语言，右上角添加项目

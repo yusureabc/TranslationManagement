@@ -31,7 +31,7 @@
               </li>
 
               <li>
-                  <a href="http://confluence.yeedev.com/pages/viewpage.action?pageId=11698532" target="_blank"> Manual </a>
+                  <a href="https://www.kancloud.cn/yusure/translation_management" target="_blank"> Manual </a>
               </li>
 
               <li>
