@@ -325,6 +325,7 @@ XML;
         foreach ( $result as $k => $item )
         {
             $content = $item->content ?? ' ';
+            $content = htmlspecialchars( $content );
             $string = $xml->addChild( 'string', $content );
             $string->addAttribute( 'name', $item->key );
         }
