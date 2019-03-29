@@ -10,7 +10,7 @@ $router->group( ['prefix' => 'translate'], function ($router)
     $router->patch( '{id}/start', 'TranslateController@store' );
     /* 导入译文 */
     $router->get( '{id}/import', 'TranslateController@import' );
-    $router->any( 'import_excel/{id}', 'TranslateController@importExcel' )->name( 'import.translated' );
+    $router->any( 'import_excel/{id}/{force}', 'TranslateController@importExcel' )->name( 'import.translated' );
     /* 评论 */
     $router->get( '{comment_id}/comment', 'TranslateController@comment' );
     $router->post( '{comment_id}/comment', 'TranslateController@commentStore' );

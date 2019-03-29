@@ -311,7 +311,7 @@ class TranslateService extends BaseService
     /**
      * 导入译文
      */
-    public function importTranslated( $id, $data )
+    public function importTranslated( $id, $data, $force = 0 )
     {
         $project_id = $this->languageRepository->findProjectId( $id );
         $translated = replace_array_key( $data, 'key' );
@@ -326,10 +326,12 @@ class TranslateService extends BaseService
                 'key_id'      => $item['id'],
             ];
             $content = $this->contentRepository->getField( $condition, 'content' );
-            if ( ! $content )
-            {
-                Content::updateOrCreate( $condition, ['content' => $translated[ $item['key'] ]['translated']] );
-            }
+
+            /* 如果 $content 有内容 + force 是 false 就不做任何处理 */
+            if ( $content && 0 == $force )  continue;
+
+            $translatedContent = $translated[ $item['key'] ]['translated'] ?? '';
+            Content::updateOrCreate( $condition, ['content' => $translatedContent] );
         }
 
         return true;

@@ -159,9 +159,10 @@ class TranslateController extends Controller
      * @date   2019-02-25
      * @param  Request    $request [description]
      * @param  [type]     $id      [description]
+     * @param  [type]     $force   是否强制更新
      * @return [type]              [description]
      */
-    public function importExcel( Request $request, $id )
+    public function importExcel( Request $request, $id, $force = 0 )
     {
         if ( $request->isMethod( 'post' ) )
         {
@@ -174,13 +175,13 @@ class TranslateController extends Controller
             $filePath = $this->projectService->storeExcel( $excel );            
 
             /* 解析数据 */
-            Excel::load( $filePath, function( $reader ) use ( $id ) {
+            Excel::load( $filePath, function( $reader ) use ( $id, $force ) {
                 $data = $reader->all()->toArray();
                 foreach ( $data as $k => $item )
                 {
                     if ( ! $item['key'] )  unset( $data[$k] );
                 }
-                $this->translateService->importTranslated( $id, $data );
+                $this->translateService->importTranslated( $id, $data, $force );
             });
 
             return redirect( route( 'language.edit', ['id' => $id] ) );

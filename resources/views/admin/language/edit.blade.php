@@ -85,7 +85,8 @@
                     <a class="btn btn-warning" target="_blank" href="{{ route( 'language.export_js', ['id' => $id] ) }}">{!!trans('admin/action.actionButton.export_js')!!}</a>
                     <a class="btn btn-success" target="_blank" href="{{ route( 'language.export_excel', ['id' => $id, 'translatedStatus' => 1] ) }}">{!!trans('admin/action.actionButton.export_excel')!!}</a>
                     <a class="btn btn-warning" target="_blank" href="{{ route( 'language.export_excel', ['id' => $id, 'translatedStatus' => 0] ) }}">{!!trans('admin/action.actionButton.export_excel')!!} ( Untranslated )</a>
-                    <a class="btn btn-success" href="{{ route( 'import.translated', ['id' => $id] ) }}"> {!! trans( 'admin/action.actionButton.import' ) !!} </a>
+                    <a class="btn btn-success" href="{{ route( 'import.translated', ['id' => $id, 'force' => 0] ) }}"> {!! trans( 'admin/action.actionButton.import' ) !!} </a>
+                    <a class="btn btn-danger" href="{{ route( 'import.translated', ['id' => $id, 'force' => 1] ) }}"> {!! trans( 'admin/action.actionButton.import' ) !!} ( force ) </a>
               </div>
             </div>
           </form>
