@@ -1,22 +1,26 @@
 # 翻译资源管理系统
 
+
 |Author|Scott Yu|
 |---|---
 |E-mail|yusureyes@163.com
+
+![](https://yusure.cn/usr/uploads/2019/05/1407403721.png)
 
 #### 项目介绍
 　　这是一个用于管理多语言资源的译文管理系统，由于用户分布于全球各地，公司的 App 需要显示多语言，Android 和 iOS 有大量的译文需要管理，手工维护极其麻烦，于是这个系统诞生了，方便 translator 在平台翻译，翻译完成之后，开发者将一键导出代码，直接放置在项目中。
 
 * 注意 translator 需要自己找人翻译，本系统只是维护译文资源，并不会自动翻译。
-* 自动翻译的 feature 提上日程，计划对接到 Google translate，目前开发中。
 
   **公司 App 下载方式：软件商店搜索  `Yeelight`**
 
 #### 软件架构
-PHP 7.1+  
-Mysql 5.6+  
-框架:　Laravel 5.3  
-后台系统:　[iDashboard](https://github.com/lanceWan/iDashboard "iDashboard")  
+| Tools | Version |
+|---|---
+| PHP | 7.1+
+| Mysql | 5.6+
+| 框架 | Laravel 5.3
+
 
 #### 安装教程
 
@@ -30,7 +34,6 @@ Mysql 5.6+
 如果 storage 不可写，请赋权限:
 `chmod -R 777 storage`
 
-
 #### 演示地址
 http://translate.demo.yusure.cn  
 `管理员账号密码：   admin    123456  `  
@@ -38,9 +41,6 @@ http://translate.demo.yusure.cn
 
 
 #### 使用说明
-
-[使用手册地址](https://www.kancloud.cn/yusure/translation_management)
-
 ##### 如何录入源语言（中文）
 1. 创建应用（可以后期创建）：可以将多个 Project 分配到一个应用下，因为项目迭代会出现多个 Project，为方便管理，增加应用管理。
 2. 创建项目：点击 Project List，勾选需要翻译的语言，右上角添加项目
@@ -68,7 +68,7 @@ return [
 
 ##### 如何配置对照语言：
 例如翻译英文需要参考中文，翻译法语需要英文作为参考，那么就需要修改这个配置文件
-`config/sourcelang.php`
+`config/translator.php`
 
 ##### 如何导出译文：
   当译文都 ready 的时候，需要导出译文，导出译文有两种方式：第一种基于语言去导出，第二种针对整个应用（可以合并多个 Project）可以导出压缩包。  
